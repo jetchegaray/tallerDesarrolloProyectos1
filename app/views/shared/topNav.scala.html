@@ -1,0 +1,15 @@
+@(title: String)
+
+<div id="top-nav" class="container">
+	<!-- This link should go to home instead of hardcoded mockup -->
+	<a class="nav-logo" href="@routes.Mockup.at("1")">
+		<img src="@routes.Assets.at("images/nav_logo.png")" alt="miBoda.com" />
+	</a>
+	<a class="brand" href="@routes.Mockup.at("1")">
+		Casamiento de @title
+	</a>
+	<ul class="nav pull-right">
+		<li><a href="@routes.Mockup.at("inbox")">Inbox</a></li>
+		<li><a href="@routes.Mockup.at("account")">Account</a></li>
+	</ul>
+</div>
