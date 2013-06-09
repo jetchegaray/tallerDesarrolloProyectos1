@@ -24,7 +24,7 @@ public class Mockup extends Application {
 			for(String line : fileContent) {
 				content.append(line);
 			}
-			return ok(main.render(mockup, new Html(content)));
+			return ok(account.render(mockup, new Html(content)));
 		} catch(IOException e) {
 			return notFound();
 		}
