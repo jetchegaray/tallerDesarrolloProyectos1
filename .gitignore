@@ -4,3 +4,6 @@ target
 tmp
 dist
 .cache
+/target
+.*class
+

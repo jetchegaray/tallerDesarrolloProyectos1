@@ -1,0 +1,20 @@
+@(userForm : Form[User])
+
+@import helper._
+
+@main("Todo list") {
+    
+   
+    <h2>Registrate</h2>
+    
+    @form(routes.UserController.addUser()) {
+        
+        @inputText(userForm("username")) 
+        @inputText(userForm("password"))                
+        @inputText(userForm("email")) 
+        
+        <input type="submit" value="Registrar">
+        
+    }
+    
+}
