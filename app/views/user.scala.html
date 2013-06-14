@@ -1,0 +1,29 @@
+@(userForm: play.data.Form[model.domain.User]) 
+@import helper.twitterBootstrap._
+
+@helper.form(action = routes.UserController.addUser()) {
+<form class="form-horizontal">
+	<div class="control-group">
+		<div class="controls">@helper.inputText(userForm("userName"),
+			'_label -> "Usuario", '_help -> "", '_class -> "span4", 'placeholder
+			-> "userName")</div>
+	</div>
+	<div class="control-group">
+		<div class="controls">
+			@helper.inputPassword(userForm("password"), '_label -> "Contraseña",
+			'_help -> "", '_class -> "span4", 'placeholder -> "password")</div>
+	</div>
+	<div class="control-group">
+		<div class="controls">@helper.inputText(userForm("email"),
+			'_label -> "Email", '_help -> "", '_class -> "span4", 'placeholder ->
+			"email")</div>
+	</div>
+
+	<div class="control-group">
+		<div class="controls">
+			<button type="submit" class="btn-success">Registrarme</button>
+		</div>
+	</div>
+	
+</form>
+}
