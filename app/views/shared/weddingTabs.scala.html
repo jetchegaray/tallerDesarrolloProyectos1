@@ -1,0 +1,15 @@
+@(title: String)
+
+@* Local helpers *@
+@activeClass(o1: String, o2: String) = { @{if (o1 == o2) { "active" } else { "" }} }
+@linkItem(item: String) = {
+	<li class="@activeClass(title,item)"><a href="@routes.Mockup.at(item)">@item</a></li>
+}
+
+@* Sidebar *@
+@linkItem("Civil")
+@linkItem("Ceremonia")
+@linkItem("Fiesta")
+@linkItem("Presupuesto")
+@linkItem("Contrataciones")
+@linkItem("Invitados")
