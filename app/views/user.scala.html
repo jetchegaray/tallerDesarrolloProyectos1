@@ -1,29 +1,32 @@
-@(userForm: play.data.Form[model.domain.User]) 
-@import helper.twitterBootstrap._
+@(userForm: play.data.Form[model.domain.User])
 
-@helper.form(action = routes.UserController.addUser()) {
-<form class="form-horizontal">
-	<div class="control-group">
-		<div class="controls">@helper.inputText(userForm("userName"),
-			'_label -> "Usuario", '_help -> "", '_class -> "span4", 'placeholder
-			-> "userName")</div>
-	</div>
-	<div class="control-group">
-		<div class="controls">
-			@helper.inputPassword(userForm("password"), '_label -> "Contraseña",
-			'_help -> "", '_class -> "span4", 'placeholder -> "password")</div>
-	</div>
-	<div class="control-group">
-		<div class="controls">@helper.inputText(userForm("email"),
-			'_label -> "Email", '_help -> "", '_class -> "span4", 'placeholder ->
-			"email")</div>
+@import helper.bootstrap._
+
+@main("Signup") {
+
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner"> @shared.topNav()() </div>
 	</div>
 
-	<div class="control-group">
-		<div class="controls">
-			<button type="submit" class="btn-success">Registrarme</button>
-		</div>
+	<div class="container">
+		<h1>Signup</h1>
+
+		@helper.form(action = routes.UserController.addUser(), args = 'class -> "form-horizontal") {
+
+			@helper.inputText(userForm("email"),
+				'_label -> "Email", '_help -> "", 'placeholder -> "email")
+
+			@helper.inputText(userForm("userName"),
+				'_label -> "Usuario", '_help -> "", 'placeholder -> "username")
+
+			@helper.inputPassword(userForm("password"),
+				'_label -> "Contraseña", '_help -> "", 'placeholder -> "password")
+
+			<div class="control-group">
+				<div class="controls">
+					<button type="submit" class="btn-success">Registrarme</button>
+				</div>
+			</div>
+		}
 	</div>
-	
-</form>
 }

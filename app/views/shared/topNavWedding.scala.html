@@ -1,0 +1,7 @@
+@(title: String)
+
+@topNav("Casamiento de " + title) {
+	<li><a href="@routes.Mockup.at("Dashboard")">Dashboard</a></li>
+	<li><a href="@routes.Mockup.at("Inbox")">Inbox</a></li>
+	<li><a href="@routes.UserController.user()">Account</a></li>
+}
