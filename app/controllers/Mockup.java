@@ -1,19 +1,15 @@
 package controllers;
 
-import controllers.Application;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.nio.charset.StandardCharsets;
-
-import play.*;
-import play.mvc.*;
-import play.api.templates.*;
-
-import scala.collection.mutable.StringBuilder;
 import java.util.List;
-import java.io.IOException;
 
-import views.html.*;
+import play.api.templates.Html;
+import play.mvc.Result;
+import scala.collection.mutable.StringBuilder;
+import views.html.account;
 
 public class Mockup extends Application {
 
