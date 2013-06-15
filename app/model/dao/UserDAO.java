@@ -11,7 +11,7 @@ public class UserDAO extends BasicDAO<User,ObjectId>{
 	private static UserDAO instance = new UserDAO();
 
 	private UserDAO() {
-		super(DaoConfiguration.mongo, DaoConfiguration.morphia, DaoConfiguration.DB_NAME);
+		super(DaoConfiguration.mongo, DaoConfiguration.morphia, DaoConfiguration.mongoURI.getDatabase());
 	}
 
 
