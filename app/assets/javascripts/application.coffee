@@ -28,4 +28,21 @@ $ =>
 
     spinner.spin(inner.get(0))
     target = $target.data("target") || $target.attr("id")
-    inner.load "#{$target.data("href")} ##{target}", -> spinner.stop()
+    inner.load "#{$target.data("href")} ##{target}", ->
+      spinner.stop()
+      TaskHelper.bind()
+
+  TaskHelper.bind()
+
+class TaskHelper
+  @bind = ->
+    # Handle toggle search buttons
+    $(".configuration .search-buttons button").on "click", (e) ->
+      if $(this).hasClass("active") and $(".configuration .search-buttons .active").length is 1
+        $(".search-results").addClass("hide")
+      else
+        $(".search-results").removeClass("hide")
+        $(".configuration .no-search").click() if $(".configuration .no-search").hasClass("active")
+
+    $(".configuration .no-search").on "click", (e) ->
+      $(".search-buttons .active").click() unless $(this).hasClass("active")
