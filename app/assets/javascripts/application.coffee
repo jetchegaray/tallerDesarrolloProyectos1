@@ -19,12 +19,13 @@ spinnerOpts =
   left: 'auto'
 
 $ =>
-	# Handle ajax tasks
-	$("#task-list").on "show", (e)->
+  # Handle ajax tasks
+  $("#task-list").on "show", (e)->
 
-		$target = $(e.target)
-		spinner = new Spinner(spinnerOpts)
-		inner = $target.find(".accordion-inner")
+    $target = $(e.target)
+    spinner = new Spinner(spinnerOpts)
+    inner = $target.find(".accordion-inner")
 
-		spinner.spin(inner.get(0))
-		inner.load "#{$target.data("href")} ##{$target.attr("id")}", spinner.stop
+    spinner.spin(inner.get(0))
+    target = $target.data("target") || $target.attr("id")
+    inner.load "#{$target.data("href")} ##{target}", -> spinner.stop()

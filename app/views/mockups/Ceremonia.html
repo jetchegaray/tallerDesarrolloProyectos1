@@ -1,1 +1,102 @@
-<h1>Hola soy Ceremonia</h1>
+<header class="page-header">
+    <h2>Ceremonia</h2>
+    <h4 class="text-right">Estimado entre $X.XXX y $X.XXX</h4>
+</header>
+
+<form class="form-horizontal">
+    <fieldset>
+        <div class="control-group">
+            <label class="control-label" for="city">Tipo de ceremonia</label>
+            <div class="controls">
+                <select>
+                    <option></option>
+                    <option>Católica</option>
+                    <option>Judía</option>
+                    <option>Musulmana</option>
+                    <option>Griega</option>
+                </select>
+                <span class="help-inline">Lorem ipsum helpum</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="city">Ciudad</label>
+            <div class="controls">
+                <input id="city" type="text" placeholder="Ciudad">
+                <span class="help-inline">Lorem ipsum helpum</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="city">Fecha</label>
+            <div class="controls">
+                <input id="city" type="date">
+                <span class="help-inline">Lorem ipsum helpum</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="city">Fotografo</label>
+            <div class="controls">
+                <select>
+                    <option></option>
+                    <option>Si</option>
+                    <option>No</option>
+                </select>
+                <span class="help-inline">Lorem ipsum helpum</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="city">Arreglo o decoración especial?</label>
+            <div class="controls">
+                <select>
+                    <option></option>
+                    <option>Si</option>
+                    <option>No</option>
+                </select>
+                <span class="help-inline">Lorem ipsum helpum</span>
+            </div>
+        </div>
+    </fieldset>
+</form>
+
+<h2>Tareas pendientes</h2>
+<div class="accordion" id="task-list">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#task-list" href="#task-201">
+                Reservar registro templo
+            </a>
+        </div>
+        <div id="task-201" data-href="/mockup/tasks/201" class="accordion-body collapse">
+            <div class="accordion-inner">Loading</div>
+        </div>
+    </div>
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#task-list" href="#task-202">
+                Comprar anillos
+            </a>
+        </div>
+        <div id="task-202" data-href="/mockup/tasks/hire" class="accordion-body collapse">
+            <div class="accordion-inner">Loading</div>
+        </div>
+    </div>
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#task-list" href="#task-203">
+                Comprar traje del novio
+            </a>
+        </div>
+        <div id="task-203" data-href="/mockup/tasks/hire" class="accordion-body collapse" data-target="task-202">
+            <div class="accordion-inner">Loading</div>
+        </div>
+    </div>
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#task-list" href="#task-204">
+                Comprar vestido novia
+            </a>
+        </div>
+        <div id="task-204" data-href="/mockup/tasks/hire" class="accordion-body collapse" data-target="task-202">
+            <div class="accordion-inner">Loading</div>
+        </div>
+    </div>
+</div>

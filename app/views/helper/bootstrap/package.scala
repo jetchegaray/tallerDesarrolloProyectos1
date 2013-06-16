@@ -1,10 +1,5 @@
 package views.html.helper
 
-// import views.html.helper.FieldConstructor
-
-/**
- * Contains template helpers, for example for generating HTML forms.
- */
 package object bootstrap {
 
   /**
