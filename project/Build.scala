@@ -9,10 +9,10 @@ object ApplicationBuild extends Build {
 
   val appDependencies = Seq(
     // Add your project dependencies here,
-     "com.google.code.morphia" % "morphia" % "0.99",
+     "com.github.jmkgreen.morphia" % "morphia" % "1.2.3",
+     "com.github.jmkgreen.morphia" % "morphia-logging-slf4j" % "1.2.3",
      "org.mongodb" % "mongo-java-driver" % "2.7.3",
-     "com.google.code.morphia" % "morphia-logging-slf4j" % "0.99",
-   //   "com.google.code.morphia" % "validation" % "0.99",
+   //   "com.github.jmkgreen.morphia" % "validation" % "0.99",
     javaCore,
     javaJdbc,
     javaEbean
