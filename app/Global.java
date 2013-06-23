@@ -4,8 +4,10 @@ import play.GlobalSettings;
 import com.github.jmkgreen.morphia.logging.MorphiaLoggerFactory;
 import com.github.jmkgreen.morphia.logging.slf4j.SLF4JLogrImplFactory;
 import java.net.UnknownHostException;
-import com.mongodb.Mongo;
-import com.mongodb.MongoURI;
+import java.lang.RuntimeException;
+
+import com.mongodb.MongoClient;
+import com.mongodb.DBAddress;
 import model.dao.DaoConfiguration;
 
 public class Global extends GlobalSettings {
@@ -15,18 +17,14 @@ public class Global extends GlobalSettings {
 	public void beforeStart(Application app) {
 		MorphiaLoggerFactory.reset();
 		MorphiaLoggerFactory.registerLogger(SLF4JLogrImplFactory.class);
+
 		try {
-			//mongodb://127.0.0.1:27017/bodas_db
-			DaoConfiguration.mongoURI = new MongoURI(app.configuration().getString("mongodb.uri"));
-			DaoConfiguration.mongo = new Mongo(DaoConfiguration.mongoURI);
+			// 127.0.0.1:27017/miboda
+			DaoConfiguration.dBAddress = new DBAddress(app.configuration().getString("mongodb.uri"));
+			DaoConfiguration.mongo = new MongoClient(DaoConfiguration.dBAddress);
 		} catch (UnknownHostException e) {
-			e.printStackTrace();
+			throw new RuntimeException("Couldn't connect to mongo", e);
 		}
 	}
-
-	@Override
-	public void onStart(Application app) {
-	}
-
 
 }
