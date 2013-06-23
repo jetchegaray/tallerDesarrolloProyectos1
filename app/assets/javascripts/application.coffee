@@ -18,7 +18,7 @@ spinnerOpts =
   top: 'auto'
   left: 'auto'
 
-$ =>
+$ ->
   # Handle ajax tasks
   $("#task-list").on "show", (e)->
 
@@ -32,7 +32,8 @@ $ =>
       spinner.stop()
       TaskHelper.bind()
 
-  TaskHelper.bind()
+  TaskHelper.bind() # Should be initialized only on tasks pages
+  InvitesHelper.init() # Should be initialized only on tasks pages
 
 class TaskHelper
   @bind = ->
@@ -46,3 +47,23 @@ class TaskHelper
 
     $(".configuration .no-search").on "click", (e) ->
       $(".search-buttons .active").click() unless $(this).hasClass("active")
+
+
+class InvitesHelper
+  @init = ->
+    # Click cicle invitation state
+    $(".img-sticker").click (e) ->
+      e.preventDefault()
+      switch
+        when $(this).hasClass("confirmed")   then $(this).removeClass("confirmed").addClass("canceled")
+        when $(this).hasClass("canceled")    then $(this).removeClass("canceled").addClass("not-invited")
+        when $(this).hasClass("not-invited") then $(this).removeClass("not-invited")
+        else $(this).addClass("confirmed")
+
+    # Mockup - Randomize invites states
+    $(".img-sticker").each (e) ->
+      sol = Math.random()
+      switch
+        when sol < 0.1 then $(this).addClass("canceled")
+        when sol < 0.5 then $(this).addClass("confirmed")
+        when sol < 0.7 then $(this).addClass("not-invited")
