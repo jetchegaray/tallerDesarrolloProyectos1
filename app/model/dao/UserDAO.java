@@ -4,7 +4,7 @@ import model.domain.User;
 
 import org.bson.types.ObjectId;
 
-import com.google.code.morphia.dao.BasicDAO;
+import com.github.jmkgreen.morphia.dao.BasicDAO;
 
 public class UserDAO extends BasicDAO<User,ObjectId>{
 
