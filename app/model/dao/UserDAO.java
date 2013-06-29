@@ -4,14 +4,14 @@ import model.domain.User;
 
 import org.bson.types.ObjectId;
 
-import com.google.code.morphia.dao.BasicDAO;
+import com.github.jmkgreen.morphia.dao.BasicDAO;
 
 public class UserDAO extends BasicDAO<User,ObjectId>{
 
 	private static UserDAO instance = new UserDAO();
 
 	private UserDAO() {
-		super(DaoConfiguration.mongo, DaoConfiguration.morphia, DaoConfiguration.mongoURI.getDatabase());
+		super(DaoConfiguration.mongo, DaoConfiguration.morphia, DaoConfiguration.dBAddress.getDBName());
 	}
 
 
