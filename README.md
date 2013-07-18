@@ -51,3 +51,12 @@ sbt run
 ```
 
 ir a `http://localhost:9000/mockup/Dashboard`
+
+
+### Problemas
+
+Si arroja muchas veces problemas de "out of memory" configurar la siguiente variable de entorno en el .bashrc o similar:
+
+```
+export SBT_OPTS="-XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=256M"
+```
