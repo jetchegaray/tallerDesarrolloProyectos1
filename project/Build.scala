@@ -11,7 +11,7 @@ object ApplicationBuild extends Build {
     // Add your project dependencies here,
      "com.github.jmkgreen.morphia" % "morphia" % "1.2.3",
      "com.github.jmkgreen.morphia" % "morphia-logging-slf4j" % "1.2.3",
-     "org.mongodb" % "mongo-java-driver" % "2.7.3",
+     "org.mongodb" % "mongo-java-driver" % "2.11.2",
    //   "com.github.jmkgreen.morphia" % "validation" % "0.99",
     javaCore,
     javaJdbc,

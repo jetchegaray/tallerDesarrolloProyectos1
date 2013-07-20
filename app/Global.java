@@ -7,7 +7,7 @@ import java.net.UnknownHostException;
 import java.lang.RuntimeException;
 
 import com.mongodb.MongoClient;
-import com.mongodb.DBAddress;
+import com.mongodb.MongoClientURI;
 import model.dao.DaoConfiguration;
 
 public class Global extends GlobalSettings {
@@ -19,8 +19,7 @@ public class Global extends GlobalSettings {
 		MorphiaLoggerFactory.registerLogger(SLF4JLogrImplFactory.class);
 
 		try {
-			// 127.0.0.1:27017/miboda
-			DaoConfiguration.dBAddress = new DBAddress(app.configuration().getString("mongodb.uri"));
+			DaoConfiguration.dBAddress = new MongoClientURI(app.configuration().getString("mongodb.uri"));
 			DaoConfiguration.mongo = new MongoClient(DaoConfiguration.dBAddress);
 		} catch (UnknownHostException e) {
 			throw new RuntimeException("Couldn't connect to mongo", e);
