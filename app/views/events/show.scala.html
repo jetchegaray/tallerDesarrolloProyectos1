@@ -1,0 +1,19 @@
+@(event: model.domain.Event)
+
+@import model.domain.events._
+
+@account(event.name) {
+
+    <header class="page-header">
+        <h2>@event.name</h2>
+        <h4 class="text-right">Estimado entre @helper.budget.range(event)</h4>
+    </header>
+
+    @event match {
+        case event: Civil    => { @showCivil(event) }
+        case event: Ceremony => { @showCeremony(event) }
+        case event: Party    => { @showParty(event) }
+        case _ => { <h1>Unknown event :(</h1> }
+    }
+
+}

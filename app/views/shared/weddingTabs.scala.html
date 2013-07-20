@@ -1,15 +1,26 @@
-@(title: String)
+@(title: String, availableEvents: Seq[String] = scala.collection.immutable.List("Civil", "Ceremonia", "Fiesta"))
 
 @* Local helpers *@
 @activeClass(o1: String, o2: String) = { @{if (o1 == o2) { "active" } else { "" }} }
+
+@route(string: String) = {
+    @string match {
+        case "Civil"     => { @routes.EventsController.show("CIVIL") }
+        case "Ceremonia" => { @routes.EventsController.show("CEREMONY") }
+        case "Fiesta"    => { @routes.EventsController.show("PARTY") }
+        case _ => {
+            @routes.Mockup.at(string)
+        }
+    }
+}
 @linkItem(item: String) = {
-	<li class="@activeClass(title,item)"><a href="@routes.Mockup.at(item)">@item</a></li>
+	<li class="@activeClass(title,item)"><a href="@route(item)">@item</a></li>
 }
 
 @* Sidebar *@
-@linkItem("Civil")
-@linkItem("Ceremonia")
-@linkItem("Fiesta")
+@for(eventName <- availableEvents) {
+    @linkItem(eventName)
+}
 @linkItem("Presupuesto")
 @linkItem("Contrataciones")
 @linkItem("Invitados")

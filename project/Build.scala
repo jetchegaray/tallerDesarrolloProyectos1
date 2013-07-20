@@ -12,6 +12,7 @@ object ApplicationBuild extends Build {
      "com.github.jmkgreen.morphia" % "morphia" % "1.2.3",
      "com.github.jmkgreen.morphia" % "morphia-logging-slf4j" % "1.2.3",
      "org.mongodb" % "mongo-java-driver" % "2.11.2",
+     "commons-collections" % "commons-collections" % "3.2.1",
    //   "com.github.jmkgreen.morphia" % "validation" % "0.99",
     javaCore,
     javaJdbc,
