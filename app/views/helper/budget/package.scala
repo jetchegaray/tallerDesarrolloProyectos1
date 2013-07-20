@@ -1,7 +1,7 @@
 package views.html.helper
 
-import model.domain.Event;
-import scala.util.Random;
+import model.domain.Event
+import scala.util.Random
 
 package object budget {
 

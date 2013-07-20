@@ -15,5 +15,8 @@ GET      /user                      controllers.UserController.user()
 POST     /user                      controllers.UserController.addUser()
 
 GET      /civil                     controllers.EventsController.show(name = "CIVIL")
+PATCH    /civil                     controllers.EventsController.update(name = "CIVIL")
 GET      /ceremonia                 controllers.EventsController.show(name = "CEREMONY")
+PATCH    /ceremonia                 controllers.EventsController.update(name = "CEREMONY")
 GET      /fiesta                    controllers.EventsController.show(name = "PARTY")
+PATCH    /fiesta                    controllers.EventsController.update(name = "PARTY")

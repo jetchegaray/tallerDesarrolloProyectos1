@@ -2,9 +2,13 @@ package model.domain;
 
 import model.domain.events.*;
 
+import java.util.Date;
+
 public abstract class Event {
 
 	public String name;
+	public String city;
+	public Date date;
 
 	public Event() {
 		this("Unnamed... :(");
