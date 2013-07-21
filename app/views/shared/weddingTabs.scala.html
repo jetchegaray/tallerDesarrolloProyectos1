@@ -1,15 +1,18 @@
-@(title: String)
+@(title: String, availableEvents: Seq[String] = scala.collection.immutable.List("Civil", "Ceremonia", "Fiesta"))
 
 @* Local helpers *@
 @activeClass(o1: String, o2: String) = { @{if (o1 == o2) { "active" } else { "" }} }
-@linkItem(item: String) = {
-	<li class="@activeClass(title,item)"><a href="@routes.Mockup.at(item)">@item</a></li>
+
+@linkItem(item: String, url: Call) = {
+	<li class="@activeClass(title,item)"><a href="@url">@item</a></li>
 }
 
 @* Sidebar *@
-@linkItem("Civil")
-@linkItem("Ceremonia")
-@linkItem("Fiesta")
-@linkItem("Presupuesto")
-@linkItem("Contrataciones")
-@linkItem("Invitados")
+
+@for(eventName <- availableEvents) {
+    @linkItem(eventName, helper.events.routeFromName(eventName))
+}
+@* TODO: Change this routes once they are implemented *@
+@linkItem("Presupuesto",    routes.Mockup.at("Presupuesto"))
+@linkItem("Contrataciones", routes.Mockup.at("Contrataciones"))
+@linkItem("Invitados",      routes.Mockup.at("Invitados"))
