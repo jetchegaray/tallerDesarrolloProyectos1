@@ -1,6 +1,9 @@
 package model.domain;
 
 import java.util.Date;
+import java.util.GregorianCalendar;
+
+import com.google.code.morphia.annotations.Embedded;
 
 public abstract class Task {
 
@@ -8,7 +11,7 @@ public abstract class Task {
 	public Date dueDate;
 
 	public Task() {
-		this("Unnamed... :(", new Date(2013, 11, 21));
+		this("Unnamed... :(", new GregorianCalendar(2013, 11, 21).getTime());
 	}
 
 	public Task(String name, Date dueDate) {

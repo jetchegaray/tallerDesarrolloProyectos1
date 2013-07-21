@@ -10,11 +10,10 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import play.data.Form;
 
-public class EventsController extends Controller {
+public class EventsController extends WeddingController {
 
 	public static Result show(String name) {
-		Event event = new Wedding().getEvent(name);
-		Form<? extends Event> form = formFor(event);
+		Event event = currentWedding().getEvent(name);
 		if (event != null) {
 			return ok(show.render(event));
 		} else {
@@ -23,7 +22,7 @@ public class EventsController extends Controller {
 	}
 
 	public static Result update(String name) {
-		Event event = new Wedding().getEvent(name);
+		Event event = currentWedding().getEvent(name);
 		Form<? extends Event> filledForm = formFor(event).bindFromRequest();
 
 		if(!filledForm.hasErrors()) {

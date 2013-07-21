@@ -6,12 +6,18 @@ import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
 
+import org.bson.types.ObjectId;
+import com.google.code.morphia.annotations.Embedded;
+import com.google.code.morphia.annotations.Entity;
+import com.google.code.morphia.annotations.Id;
+
 public abstract class Event {
 
 	public String name;
-	public String city;
 	public Date date;
-	public List<Task> tasks;
+	@Embedded List<Task> tasks;
+
+	public String city;
 
 	public Event() {
 		this("Unnamed... :(");
@@ -20,6 +26,10 @@ public abstract class Event {
 	public Event(String name) {
 		this.name = name;
 		this.tasks = new ArrayList<Task>();
+	}
+
+	public void addTask(Task t) {
+		tasks.add(t);
 	}
 
 	public List<Task> pendingTasks() {
