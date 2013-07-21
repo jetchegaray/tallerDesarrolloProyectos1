@@ -2,38 +2,7 @@
 
 @formParty(helper.events.formFor(party))
 
-<h2>Tareas pendientes</h2>
-<div class="accordion" id="task-list">
-    <div class="accordion-group">
-        <div class="accordion-heading">
-            <a class="accordion-toggle" data-toggle="collapse" data-parent="#task-list" href="#task-301">
-                Contratar Salón
-            </a>
-        </div>
-        <div id="task-301" data-href="/mockup/tasks/hire" class="accordion-body collapse" data-target="task-202">
-            <div class="accordion-inner">Loading</div>
-        </div>
-    </div>
-    <div class="accordion-group">
-        <div class="accordion-heading">
-            <a class="accordion-toggle" data-toggle="collapse" data-parent="#task-list" href="#task-302">
-                Contratar catering
-            </a>
-        </div>
-        <div id="task-302" data-href="/mockup/tasks/hire" class="accordion-body collapse" data-target="task-202">
-            <div class="accordion-inner">Loading</div>
-        </div>
-    </div>
-    <div class="accordion-group">
-        <div class="accordion-heading">
-            <a class="accordion-toggle" data-toggle="collapse" data-parent="#task-list" href="#task-303">
-                Enviar invitaciones
-            </a>
-        </div>
-        <div id="task-303" data-href="/mockup/tasks/102" class="accordion-body collapse" data-target="task-102">
-            <div class="accordion-inner">Loading</div>
-        </div>
-    </div>
+@tasks.pendingTasks(party.pendingTasks()) {
     <div class="accordion-group">
         <div class="accordion-heading">
             <a class="accordion-toggle" href="/mockup/tasks/tables">
@@ -41,4 +10,4 @@
             </a>
         </div>
     </div>
-</div>
+}
