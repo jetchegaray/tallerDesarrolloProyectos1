@@ -1,0 +1,21 @@
+package views.html.helper
+
+import play.data.Form
+import play.api.mvc.Call
+
+package object events {
+
+    def formFor[T](event: T) : Form[T] = {
+        Form.form(event.getClass().asInstanceOf[Class[T]]).fill(event)
+    }
+
+    def routeFromName(eventName: String) : Call = {
+        eventName match {
+            case "Civil"     => controllers.routes.EventsController.show("CIVIL")
+            case "Ceremonia" => controllers.routes.EventsController.show("CEREMONY")
+            case "Fiesta"    => controllers.routes.EventsController.show("PARTY")
+            case _ => controllers.routes.Application.index()
+        }
+    }
+
+}
