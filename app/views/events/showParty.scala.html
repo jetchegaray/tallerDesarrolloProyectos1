@@ -1,0 +1,13 @@
+@(party: model.domain.events.Party)
+
+@formParty(helper.events.formFor(party))
+
+@tasks.pendingTasks(party.pendingTasks()) {
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle" href="/mockup/tasks/tables">
+                Organizar mesas
+            </a>
+        </div>
+    </div>
+}
