@@ -3,24 +3,16 @@
 @* Local helpers *@
 @activeClass(o1: String, o2: String) = { @{if (o1 == o2) { "active" } else { "" }} }
 
-@route(string: String) = {
-    @string match {
-        case "Civil"     => { @routes.EventsController.show("CIVIL") }
-        case "Ceremonia" => { @routes.EventsController.show("CEREMONY") }
-        case "Fiesta"    => { @routes.EventsController.show("PARTY") }
-        case _ => {
-            @routes.Mockup.at(string)
-        }
-    }
-}
-@linkItem(item: String) = {
-	<li class="@activeClass(title,item)"><a href="@route(item)">@item</a></li>
+@linkItem(item: String, url: Call) = {
+	<li class="@activeClass(title,item)"><a href="@url">@item</a></li>
 }
 
 @* Sidebar *@
+
 @for(eventName <- availableEvents) {
-    @linkItem(eventName)
+    @linkItem(eventName, helper.events.routeFromName(eventName))
 }
-@linkItem("Presupuesto")
-@linkItem("Contrataciones")
-@linkItem("Invitados")
+@* TODO: Change this routes once they are implemented *@
+@linkItem("Presupuesto",    routes.Mockup.at("Presupuesto"))
+@linkItem("Contrataciones", routes.Mockup.at("Contrataciones"))
+@linkItem("Invitados",      routes.Mockup.at("Invitados"))
