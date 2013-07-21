@@ -19,6 +19,8 @@ public class FakeTask extends Task {
 	public String target() {
 		if (mockupId.equals("hire")) {
 			return "202";
+		} else if (mockupId.equals("hire-dress")) {
+			return "204";
 		} else {
 			return mockupId;
 		}

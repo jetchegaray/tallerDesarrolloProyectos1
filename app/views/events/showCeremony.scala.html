@@ -1,4 +1,4 @@
-@(event: model.domain.events.Ceremony)
+@(ceremony: model.domain.events.Ceremony)
 
 <form class="form-horizontal">
     <fieldset>
@@ -54,56 +54,5 @@
     </fieldset>
 </form>
 
-<h2>Tareas pendientes</h2>
-<div class="accordion" id="task-list">
-    <div class="accordion-group">
-        <div class="accordion-heading">
-            <a class="accordion-toggle" data-toggle="collapse" data-parent="#task-list" href="#task-201">
-                Reservar registro templo
-            </a>
-        </div>
-        <div id="task-201" data-href="/mockup/tasks/201" class="accordion-body collapse">
-            <div class="accordion-inner">Loading</div>
-        </div>
-    </div>
-    <div class="accordion-group">
-        <div class="accordion-heading">
-            <a class="accordion-toggle" data-toggle="collapse" data-parent="#task-list" href="#task-202">
-                Comprar anillos
-            </a>
-        </div>
-        <div id="task-202" data-href="/mockup/tasks/hire" class="accordion-body collapse">
-            <div class="accordion-inner">Loading</div>
-        </div>
-    </div>
-    <div class="accordion-group">
-        <div class="accordion-heading">
-            <a class="accordion-toggle" data-toggle="collapse" data-parent="#task-list" href="#task-203">
-                Comprar traje del novio
-            </a>
-        </div>
-        <div id="task-203" data-href="/mockup/tasks/hire" class="accordion-body collapse" data-target="task-202">
-            <div class="accordion-inner">Loading</div>
-        </div>
-    </div>
-    <div class="accordion-group">
-        <div class="accordion-heading">
-            <a class="accordion-toggle" data-toggle="collapse" data-parent="#task-list" href="#task-204">
-                Comprar vestido novia
-            </a>
-        </div>
-        <div id="task-204" data-href="/mockup/tasks/hire-dress" class="accordion-body collapse">
-            <div class="accordion-inner">Loading</div>
-        </div>
-    </div>
-    <div class="accordion-group">
-        <div class="accordion-heading">
-            <a class="accordion-toggle" data-toggle="collapse" data-parent="#task-list" href="#task-205">
-                Enviar Invitaciones
-            </a>
-        </div>
-        <div id="task-205" data-href="/mockup/tasks/102" class="accordion-body collapse" data-target="task-102">
-            <div class="accordion-inner">Loading</div>
-        </div>
-    </div>
-</div>
+
+@tasks.pendingTasks(ceremony.pendingTasks())()
