@@ -20,3 +20,5 @@ GET      /ceremonia                 controllers.EventsController.show(name = "CE
 PATCH    /ceremonia                 controllers.EventsController.update(name = "CEREMONY")
 GET      /fiesta                    controllers.EventsController.show(name = "PARTY")
 PATCH    /fiesta                    controllers.EventsController.update(name = "PARTY")
+
+GET      /budget                    controllers.BudgetController.show()
