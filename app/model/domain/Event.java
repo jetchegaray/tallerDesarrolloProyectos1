@@ -15,6 +15,7 @@ public abstract class Event {
 
 	public String name;
 	public Date date;
+	public Integer guestEstimate;
 	@Embedded List<Task> tasks;
 
 	public String city;

@@ -18,7 +18,11 @@ public class FakeTask extends Task {
 	}
 
 	public FakeTask(String name, String id) {
-		super(name, new GregorianCalendar(2013, 11, 21).getTime());
+		this(name, id, new GregorianCalendar(2013, 11, 21).getTime());
+	}
+
+	public FakeTask(String name, String id, Date dueDate) {
+		super(name, dueDate);
 		this.mockupId = id;
 	}
 
