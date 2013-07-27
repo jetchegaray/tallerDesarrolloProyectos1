@@ -4,15 +4,14 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import com.google.code.morphia.annotations.Embedded;
+import java.util.Date;
 
 public abstract class Task {
 
 	public String name;
 	public Date dueDate;
 
-	public Task() {
-		this("Unnamed... :(", new GregorianCalendar(2013, 11, 21).getTime());
-	}
+	protected Task() {}
 
 	public Task(String name, Date dueDate) {
 		this.name = name;

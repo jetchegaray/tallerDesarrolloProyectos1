@@ -5,6 +5,7 @@ import model.domain.events.*;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.ArrayList;
 import org.bson.types.ObjectId;
@@ -24,7 +25,6 @@ public class Wedding {
 	ObjectId id;
 
 	@Transient Calendar calendar;
-	@Transient Date date;
 
 	@Transient
 	public List<Guest> husbandGuests;
@@ -40,6 +40,15 @@ public class Wedding {
 	@Embedded public Civil civil;
 	@Embedded public Ceremony ceremony;
 	@Embedded public Party party;
+
+	// Initial estimates
+	public Integer budgetEstimate;
+	public Date dateEstimate;
+
+	public Wedding() {
+		calendar = new GregorianCalendar(2014, 5, 30);
+		dateEstimate = calendar.getTime();
+	}
 
 	public String getId() {
 		return id.toString();

@@ -6,6 +6,8 @@ import com.google.code.morphia.annotations.Embedded;
 
 public class Civil extends Event {
 
+	public Boolean withReception;
+
 	public Civil() {
 		super("Civil");
 	}
