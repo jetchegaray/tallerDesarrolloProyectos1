@@ -1,15 +1,18 @@
 package views.html.helper
 
-import model.domain.Event
-import scala.util.Random
+import model.domain.Costable
+import java.math.BigDecimal
 
 package object budget {
 
-    def range(event: Event): String = {
-        // TODO: Extract budget from event (Ideally instead of event we should receive a Budgeteable or similar)
-        val random = new Random();
-        val min = random.nextInt(150) * 100 + 10000;
-        val max = random.nextInt(350) * 100 + 25000;
-        f"$$ $min%,d y $$ $max%,d"
+    def range(costable: Costable): String = {
+        val min = toMoney(costable.getLowerEstimate());
+        val max = toMoney(costable.getUpperEstimate());
+        f"$min y $max"
+    }
+
+    def toMoney(cost: BigDecimal): String = {
+        val value = cost.intValue();
+        f"$$ $value%,d"
     }
 }

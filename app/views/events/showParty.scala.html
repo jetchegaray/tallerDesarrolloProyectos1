@@ -2,7 +2,7 @@
 
 @formParty(helper.events.formFor(party))
 
-@tasks.pendingTasks(party.pendingTasks()) {
+@tasks.listPending(party.getPendingTasks()) {
     <div class="accordion-group">
         <div class="accordion-heading">
             <a class="accordion-toggle" href="/mockup/tasks/tables">
