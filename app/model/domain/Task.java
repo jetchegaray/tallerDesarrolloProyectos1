@@ -1,12 +1,13 @@
 package model.domain;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
 import com.google.code.morphia.annotations.Embedded;
 import java.util.Date;
 
-public abstract class Task {
+public abstract class Task implements Costable {
 
 	public String name;
 	public Date dueDate;
@@ -18,4 +19,13 @@ public abstract class Task {
 		this.dueDate = dueDate;
 	}
 
+	// Lower end for the current estimated cost
+	public BigDecimal getLowerEstimate() {
+		return new BigDecimal(0);
+	}
+
+	// Upper end for the current estimated cost
+	public BigDecimal getUpperEstimate() {
+		return new BigDecimal(0);
+	}
 }

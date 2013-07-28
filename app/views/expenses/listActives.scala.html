@@ -1,0 +1,45 @@
+@(expenses: Seq[model.domain.Expense])
+
+@import views.html.helper._
+
+<section>
+    <h4>Gastos realizados</h4>
+    @nonEmptyOrElse(expenses) { expensesSeq =>
+        <table class='table table-hover'>
+            <thead>
+                <tr>
+                    <th>Origen</th>
+                    <th>Detalle</th>
+                    <th width="50%">Datos</th>
+                    <th class="text-right">Costo</th>
+                </tr>
+            </thead>
+            <tbody>
+            @for(expense <- expensesSeq) {
+                <tr>
+                    <td><a href="/mockup/Ceremonia">Ceremonia</a></td>
+                    <td>Comprar anillos</td>
+                    <td class="media">
+                        <a href="/mockup/Conversation" alt="Contactar" class="pull-left">
+                            <img class="media-object" src="http://lorempixel.com/64/64/people" alt="someone"/>
+                        </a>
+                        <div class="media-body">
+                            <h6>Some provider</h6>
+                            <small>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                consequat.
+                            </small>
+                        </div>
+                    </td>
+                    <td class="text-right">$ 40.000</td>
+                </tr>
+
+            }
+            </tbody>
+        </table>
+    } {
+        <p>No se han realizado gastos todavía</p>
+    }
+</section>
