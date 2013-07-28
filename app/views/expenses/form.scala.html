@@ -1,0 +1,28 @@
+@(expenseForm: play.data.Form[model.domain.Expense], expenseType: String)
+
+@import helper.bootstrap._
+
+@helper.form(action = routes.BudgetController.createExpense(expenseType), args = 'class -> "form-horizontal") {
+
+    @if(expenseType == null)  {
+        @helper.select(expenseForm("type"),  helper.wedding.expenseTypeOptions(WeddingContext.current()),
+            '_label -> "Evento", '_help -> "A qué evento corresponde el gasto?")
+
+    }
+
+    @helper.inputText(expenseForm("reason"),
+        '_label -> "Motivo", '_help -> "Razón que dio origen al gasto", 'placeholder -> "Motivo")
+
+    @helper.inputMoney(expenseForm("total"),
+        '_label -> "Total", '_help -> "Costo total del gasto")
+
+    @helper.inputDate(expenseForm("date"),
+        '_label -> "Fecha", '_help -> "Fecha de pago")
+
+    <div class="control-group">
+        <div class="controls">
+            <button type="submit" class="btn-success">Crear</button>
+        </div>
+    </div>
+}
+
