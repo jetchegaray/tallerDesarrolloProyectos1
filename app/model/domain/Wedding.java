@@ -38,6 +38,7 @@ public class Wedding implements Budgetable {
 	public Place place;
 
 	@Transient private List<Event> events;
+	List<Expense> expenses;
 	@Embedded public Civil civil;
 	@Embedded public Ceremony ceremony;
 	@Embedded public Party party;
@@ -50,6 +51,7 @@ public class Wedding implements Budgetable {
 		calendar = new GregorianCalendar(2014, 5, 30);
 		dateEstimate = calendar.getTime();
 		budgetEstimate = 100000;
+		expenses = new ArrayList<Expense>();
 	}
 
 	public String getId() {
@@ -74,11 +76,18 @@ public class Wedding implements Budgetable {
 		return events;
 	}
 
-	public List<Expense> getActiveExpenses() {
+	// Include event expenses
+	public List<Expense> getAllActiveExpenses() {
 		List<Expense> expenses = new ArrayList<Expense>();
 		for(Event event : getEvents()) {
 			expenses.addAll(event.getActiveExpenses());
 		}
+		expenses.addAll(this.getActiveExpenses());
+		return expenses;
+	}
+
+	public List<Expense> getActiveExpenses() {
+		// We should filter expenses that have been canceled or rejected
 		return expenses;
 	}
 
@@ -93,6 +102,9 @@ public class Wedding implements Budgetable {
 		for(Event event : getEvents()) {
 			acum = acum.add(event.getLowerEstimate());
 		}
+		for(Expense expense: getActiveExpenses()) {
+			acum = acum.add(expense.getTotal());
+		}
 		return acum;
 	}
 
@@ -102,6 +114,9 @@ public class Wedding implements Budgetable {
 		for(Event event : getEvents()) {
 			acum = acum.add(event.getUpperEstimate());
 		}
+		for(Expense expense: getActiveExpenses()) {
+			acum = acum.add(expense.getTotal());
+		}
 		return acum;
 	}
 
@@ -110,6 +125,9 @@ public class Wedding implements Budgetable {
 		BigDecimal acum = new BigDecimal(0);
 		for(Event event : getEvents()) {
 			acum = acum.add(event.getAmountSpent());
+		}
+		for(Expense expense: getActiveExpenses()) {
+			acum = acum.add(expense.getAmountSpent());
 		}
 		return acum;
 	}
@@ -125,6 +143,9 @@ public class Wedding implements Budgetable {
 		for(Event event : getEvents()) {
 			acum = acum.add(event.getAmountComprised());
 		}
+		for(Expense expense: getActiveExpenses()) {
+			acum = acum.add(expense.getAmountComprised());
+		}
 		return acum;
 	}
 
@@ -133,6 +154,14 @@ public class Wedding implements Budgetable {
 		for(Event event : getEvents()) {
 			acum = acum.add(event.getTotalCost());
 		}
+		for(Expense expense: getActiveExpenses()) {
+			acum = acum.add(expense.getTotal());
+		}
 		return acum;
 	}
+
+	public void addExpense(Expense expense) {
+		expenses.add(expense);
+	}
+
 }

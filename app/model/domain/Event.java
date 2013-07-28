@@ -61,6 +61,9 @@ public abstract class Event implements Budgetable {
 		}
 	}
 
+	// Allow to reverse getType
+	public abstract String getTypeName();
+
 	// Amount to spend by the budgeteable
 	public BigDecimal getBudget() {
 		return budget;
@@ -115,7 +118,11 @@ public abstract class Event implements Budgetable {
 		return acum;
 	}
 
-	private enum EventType {
+	public void addExpense(Expense expense) {
+		expenses.add(expense);
+	}
+
+	protected enum EventType {
 		CIVIL, CEREMONY, PARTY
 	}
 
