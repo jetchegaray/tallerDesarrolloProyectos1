@@ -11,6 +11,10 @@ public class Party extends Event {
 		super("Fiesta");
 	}
 
+	public String getTypeName() {
+		return EventType.PARTY.toString();
+	}
+
 	private enum Style {
 		DAY, NIGHT
 	}
