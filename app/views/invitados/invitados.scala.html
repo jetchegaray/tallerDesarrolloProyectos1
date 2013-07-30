@@ -1,5 +1,7 @@
-@(title: String, invitados: List[String])
+@(title: String, invitados: List[model.domain.guests.Guest])
 
+@import model.domain.guests._
+_
 @main(title) {
 <div class="navbar navbar-fixed-top">
 	<div class="navbar-inner"> @shared.topNavWedding("Monica y Javier") </div>
@@ -11,7 +13,7 @@
 			<h2>Invitados</h2>
 			<nav class="text-right">
 				<div class="control-group">
-					<button class="btn btn-success"><i class="icon-plus"></i> Agregar invitado</button>
+					<button type="submit" class="btn btn-success"><i class="icon-plus"></i> Agregar invitado</button>
 					<select class="invites-filter">
 						<option><em>Filtros</em></option>
 						<option>Civil</option>
@@ -31,15 +33,15 @@
 
 					@for(invitado <- invitados){
 					<tr>
-						<td class="table-name-cell">@invitado</td>
+						<td class="table-name-cell">@invitado.getName()</td>
 						<td class="table-sticker-cell">
-							<a href="#" class="js-invite"><img src="/assets/images/sprites/wedding-rings.png" class="img-sticker img-circle" width="64px"></a>
+							<a href="#" class="js-invite"><img src="/assets/images/sprites/wedding-rings.png" class="@("img-sticker img-circle " + invitado.getStatusCivil().getCode())" width="64px"></a>
 						</td>
 						<td class="table-sticker-cell">
-							<a href="#" class="js-invite"><img src="/assets/images/sprites/wedding-bells.png" class="img-sticker img-circle" width="64px"></a>
+							<a href="#" class="js-invite"><img src="/assets/images/sprites/wedding-bells.png" class="@("img-sticker img-circle " + invitado.getStatusIglesia().getCode())" width="64px"></a>
 						</td>
 						<td class="table-sticker-cell">
-							<a href="#" class="js-invite"><img src="/assets/images/sprites/wedding-night.png" class="img-sticker img-circle" width="64px"></a>
+							<a href="#" class="js-invite"><img src="/assets/images/sprites/wedding-night.png" class="@("img-sticker img-circle " + invitado.getStatusFiesta().getCode())" width="64px"></a>
 						</td>
 					</tr>
 					}

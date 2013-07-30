@@ -22,3 +22,4 @@ GET      /fiesta                    controllers.EventsController.show(name = "PA
 PATCH    /fiesta                    controllers.EventsController.update(name = "PARTY")
 
 GET 	 /invitados					controllers.InvitadosController.at(title = "Invitados")
+POST     /invitados                 controllers.InvitadosController.addGuest()

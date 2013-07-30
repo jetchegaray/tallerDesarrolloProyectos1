@@ -7,6 +7,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
+
+import model.domain.guests.Guest;
 import org.bson.types.ObjectId;
 
 import org.apache.commons.collections.CollectionUtils;
