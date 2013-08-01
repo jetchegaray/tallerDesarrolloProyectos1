@@ -6165,3 +6165,19 @@ a.badge:focus {
 .affix {
   position: fixed;
 }
+
+
+#form-agregar-usuario{
+    background-color: white;
+    border-radius: 6px;
+    padding:20px;
+    width:400px;
+}
+#form-agregar-usuario input{
+    width:400px;
+}
+
+#form-agregar-usuario h1{
+    font-size:16px;
+}
+

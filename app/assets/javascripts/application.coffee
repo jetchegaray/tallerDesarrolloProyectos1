@@ -61,7 +61,6 @@ class InvitesHelper
         when $(this).hasClass("invited")     then $(this).removeClass("invited").addClass("confirmed")
         else $(this).addClass("confirmed")
 
-
     ###Mockup - Randomize invites states - NO descomentar
     $(".img-sticker").each (e) ->
       sol = Math.random()
