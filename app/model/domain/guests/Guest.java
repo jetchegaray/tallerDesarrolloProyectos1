@@ -89,9 +89,9 @@ public class Guest {
         this.statusFiesta = statusFiesta;
     }
 
-    public static void create(Guest guest){
+    public static void createInDB(Guest guest){
         GuestDAO.getGuestDAO().save(guest);
-        System.out.println("HOLAAAAAAAAAAAAAAAAAA RODODOOOOOOOOOOOOOOOO");
+        System.out.println("Guardando un nuevo usuario");
     }
 
 

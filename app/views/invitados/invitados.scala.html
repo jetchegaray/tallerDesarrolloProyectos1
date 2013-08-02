@@ -1,10 +1,11 @@
-@(title: String, invitados: List[model.domain.guests.Guest])
+@(title: String, invitados: List[model.domain.guests.Guest],guestForm: play.data.Form[model.domain.guests.Guest])
 
 @import model.domain.guests._
+@import helper.bootstrap._
 _
 @main(title) {
 <div class="navbar navbar-fixed-top">
-	<div class="navbar-inner"> @shared.topNavWedding("Monica y Javier") </div>
+	<div class="navbar-inner"> @shared.topNavWedding("HARCODED") </div>
 </div>
 <div id="wedding-management" class="container">
 	<div class="row">
@@ -59,18 +60,26 @@ _
 				</fieldset>
 			</form>
 			
-			<div id="form-agregar-usuario" class="container">
-				<h1>Registrar usuario</h1>
+			<div id="form-agregar-invitado" class="container" style="display: none;">
+				<h1>Registrar Invitado</h1>
 
-					<label>usuario</label><input type="text" />
-					<label>email</label><input type="text" />
+					<!--label>Nombre Invitado</label><input type="text" />
+					<label>Email</label><input type="text" /-->
+                    @helper.form(action = routes.InvitadosController.addGuest(), args = 'class -> "form-horizontal") {
+
+                    @helper.inputText(guestForm("name"),
+                    '_label -> "Nombre", '_help -> "", 'placeholder -> "name")
+
+                    @helper.inputText(guestForm("email"),
+                    '_label -> "Email", '_help -> "", 'placeholder -> "email")
+
 
 					<div class="control-group">
 						<div class="controls">
-							<button type="submit" class="btn-success">Registrarme</button>
+							<button type="submit" class="btn-success">Agregar</button>
 						</div>
 					</div>
-				
+				    }
 			</div>
 			
 		</div>

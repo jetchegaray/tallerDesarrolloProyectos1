@@ -6167,17 +6167,17 @@ a.badge:focus {
 }
 
 
-#form-agregar-usuario{
+#form-agregar-invitado{
     background-color: white;
     border-radius: 6px;
     padding:20px;
-    width:400px;
+    width:600px;
 }
-#form-agregar-usuario input{
+#form-agregar-invitado input{
     width:400px;
 }
 
-#form-agregar-usuario h1{
+#form-agregar-invitado h1{
     font-size:16px;
 }
 
