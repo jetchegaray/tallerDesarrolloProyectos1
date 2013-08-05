@@ -35,7 +35,7 @@ public class GuestDAO extends BasicDAO<Guest, ObjectId> {
 
 	private QueryResults<Guest> guestsForWedding(Wedding wedding) {
 		Query<Guest> query = createQuery();
-		query.field("weddingId").equal(new ObjectId(wedding.getId()));
+		query.field("wedding").equal(wedding);
 
 		return find(query);
 	}

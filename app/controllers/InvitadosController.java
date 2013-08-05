@@ -6,12 +6,13 @@ import java.util.ArrayList;
 import model.dao.GuestDAO;
 import model.domain.User;
 import model.domain.guests.Guest;
-import model.domain.guests.InvitationStatus;
-import org.bson.types.ObjectId;
+
 import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.Result;
-import views.html.invitados.*;
+
+import views.html.invitados.invitados;
+import views.html.invitados.form;
 import views.html.user.signup;
 
 public class InvitadosController extends WeddingController {
@@ -29,20 +30,18 @@ public class InvitadosController extends WeddingController {
 		return ok(invitados.render(guestQueryList, guestForm));
 	}
 
-    public static Result addGuest(){
+	public static Result addGuest(){
+		Form<Guest> filledForm = guestForm.bindFromRequest();
 
-        System.out.println("Vamos a agregar un usuario");
-        //Form<Guest> filledForm = guestForm.bindFromRequest();
-        DynamicForm params = new DynamicForm().bindFromRequest();
-        String guestName = params.get("name");
-        String guestEmail = params.get("email");
-        ObjectId weddingId = new ObjectId(currentWedding().getId());
-        System.out.println("Fillled form: " + params.toString());
+		if (filledForm.hasErrors()) {
+			return badRequest(form.render(filledForm));
+		}
 
-        Guest nuevoInvitado = new Guest(guestName,guestEmail,weddingId) ;
-        System.out.println("Id" + weddingId.toString());
-        Guest.createInDB(nuevoInvitado);
-        return redirect(routes.InvitadosController.index());
+		Guest guest   = filledForm.get();
+		guest.setWedding(currentWedding());
 
-    }
+		GuestDAO.getGuestDAO().save(guest);
+		return redirect(routes.InvitadosController.index());
+
+	}
 }

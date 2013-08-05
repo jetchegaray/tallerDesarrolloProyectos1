@@ -1,6 +1,6 @@
 package model.domain.guests;
 
-public enum InvitationStatus{
+public enum InvitationStatus {
 
      NOASISTE("canceled"), NOINVITADO("not-invited"), INVITADO("invited"), ASISTE("confirmed");
 

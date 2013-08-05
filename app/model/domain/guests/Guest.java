@@ -2,7 +2,10 @@ package model.domain.guests;
 
 import com.google.code.morphia.annotations.Entity;
 import com.google.code.morphia.annotations.Id;
+import com.google.code.morphia.annotations.Indexed;
+import com.google.code.morphia.annotations.Reference;
 import model.dao.GuestDAO;
+import model.domain.Wedding;
 import org.bson.types.ObjectId;
 import play.data.validation.Constraints;
 import play.data.validation.Constraints.Required;
@@ -14,8 +17,8 @@ public class Guest {
     @Id
     private ObjectId id;
 
-    @Required
-    private ObjectId weddingId;
+    @Indexed @Reference
+    private Wedding wedding;
 
     private String email;
     private String roomLocation;
@@ -29,36 +32,30 @@ public class Guest {
     private InvitationStatus statusIglesia;
 
     public Guest() {
+        this.statusCivil   = InvitationStatus.NOINVITADO;
+        this.statusFiesta  = InvitationStatus.NOINVITADO;
+        this.statusIglesia = InvitationStatus.INVITADO;
+        this.roomLocation  = null;
     }
 
-    public Guest(String name, String email, ObjectId weddingId) {
-        this.email = email;
-        this.name = name;
-        this.statusCivil= InvitationStatus.NOINVITADO;
-        this.statusFiesta= InvitationStatus.NOINVITADO;
-        this.statusIglesia= InvitationStatus.NOINVITADO;
-        this.roomLocation = null;
-        this.weddingId= weddingId;
+    public void setWedding(Wedding wedding) {
+        this.wedding = wedding;
     }
-
-    public Guest(String email, String roomLocation, String name,ObjectId weddingId) {
-        this.email = email;
-        this.roomLocation = roomLocation;
-        this.name = name;
-        this.statusCivil= InvitationStatus.NOINVITADO;
-        this.statusFiesta= InvitationStatus.NOINVITADO;
-        this.statusIglesia= InvitationStatus.NOINVITADO;
-        this.weddingId= weddingId;
-    }
-
-
 
     public String getEmail() {
         return email;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getRoomLocation() {
         return roomLocation;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getName() {
