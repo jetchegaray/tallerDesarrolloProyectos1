@@ -16,7 +16,7 @@ import play.mvc.Result;
 import views.html.invitados.*;
 import views.html.user.signup;
 
-public class InvitadosController extends Application {
+public class InvitadosController extends WeddingController {
 
 	static List<Guest> guestList = new ArrayList<Guest>();
 
@@ -53,7 +53,7 @@ public class InvitadosController extends Application {
             List<Guest> guestQueryList =guestsFound.asList();
             //createDummyGuests();
 
-			return ok(invitados.render(title, guestQueryList,guestForm));
+			return ok(invitados.render(guestQueryList, guestForm));
 	}
 
     public static void createDummyGuests(){
