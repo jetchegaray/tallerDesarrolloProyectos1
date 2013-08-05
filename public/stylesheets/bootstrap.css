@@ -6165,19 +6165,3 @@ a.badge:focus {
 .affix {
   position: fixed;
 }
-
-
-#form-agregar-invitado{
-    background-color: white;
-    border-radius: 6px;
-    padding:20px;
-    width:600px;
-}
-#form-agregar-invitado input{
-    width:400px;
-}
-
-#form-agregar-invitado h1{
-    font-size:16px;
-}
-

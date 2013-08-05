@@ -1,8 +1,7 @@
-
 function desactivar(seleccionado){
     if(seleccionado == "Filtros"){
-        var tabla  = $('table');
-        hijos = tabla.find('.fila-invitado');
+        var tabla = $('table');
+        var hijos = tabla.find('.fila-invitado');
         hijos.each(function(){
             $(this).css("display","");
         });
@@ -19,20 +18,20 @@ function desactivar(seleccionado){
 }
 
 function filtrarPor(filtro){
-        var tabla  = $('table');
-        hijos = tabla.find('.fila-invitado');
-        console.log(hijos);
-        hijos.each(function(){
-            $(this).css("display","");
-            imgCivil = $(this).find(filtro);
-            console.log(imgCivil);
-            if(imgCivil.hasClass('not-invited')){
-                 var padre = imgCivil.parent().parent().parent();
-                 padre.css('display','none');
-                 console.log(imgCivil);
-                 console.log(padre);
-            }
-        });
+    var tabla = $('table');
+    var hijos = tabla.find('.fila-invitado');
+    console.log(hijos);
+    hijos.each(function(){
+        $(this).css("display","");
+        var imgCivil = $(this).find(filtro);
+        console.log(imgCivil);
+        if(imgCivil.hasClass('not-invited')){
+           var padre = imgCivil.parent().parent().parent();
+           padre.css('display','none');
+           console.log(imgCivil);
+           console.log(padre);
+       }
+   });
 }
 
 $(".invites-filter").change(function () {
@@ -41,8 +40,7 @@ $(".invites-filter").change(function () {
     desactivar(seleccionado);
 });
 
-  $('.boton-agregar-invitado').bind('click', function(e) {
-                e.preventDefault();
-                $('#form-agregar-invitado').bPopup();
-
+$('.boton-agregar-invitado').bind('click', function(e) {
+    e.preventDefault();
+    $('#form-agregar-invitado').bPopup();
 });
