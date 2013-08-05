@@ -40,9 +40,19 @@ public abstract class Event implements Budgetable {
 		tasks.add(t);
 	}
 
-	public List<Task> getPendingTasks() {
-		// We should filter tasks that have been completed or canceled
+	public List<Task> getAllTasks() {
 		return tasks;
+	}
+	
+	public List<Task> getPendingTasks() {
+		// We should filter tasks that have been completed or canceled (not done)
+		List<Task> tasksAux = new ArrayList<Task>();
+		for(Task task : getAllTasks()) {
+			if (! task.done){
+				tasksAux.add(task);
+			}
+		}
+		return tasksAux;
 	}
 
 	public List<Expense> getActiveExpenses() {
@@ -72,7 +82,7 @@ public abstract class Event implements Budgetable {
 	// Lower end for the current estimated cost
 	public BigDecimal getLowerEstimate() {
 		BigDecimal acum = new BigDecimal(0);
-		for(Task task : getPendingTasks()) {
+		for(Task task : getAllTasks()) {
 			acum = acum.add(task.getLowerEstimate());
 		}
 		return acum.add(getAmountSpent());
@@ -81,7 +91,7 @@ public abstract class Event implements Budgetable {
 	// Upper end for the current estimated cost
 	public BigDecimal getUpperEstimate() {
 		BigDecimal acum = new BigDecimal(0);
-		for(Task task : getPendingTasks()) {
+		for(Task task : getAllTasks()) {
 			acum = acum.add(task.getUpperEstimate());
 		}
 		return acum.add(getAmountSpent());
