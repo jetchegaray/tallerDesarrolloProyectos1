@@ -9,6 +9,8 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.ArrayList;
 import java.math.BigDecimal;
+
+import model.domain.guests.Guest;
 import org.bson.types.ObjectId;
 
 import org.apache.commons.collections.CollectionUtils;
