@@ -42,7 +42,7 @@ public class InvitadosController extends WeddingController {
 
 
 
-	public static Result at(String title) {
+	public static Result index() {
             session("userId", "Martin");  //TODO take it from session para filtrar en la query
 
             String userId = session("userId");//"Martin"; //
@@ -90,7 +90,7 @@ public class InvitadosController extends WeddingController {
 
         Guest nuevoInvitado = new Guest(guestName,guestEmail,weddingId) ;
         Guest.createInDB(nuevoInvitado);
-        return redirect(routes.InvitadosController.at());
+        return redirect(routes.InvitadosController.index());
 
     }
 }
