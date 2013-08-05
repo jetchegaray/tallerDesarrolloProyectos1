@@ -9,4 +9,8 @@ public class Ceremony extends Event {
 		super("Ceremonia");
 	}
 
+	public String getTypeName() {
+		return EventType.CEREMONY.toString();
+	}
+
 }

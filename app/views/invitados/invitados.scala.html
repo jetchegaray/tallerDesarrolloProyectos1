@@ -4,13 +4,10 @@
 @import helper.bootstrap._
 _
 @main(title) {
-<div class="navbar navbar-fixed-top">
-	<div class="navbar-inner"> @shared.topNavWedding("HARCODED") </div>
-</div>
 <div id="wedding-management" class="container">
 	<div class="row">
-		<ul class="span2 nav nav-pills nav-stacked"> @shared.weddingTabs(title) </ul>		
-		<div class="span10 tab-content"> 
+		<ul class="span2 nav nav-pills nav-stacked"> @shared.weddingTabs(title) </ul>
+		<div class="span10 tab-content">
 			<h2>Invitados</h2>
 			<nav class="text-right">
 				<div class="control-group">
@@ -59,7 +56,7 @@ _
 					</div>
 				</fieldset>
 			</form>
-			
+
 			<div id="form-agregar-invitado" class="container" style="display: none;">
 				<h1>Registrar Invitado</h1>
 
@@ -81,7 +78,7 @@ _
 					</div>
 				    }
 			</div>
-			
+
 		</div>
 	</div>
 </div>

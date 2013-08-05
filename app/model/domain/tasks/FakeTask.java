@@ -2,24 +2,36 @@ package model.domain.tasks;
 
 import model.domain.Task;
 
+import java.util.Random;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
 import com.google.code.morphia.annotations.Embedded;
+import java.math.BigDecimal;
+
 /*
 	Fake task class to simplify integration with mockup tasks
 */
 public class FakeTask extends Task {
 
 	public String mockupId;
+	BigDecimal lowerEstimate;
+	BigDecimal upperEstimate;
 
 	public FakeTask() {
 		super();
 	}
 
 	public FakeTask(String name, String id) {
-		super(name, new GregorianCalendar(2013, 11, 21).getTime());
+		this(name, id, new GregorianCalendar(2013, 11, 21).getTime());
+	}
+
+	public FakeTask(String name, String id, Date dueDate) {
+		super(name, dueDate);
 		this.mockupId = id;
+		Random random = new Random();
+		lowerEstimate = new BigDecimal(random.nextInt(150) * 100 + 500);
+		upperEstimate = new BigDecimal(random.nextInt(150) * 100 + lowerEstimate.intValue());
 	}
 
 	public String target() {
@@ -30,6 +42,16 @@ public class FakeTask extends Task {
 		} else {
 			return mockupId;
 		}
+	}
+
+	@Override
+	public BigDecimal getLowerEstimate() {
+		return lowerEstimate;
+	}
+
+	@Override
+	public BigDecimal getUpperEstimate() {
+		return upperEstimate;
 	}
 
 }
