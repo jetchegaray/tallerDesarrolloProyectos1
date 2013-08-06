@@ -11,6 +11,7 @@ public abstract class Task implements Costable {
 
 	public String name;
 	public Date dueDate;
+	public boolean done = false;
 
 	protected Task() {}
 
@@ -28,4 +29,9 @@ public abstract class Task implements Costable {
 	public BigDecimal getUpperEstimate() {
 		return new BigDecimal(0);
 	}
+	
+	public void completeTask(){
+		this.done = true;
+	}
+	
 }
