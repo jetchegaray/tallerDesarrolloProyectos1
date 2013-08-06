@@ -11,6 +11,8 @@ GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
 GET      /login                     controllers.UserController.getLogin()
 POST     /login                     controllers.UserController.login()
+POST     /logout                    controllers.UserController.logout()
+
 GET      /user                      controllers.UserController.user()
 POST     /user                      controllers.UserController.addUser()
 

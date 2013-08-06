@@ -1,0 +1,6 @@
+@(text: String, link: play.api.mvc.Call)
+
+<a href="#" data-link-form="true">@text
+@helper.form(action = link, args = 'style -> "display: none; visibility: hidden;"){
+}
+</a>

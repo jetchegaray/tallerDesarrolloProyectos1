@@ -12,39 +12,46 @@ public class UserController extends Controller {
 
 	public static Form<User> userForm = Form.form(User.class);
 
-    public static Result user() {
-        return ok(signup.render(userForm));
-    }
+	public static Result user() {
+		return ok(signup.render(userForm));
+	}
 
-    public static Result getLogin() {
-        return ok(login.render(userForm));
-    }
+	public static Result getLogin() {
+		return ok(login.render(userForm));
+	}
 
-    public static Result login() {
-        DynamicForm params = new DynamicForm().bindFromRequest();
-        String userName = params.get("userName");
-        String password = params.get("password");
-        User dbUser = UserDAO.getUserDAO().findOne("userName", userName);
+	public static Result login() {
+		DynamicForm params = new DynamicForm().bindFromRequest();
+		String userName = params.get("userName");
+		String password = params.get("password");
+		User user = UserDAO.getUserDAO().findOne("userName", userName);
 
-        if ((dbUser != null) && dbUser.password.equals(password)) {
-            session("userId", dbUser.userName);
-            return redirect(routes.Mockup.at("Dashboard"));
-        } else {
-            Form<User> filledForm = userForm.bindFromRequest();
-            return badRequest(login.render(filledForm));
-        }
-    }
+		if ((user != null) && user.password.equals(password)) {
+			WeddingAuthenticator.signin(session(), user);
+			return redirect(routes.Mockup.at("Dashboard"));
+		} else {
+			Form<User> filledForm = userForm.bindFromRequest();
+			return badRequest(login.render(filledForm));
+		}
+	}
 
-    public static Result addUser(){
+	public static Result logout() {
+		WeddingAuthenticator.signout(session());
+		return redirect( routes.Application.index() );
+	}
 
-    	Form<User> filledForm = userForm.bindFromRequest();
+	public static Result addUser(){
+
+		Form<User> filledForm = userForm.bindFromRequest();
 
 		if(filledForm.hasErrors()) {
 			return badRequest(signup.render(filledForm));
 		} else {
-			User.create(filledForm.get());
+			User user = User.create(filledForm.get());
+			WeddingAuthenticator.signin(session(), user);
+
 			return redirect(routes.Mockup.at("Dashboard"));
 		}
-    }
+	}
 
 }
