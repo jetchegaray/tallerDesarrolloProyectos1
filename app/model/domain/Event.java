@@ -21,8 +21,8 @@ public abstract class Event implements Budgetable {
 	public Date date;
 	public Integer guestEstimate;
 	public BigDecimal budget;
-	@Embedded List<Task> tasks;
-	@Embedded List<Expense> expenses;
+	public @Embedded List<Task> tasks;
+	public @Embedded List<Expense> expenses;
 
 	public String city;
 

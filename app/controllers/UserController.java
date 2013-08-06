@@ -28,7 +28,7 @@ public class UserController extends Controller {
 
         if ((dbUser != null) && dbUser.password.equals(password)) {
             session("userId", dbUser.userName);
-            return redirect(routes.Mockup.at("Dashboard"));
+            return redirect(routes.DashboardController.show());
         } else {
             Form<User> filledForm = userForm.bindFromRequest();
             return badRequest(login.render(filledForm));
@@ -43,7 +43,7 @@ public class UserController extends Controller {
 			return badRequest(signup.render(filledForm));
 		} else {
 			User.create(filledForm.get());
-			return redirect(routes.Mockup.at("Dashboard"));
+			return redirect(routes.DashboardController.show());
 		}
     }
 
