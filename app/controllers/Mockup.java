@@ -8,9 +8,11 @@ import java.util.List;
 
 import play.api.templates.Html;
 import play.mvc.Result;
+import play.mvc.With;
 import scala.collection.mutable.StringBuilder;
 import views.html.account;
 
+@With({WeddingContext.class})
 public class Mockup extends Application {
 
 	public static Result at(String mockup) {

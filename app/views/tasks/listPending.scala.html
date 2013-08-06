@@ -1,0 +1,30 @@
+@(tasks: Seq[model.domain.Task])(content: Html = Html(""))
+
+@import model.domain.Task
+@import model.domain.tasks._
+
+@accordionTask(task: Task, index: Integer) = {
+<div class="accordion-group">
+    @task match {
+        case task: FakeTask => {
+            <div class="accordion-heading">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#task-list" href="#task-@index">
+                    @task.name
+                </a>
+            </div>
+            <div id="task-@index" data-href="/mockup/tasks/@task.mockupId" class="accordion-body collapse" data-target="task-@task.target()">
+                <div class="accordion-inner">Loading</div>
+            </div>
+        }
+    }
+</div>
+}
+
+<h2>Tareas pendientes</h2>
+<div class="accordion" id="task-list">
+    @for((task, index) <- tasks.zipWithIndex) {
+        @accordionTask(task, index)
+    }
+    @* This @content is included to allow to add more hardcoded tasks *@
+    @content
+</div>

@@ -6,8 +6,9 @@ import org.bson.types.ObjectId;
 
 import play.data.validation.Constraints.Required;
 
-import com.github.jmkgreen.morphia.annotations.Entity;
-import com.github.jmkgreen.morphia.annotations.Id;
+import com.google.code.morphia.annotations.Entity;
+import com.google.code.morphia.annotations.Id;
+import com.google.code.morphia.annotations.Reference;
 
 @Entity("users")
 public class User {
@@ -24,9 +25,12 @@ public class User {
 	@Required
 	public String email;
 
+	@Reference(ignoreMissing = true)
+	public Wedding wedding;
 
-	public static void create(User user){
+	public static User create(User user){
 		UserDAO.getUserDAO().save(user);
+		return user;
 	}
 
 }

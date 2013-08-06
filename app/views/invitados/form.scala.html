@@ -1,0 +1,19 @@
+@(guestForm: play.data.Form[model.domain.guests.Guest])
+
+@import helper.bootstrap._
+
+@helper.form(action = routes.InvitadosController.addGuest(), args = 'class -> "form-horizontal") {
+
+    @helper.inputText(guestForm("name"),
+        '_label -> "Nombre", '_help -> "", 'placeholder -> "name")
+
+    @helper.inputText(guestForm("email"),
+        '_label -> "Email", '_help -> "", 'placeholder -> "email")
+
+
+    <div class="control-group">
+        <div class="controls">
+            <button type="submit" class="btn-success">Agregar</button>
+        </div>
+    </div>
+}
