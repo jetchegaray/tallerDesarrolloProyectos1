@@ -1,28 +1,24 @@
 package model.domain;
 
 import java.math.BigDecimal;
-import java.util.Map;
+import java.util.List;
 
 import org.bson.types.ObjectId;
-import org.codehaus.jackson.annotate.JsonIgnore;
-import org.springframework.stereotype.Component;
 
 import com.google.code.morphia.annotations.Entity;
 import com.google.code.morphia.annotations.Id;
-import com.google.code.morphia.annotations.Reference;
-import com.google.common.collect.Maps;
+import com.google.common.collect.Lists;
 
 @Entity("hirings")
 public class Hiring {
 
 	@Id
-	ObjectId id;
+	public ObjectId id;
 	private String name;
 	private String address;
 	private String mail;
 	private HiringType type;
 	
-	private Conversation conversation;
 	private String picture;
 	private BigDecimal price;
 	
@@ -52,12 +48,10 @@ public class Hiring {
 			}
 		}
 	}
-	private static class Conversation{
-		private static final String KEY_USER = "USER";
-		private static final String HIRE_USER = "HIRE";
-		
-		private Map<String, String> messages = Maps.newLinkedHashMap();
-	}
+	
+	private List<String> userMessages = Lists.newArrayList();
+	private List<String> hiredMessages = Lists.newArrayList();
+	
 
 	public String getName() {
 		return name;
@@ -91,20 +85,13 @@ public class Hiring {
 		this.type = type;
 	}
 
-	public Conversation getConversation() {
-		return conversation;
-	}
-
-	public void setConversation(Conversation conversation) {
-		this.conversation = conversation;
-	}
 	
 	public void addConversationMessageUser(String message) {
-		 conversation.messages.put(Conversation.KEY_USER, message);
+		 userMessages.add(message);
 	}
 
 	public void addConversationMessageHireUser(String message) {
-		conversation.messages.put(Conversation.HIRE_USER, message);
+		hiredMessages.add(message);
 	}
 	
 
@@ -123,9 +110,21 @@ public class Hiring {
 	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
-	
-	
-	
-	
+
+	public List<String> getUserMessages() {
+		return userMessages;
+	}
+
+	public void setUserMessages(List<String> userMessages) {
+		this.userMessages = userMessages;
+	}
+
+	public List<String> getHiredMessages() {
+		return hiredMessages;
+	}
+
+	public void setHiredMessages(List<String> hiredMessages) {
+		this.hiredMessages = hiredMessages;
+	}
 	
 }
