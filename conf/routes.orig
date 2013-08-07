@@ -35,8 +35,10 @@ GET      /budget/expenses/new       controllers.BudgetController.newExpense(name
 POST     /budget/expenses           controllers.BudgetController.createExpense(name = null)
 GET      /budget                    controllers.BudgetController.show()
 
+<<<<<<< HEAD
+GET	 /dashboard		    controllers.DashboardController.show()
+
+=======
 GET      /invitados                 controllers.InvitadosController.index()
 POST     /invitados                 controllers.InvitadosController.addGuest()
-
-GET 	  /hiring					controllers.HiringController.hiring()
-GET 	  /hiringByType/{type}			controllers.HiringController.getHiringByType(type: String)
+>>>>>>> master

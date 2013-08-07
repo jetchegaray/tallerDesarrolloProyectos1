@@ -13,7 +13,7 @@ object ApplicationBuild extends Build {
      "com.google.code.morphia" % "morphia-logging-slf4j" % "0.101.0",
      "org.mongodb" % "mongo-java-driver" % "2.11.2",
      "commons-collections" % "commons-collections" % "3.2.1",
-   //   "com.google.code.morphia" % "validation" % "0.99",
+     "com.google.guava" % "guava" % "12.0-rc2",
     javaCore,
     javaJdbc,
     javaEbean

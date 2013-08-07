@@ -1,0 +1,99 @@
+@(hirings: List[model.domain.Hiring])
+@import helper.bootstrap._
+
+   <script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
+@main("Signup") {
+
+<h2>Contrataciones</h2>
+
+<div id="actions" class="btn-group"><button class="btn btn-primary">
+      Buscar mas..
+    </button><button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+    	<span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+	    <li><a href="#@routes.HiringController.getHiringByType(model.domain.Hiring.HiringType.PLACE.toString())">@model.domain.Hiring.HiringType.PLACE</a></li>
+	    <li class="divider"></li>
+	    <li><a href="#@routes.HiringController.getHiringByType(model.domain.Hiring.HiringType.PHOTOS.toString())">@model.domain.Hiring.HiringType.PHOTOS</a></li>
+	    <li class="divider"></li>
+	    <li><a href="#@routes.HiringController.getHiringByType(model.domain.Hiring.HiringType.VIDEOS.toString())">@model.domain.Hiring.HiringType.VIDEOS</a></li>
+	    <li class="divider"></li>
+	    <li><a href="#@routes.HiringController.getHiringByType(model.domain.Hiring.HiringType.MUSIC.toString())">@model.domain.Hiring.HiringType.MUSIC</a></li>
+	    
+	</ul>
+	<script type="text/javascript">
+    jQuery(".dropdown-menu a").click(
+            function () {
+            	$.get(jQuery(this).attr("href"), function (data) {
+                    $('.result').html("CACA"");
+                });
+                return false;
+            }
+    )
+	</script>
+</div>
+
+<div class="result" style="border: 1px solid black; padding: 5px;">not sent yet...</div>
+ 
+    
+<article>
+    <h3>Novedades</h3>
+    <ul>
+        <li>
+            Nueva Respuesta:
+            <figure class="media">
+                <a href="/mockup/Contact" alt="Contactar" class="pull-left">
+                    <img class="media-object" src="http://lorempixel.com/64/64/people" alt="someone else"/>
+                </a>
+                <div class="media-body">
+                    <h6>Another provider</h6>
+                    <small>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud enisi ut aliquip ex ea commodo
+                        consequat (...) <a href="/mockup/Conversacion">Leer</a>
+                    </small>
+                </div>
+            </figure>
+        </li>
+    </ul>
+</article>
+
+<article>
+    <h3>Conversaciones en curso</h3>
+    <table class='table table-hover'>
+        <thead>
+            <tr>
+                <th>Origen</th>
+                <th>Detalle</th>
+                <th>Datos</th>
+                <th>Presupuesto</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><a href="/mockup/Civil">Civil</a></td>
+                <td><a href="/mockup/tasks/hire">Contratar Fotografo</a></td>
+                <td class="media">
+                    <a href="/mockup/Contact" alt="Contactar" class="pull-left">
+                        <img class="media-object" src="http://lorempixel.com/64/64/people?2" alt="someone else"/>
+                    </a>
+                    <div class="media-body">
+                        <h6>Another provider</h6>
+                        <small>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                            consequat.
+                        </small>
+                    </div>
+                </td>
+                <td> $XX.XXX </td>
+                <td><a href="/mockup/Conversacion">Ver</a></td>
+            </tr>
+        </tbody>
+    </table>
+
+</article>
+}

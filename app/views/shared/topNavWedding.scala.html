@@ -1,9 +1,16 @@
 @(currentWedding: model.domain.Wedding)
 
 @import views.html.helper.wedding
+@import views.html.helper.bootstrap._
 
 @topNav("Casamiento de " + wedding.nameCouple(currentWedding)) {
 	<li><a href="/dashboard">Dashboard</a></li>
 	<li><a href="@routes.Mockup.at("Inbox")">Inbox</a></li>
-	<li><a href="@routes.UserController.user()">Account</a></li>
+	<li>
+		@dropDown("Account") {
+			<li><a href="@routes.UserController.login">Settings</a></li>
+			<li class="divider"></li>
+			<li>@helper.formLink("Salir", routes.UserController.logout)</li>
+		}
+	</li>
 }
