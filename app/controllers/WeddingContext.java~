@@ -1,0 +1,18 @@
+package controllers;
+
+import play.mvc.Action;
+import play.mvc.Http.Context;
+import play.mvc.Result;
+
+import model.domain.Wedding;
+
+public class WeddingContext extends Action.Simple {
+
+	@Override
+	public Result call(Context ctx) throws Throwable {
+		ctx.args.put("wedding", WeddingController.currentWedding());
+		return delegate.call(ctx);
+	}
+
+	
+}

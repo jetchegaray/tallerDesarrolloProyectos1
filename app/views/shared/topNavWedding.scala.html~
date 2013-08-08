@@ -1,0 +1,9 @@
+@(currentWedding: model.domain.Wedding)
+
+@import views.html.helper.wedding
+
+@topNav("Casamiento de " + wedding.nameCouple(currentWedding)) {
+	<li><a href="@routes.Mockup.at("Dashboard")">Dashboard</a></li>
+	<li><a href="@routes.Mockup.at("Inbox")">Inbox</a></li>
+	<li><a href="@routes.UserController.user()">Account</a></li>
+}
