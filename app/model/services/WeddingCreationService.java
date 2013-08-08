@@ -5,6 +5,7 @@ import model.domain.events.*;
 import model.domain.tasks.*;
 
 import model.dao.WeddingDAO;
+import model.dao.EventDAO;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -33,6 +34,8 @@ public class WeddingCreationService {
 		civil.addTask(new FakeTask("Enviar invitaciones", "102", daysBefore(wedding, 30 * 2)));
 		// This tasks should be included when this event changes to "withReception = true"
 		civil.addTask(new FakeTask("Comprar bebidas y comida para la recepción", "101", daysBefore(wedding, 30* 3)));
+
+		EventDAO.instance.save(civil);
 		return civil;
 	}
 
@@ -46,6 +49,8 @@ public class WeddingCreationService {
 		ceremony.addTask(new FakeTask("Definir lista de invitados", "102", daysBefore(wedding, 30 * 3)));
 		// This task should be included when the previous task is completed
 		ceremony.addTask(new FakeTask("Enviar invitaciones", "102", daysBefore(wedding, 30 * 2)));
+
+		EventDAO.instance.save(ceremony);
 		return ceremony;
 	}
 
@@ -69,6 +74,7 @@ public class WeddingCreationService {
 		// This task should be included after the task "contratar salon" Currently is hardcoded in
 		// the view: showParty
 		// party.addTask(new FakeTask("Organizar mesas", "102", daysBefore(wedding, 30 * 2)));
+		EventDAO.instance.save(party);
 		return party;
 	}
 

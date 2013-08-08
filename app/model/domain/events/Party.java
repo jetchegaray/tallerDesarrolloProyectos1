@@ -5,7 +5,7 @@ import model.domain.tasks.FakeTask;
 
 public class Party extends Event {
 
-	// public
+	public String city;
 
 	public Party() {
 		super("Fiesta");

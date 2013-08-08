@@ -15,14 +15,16 @@ import com.google.code.morphia.annotations.Converters;
 import extensions.morphia.BigDecimalConverter;
 
 @Converters({BigDecimalConverter.class})
+@Entity("events")
 public abstract class Event implements Budgetable {
 
+	public @Id ObjectId id;
 	public String name;
 	public Date date;
 	public Integer guestEstimate;
 	public BigDecimal budget;
-	@Embedded List<Task> tasks;
-	@Embedded List<Expense> expenses;
+	public @Embedded List<Task> tasks;
+	public @Embedded List<Expense> expenses;
 
 	public String city;
 
