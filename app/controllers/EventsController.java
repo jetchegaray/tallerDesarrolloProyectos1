@@ -46,10 +46,6 @@ public class EventsController extends WeddingController {
 			event.updateTasks();
 			EventDAO.instance.save(event);
 
-			// Test adding tasks
-			event.addTask(new FakeTask("Glory to the gods", "102"));
-			event.getTasks().remove(0);
-
 			ObjectNode node = (ObjectNode)Json.toJson(event);
 			node.put("formatted_range", range(event));
 

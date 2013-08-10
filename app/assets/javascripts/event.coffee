@@ -65,9 +65,9 @@ class EventController
         taskItem.prependTo($('#tasks-list'))
         taskItem.effect("highlight", 3000)
 
-    $("#task-list .accordion-group[id]").each ->
+    $("#tasks-list .accordion-group[id]").each ->
       unless tasksBySlug[this.id]
-        $(this).hide(1500)
+        $(this).hide(1000)
 
 # Exports
 window.EventController = EventController

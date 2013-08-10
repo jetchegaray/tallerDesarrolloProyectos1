@@ -1,6 +1,7 @@
 @(partyForm: play.data.Form[model.domain.events.Party])
 
 @import helper.bootstrap._
+@import model.domain.events.Party
 
 @helper.form(action = routes.EventsController.update("PARTY"), args = 'class -> "form-horizontal") {
     @helper.select(partyForm("city"),
@@ -15,14 +16,6 @@
         '_label -> "Cuándo?")
 
     @helper.checkboxes(partyForm("extras"),
-        Seq(
-            ("Banda", "band"),
-            ("DJ", "dj"),
-            ("Cotillón", "cotillon"),
-            ("Decoración especial", "special-decoration"),
-            ("Fotógrafo", "photographer"),
-            ("Filmación", "film"),
-            ("Fuegos artificiales", "fireworks")
-        ),
+        helper.options(Party.EXTRAS.toSeq),
         '_label -> "Extras")
 }

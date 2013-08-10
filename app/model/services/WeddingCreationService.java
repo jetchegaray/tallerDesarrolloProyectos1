@@ -63,7 +63,6 @@ public class WeddingCreationService {
 		party.addTask(new FakeTask("Contratar impresión de invitaciones", "hire", daysBefore(wedding, 30 * 4)));
 		party.addTask(new FakeTask("Comprar traje del novio", "hire", daysBefore(wedding, 30 * 4)));
 		party.addTask(new FakeTask("Comprar vestido de novia", "hire-dress", daysBefore(wedding, 30 * 6)));
-		party.addTask(new FakeTask("Contratar shows y extras", "hire", daysBefore(wedding, 30 * 3)));
 		party.addTask(new FakeTask("Comprar souvenires", "hire", daysBefore(wedding, 30 * 3)));
 		party.addTask(new FakeTask("Elegir casa de regalos y armar la lista", "hire", daysBefore(wedding, 30 * 2)));
 		party.addTask(new FakeTask("Definir lista de invitados", "102", daysBefore(wedding, 30 * 3)));
