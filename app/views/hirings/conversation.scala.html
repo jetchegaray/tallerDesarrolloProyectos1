@@ -1,9 +1,16 @@
 @(hiring :  model.domain.Hiring)
 @import helper.bootstrap._
-<script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
 
-
-@main("Conversation") {
+@extraScripts = {
+	<script type="text/javascript">
+                        	$("#agregarNuevoMensaje").click(function() {
+                        		var keyed = $("#readMessage").val().replace(/\n/g, '<br/>');
+                        		$("#writeMessage").html(keyed);
+                        		$("#readMessage").val("");
+                        });
+   </script>
+}
+@account("Conversation", extraScripts) {
 
 <section class="tabbable">
     <h2>@hiring.getName()</h2>
@@ -114,13 +121,7 @@
                 <div class="control-group">
                     <div class="controls">
                         <button id="agregarNuevoMensaje" type="button" class="btn">Enviar
-                        <script type="text/javascript">
-                        	$("#agregarNuevoMensaje").click(function() {
-                        		var keyed = $("#readMessage").val().replace(/\n/g, '<br/>');
-                        		$("#writeMessage").html(keyed);
-                        		$("#readMessage").val("");
-                        });
-                        </script>
+                        
                         </button>
                     </div>
                 </div>

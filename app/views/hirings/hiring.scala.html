@@ -1,4 +1,4 @@
-@(hirings: List[model.domain.Hiring])
+@(hirings: List[model.domain.Hiring], hiring: model.domain.Hiring)
 
 @import helper.bootstrap._
 
@@ -45,12 +45,12 @@
             Nueva Respuesta:
             <figure class="media">
                 <a href="/mockup/Contact" alt="Contactar" class="pull-left">
-                    <img class="media-object" src="http://lorempixel.com/64/64/people" alt="someone else"/>
+                    <img class="media-object" src="@routes.Assets.at("images/app")/@hiring.getPicture()" alt="someone else"/>
                 </a>
                 <div class="media-body">
                     <h6>Bonifacia Eventos</h6>
                     <small>
-                        Si grabamos 3 horas de video, estaria por debajo de las 5 horas serian $3600, si fuera mas de 10 se iria a $4500 <a href="/mockup/Conversacion">Leer</a>
+                        @hiring.getHiredMessages().get(hiring.getHiredMessages().size()-1) <a href="/hiring/conversation/@hiring.getName()">Leer</a>
                     </small>
                 </div>
             </figure>
