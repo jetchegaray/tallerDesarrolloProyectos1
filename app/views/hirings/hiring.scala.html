@@ -1,8 +1,41 @@
 @(hirings: List[model.domain.Hiring])
+
 @import helper.bootstrap._
-<script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
-    
-@main("hiring") {
+
+@extraScripts = {
+  <script type="text/javascript">
+    //begin main function
+    $(".dropdown-menu li a").click(function(){
+      $.getJSON($(this).attr("href"), function(json){
+        renderHandlebarsTemplate("@routes.Assets.at("javascripts/template_tableHiring.handlebars")", '#tableContainer', json);
+      });
+    });
+    //end main function
+
+    // function to compile handlebars template
+    function renderHandlebarsTemplate(withTemplate,inElement,json){
+      getTemplateAjax(withTemplate, function(template) {
+        $(inElement).html(template(json));
+      })
+    };
+
+    // render handlebars templates via ajax
+    function getTemplateAjax(path, callback) {
+      var source, template;
+      $.ajax({
+        url: path,
+        success: function (data) {
+          source   = data;
+          template = Handlebars.compile(source);
+          if (callback)
+            callback(template);
+        }
+      });
+    };
+  </script>
+}
+
+@account("Contrataciones", extraScripts) {
 
 <h2>Contrataciones</h2>
 <article>
@@ -26,53 +59,21 @@
 </article>
 
 <div id="actions" class="btn-group">
-	<button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-		Buscar mas..
-    	<span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu">
-	    <li><a href="@routes.HiringController.getHiringByType(model.domain.Hiring.HiringType.Lugares.toString())" onclick="return false;">@model.domain.Hiring.HiringType.Lugares</a></li>
-	    <li class="divider"></li>
-	    <li><a href="@routes.HiringController.getHiringByType(model.domain.Hiring.HiringType.Fotos.toString())" onclick="return false;">@model.domain.Hiring.HiringType.Fotos</a></li>
-	    <li class="divider"></li>
-	    <li><a href="@routes.HiringController.getHiringByType(model.domain.Hiring.HiringType.Videos.toString())" onclick="return false;">@model.domain.Hiring.HiringType.Videos</a></li>
-	    <li class="divider"></li>
-	    <li><a href="@routes.HiringController.getHiringByType(model.domain.Hiring.HiringType.Musica.toString())" onclick="return false;">@model.domain.Hiring.HiringType.Musica</a></li>
-	</ul>
-	<script type="text/javascript">
-			//begin main function
-           $(".dropdown-menu li a").click(function(){
-        	   $.getJSON($(this).attr("href"),  function(json){
-        	  		renderHandlebarsTemplate("@routes.Assets.at("javascripts/template_tableHiring.handlebars")", '#tableContainer', json);
-              });
-           });
-           //end main function
-
-                   // function to compile handlebars template
-           function renderHandlebarsTemplate(withTemplate,inElement,json){
-        		getTemplateAjax(withTemplate, function(template) {
-           				$(inElement).html(template(json));
-           		})
-           };
-            
-           // render handlebars templates via ajax
-           function getTemplateAjax(path, callback) {
-           		var source, template;
-        		$.ajax({
-           				url: path,
-           				success: function (data) {
-           								source = data;
-           								template = Handlebars.compile(source);
-           								if (callback) 
-           									callback(template);
-           								}
-           				});
-           };
-	</script>
+  <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+    Buscar mas..
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu">
+    <li><a href="@routes.HiringController.getHiringByType(model.domain.Hiring.HiringType.Lugares.toString())" onclick="return false;">@model.domain.Hiring.HiringType.Lugares</a></li>
+    <li class="divider"></li>
+    <li><a href="@routes.HiringController.getHiringByType(model.domain.Hiring.HiringType.Fotos.toString())" onclick="return false;">@model.domain.Hiring.HiringType.Fotos</a></li>
+    <li class="divider"></li>
+    <li><a href="@routes.HiringController.getHiringByType(model.domain.Hiring.HiringType.Videos.toString())" onclick="return false;">@model.domain.Hiring.HiringType.Videos</a></li>
+    <li class="divider"></li>
+    <li><a href="@routes.HiringController.getHiringByType(model.domain.Hiring.HiringType.Musica.toString())" onclick="return false;">@model.domain.Hiring.HiringType.Musica</a></li>
+  </ul>
 </div>
 
 <div id="tableContainer" class="table table-bordered table-striped media"></div>
- 
-
 
 }
