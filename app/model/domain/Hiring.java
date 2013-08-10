@@ -7,6 +7,8 @@ import org.bson.types.ObjectId;
 
 import com.google.code.morphia.annotations.Entity;
 import com.google.code.morphia.annotations.Id;
+import com.google.code.morphia.annotations.Indexed;
+import com.google.code.morphia.annotations.Reference;
 import com.google.common.collect.Lists;
 
 @Entity("hirings")
@@ -14,6 +16,7 @@ public class Hiring {
 
 	@Id
 	public ObjectId id;
+	
 	private String name;
 	private String address;
 	private String mail;

@@ -1,5 +1,7 @@
-@(hiring :  play.data.Form[model.domain.Hiring])
+@(hiring :  model.domain.Hiring)
 @import helper.bootstrap._
+<script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
+
 
 @main("Conversation") {
 
@@ -14,7 +16,7 @@
         <article id="profile" class="tab-pane active">
             <figure class="media">
                 <a href="/mockup/Conversacion" alt="Contactar" class="pull-left">
-                    <img class="media-object" src="assets/images/app/@hiring.getPicture()" alt="someone else"/>
+                    <img class="media-object" src="@routes.Assets.at("images/app")/@hiring.getPicture()" alt="someone else"/>
                 </a>
                 <div class="media-body">
                     <small>
@@ -94,18 +96,32 @@
             	</li>
             }
          }
+         <li class="media">
+                <div class="media-body">
+                    <h6 class="media-heading">XX :</h6>
+                    <small id="writeMessage"></small>
+                </div>
+            </li>
         </ul>
         <form action="/mockup/Conversacion">
             <fieldset>
                 <div class="control-group">
                     <label class="control-label" for="city">Nuevo Mensaje</label>
                     <div class="controls">
-                        <textarea id="city" type="text-area" placeholder="" class="input-block-level" rows="10"></textarea>
+                        <textarea id="readMessage" type="text-area" placeholder="" class="input-block-level" rows="10"></textarea>
                     </div>
                 </div>
                 <div class="control-group">
                     <div class="controls">
-                        <button type="submit" class="btn">Enviar</button>
+                        <button id="agregarNuevoMensaje" type="button" class="btn">Enviar
+                        <script type="text/javascript">
+                        	$("#agregarNuevoMensaje").click(function() {
+                        		var keyed = $("#readMessage").val().replace(/\n/g, '<br/>');
+                        		$("#writeMessage").html(keyed);
+                        		$("#readMessage").val("");
+                        });
+                        </script>
+                        </button>
                     </div>
                 </div>
             </fieldset>
