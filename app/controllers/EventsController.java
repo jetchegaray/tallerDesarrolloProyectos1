@@ -7,11 +7,14 @@ import model.domain.events.*;
 
 import views.html.events.*;
 import views.html.errors.*;
+import views.html.helper.budget.*;
 
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.data.Form;
 import play.data.DynamicForm;
+import play.libs.Json;
+import org.codehaus.jackson.node.ObjectNode;
 
 public class EventsController extends WeddingController {
 
@@ -34,14 +37,27 @@ public class EventsController extends WeddingController {
 			Event eventFromForm = filledForm.get();
 			eventFromForm.id = event.id;
 			EventDAO.instance.merge(eventFromForm);
-			return ok(show.render(event));
+			// UGLY HACK: (Because play forms don't support starting from an existing object)
+			/// So, we are going to Reload from db, then updateTasks (pricing and other stuffs), finally save again!
+			event = EventDAO.instance.get(event.id);
+			event.updateTasks();
+			EventDAO.instance.save(event);
+
+			ObjectNode node = (ObjectNode)Json.toJson(event);
+			node.put("formatted_range", range(event));
+
+			return ok( node );
 		} else {
-			return notFound(e404.render());
+			return notFound( e404.render() );
 		}
 	}
 
 	private static <T extends Event> Form<T> formFor(T event) {
 		return views.html.helper.events.package$.MODULE$.formFor(event);
+	}
+
+	private static String range(Event event) {
+		return views.html.helper.budget.package$.MODULE$.range(event);
 	}
 
 }

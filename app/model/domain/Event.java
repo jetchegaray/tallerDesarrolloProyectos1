@@ -14,6 +14,9 @@ import com.google.code.morphia.annotations.Id;
 import com.google.code.morphia.annotations.Converters;
 import extensions.morphia.BigDecimalConverter;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.Predicate;
+
 @Converters({BigDecimalConverter.class})
 @Entity("events")
 public abstract class Event implements Budgetable {
@@ -36,6 +39,7 @@ public abstract class Event implements Budgetable {
 		this.name = name;
 		this.tasks = new ArrayList<Task>();
 		this.expenses = new ArrayList<Expense>();
+		this.budget = new BigDecimal(0);
 	}
 
 	public void addTask(Task t) {
@@ -123,6 +127,16 @@ public abstract class Event implements Budgetable {
 	public void addExpense(Expense expense) {
 		expenses.add(expense);
 	}
+
+	public Task findTaskBySlug(final String slug) {
+		return (Task)CollectionUtils.find(tasks, new Predicate() {
+			public boolean evaluate(Object object) {
+				return slug.equals(((Task)object).slug);
+			}
+		});
+	}
+
+	public abstract void updateTasks();
 
 	protected enum EventType {
 		CIVIL, CEREMONY, PARTY
