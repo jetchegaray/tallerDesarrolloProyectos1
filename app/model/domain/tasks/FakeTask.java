@@ -1,6 +1,7 @@
 package model.domain.tasks;
 
 import model.domain.Task;
+import model.domain.Event;
 
 import java.util.Random;
 import java.util.Date;
@@ -34,14 +35,15 @@ public class FakeTask extends Task {
 		upperEstimate = new BigDecimal(random.nextInt(150) * 100 + lowerEstimate.intValue());
 	}
 
-	public String target() {
-		if (mockupId.equals("hire")) {
-			return "202";
-		} else if (mockupId.equals("hire-dress")) {
-			return "204";
-		} else {
-			return mockupId;
+	public void updatePricingEstimate(Event event) {
+		if (slug.equals("contratar-sal-n")) {
+			lowerEstimate = lowerEstimate.add(new BigDecimal(1000));
+			upperEstimate = upperEstimate.add(new BigDecimal(1000));
 		}
+	}
+
+	public String getUrl() {
+		return "/mockup/tasks/" + mockupId;
 	}
 
 	@Override

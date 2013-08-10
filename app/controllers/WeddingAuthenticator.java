@@ -48,7 +48,12 @@ public class WeddingAuthenticator extends Security.Authenticator {
 	}
 
 	public static void setWeddingId(Session session, String id) {
-		session.put("weddingId", id);
+		if (id != null) {
+			session.put("weddingId", id);
+		} else {
+			session.remove("weddingId");
+		}
+
 	}
 
 }

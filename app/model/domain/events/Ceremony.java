@@ -9,6 +9,9 @@ public class Ceremony extends Event {
 		super("Ceremonia");
 	}
 
+	public void updateTasks() {
+	}
+
 	public String getTypeName() {
 		return EventType.CEREMONY.toString();
 	}
