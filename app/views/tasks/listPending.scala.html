@@ -2,17 +2,18 @@
 
 @import model.domain.Task
 @import model.domain.tasks._
+@import views.html.helper.events._
 
 @accordionTask(task: Task, index: Integer) = {
-<div class="accordion-group">
+<div id="@task.slug" class="accordion-group">
     @task match {
         case task: FakeTask => {
             <div class="accordion-heading">
-                <a class="accordion-toggle" data-toggle="collapse" data-parent="#task-list" href="#task-@index">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#tasks-list" href="#@{task.slug}-container">
                     @task.name
                 </a>
             </div>
-            <div id="task-@index" data-href="/mockup/tasks/@task.mockupId" class="accordion-body collapse" data-target="task-@task.target()">
+            <div id="@{task.slug}-container" data-href="@task.getUrl()" class="accordion-body collapse" data-target="@task.mockupId">
                 <div class="accordion-inner">Loading</div>
             </div>
         }
@@ -21,7 +22,7 @@
 }
 
 <h2>Tareas pendientes</h2>
-<div class="accordion" id="task-list">
+<div class="accordion" id="tasks-list">
     @for((task, index) <- tasks.zipWithIndex) {
         @accordionTask(task, index)
     }

@@ -1,6 +1,6 @@
-@(title: String)(content: Html)
+@(title: String, footer: Html = Html(""))(content: Html)
 
-@main(title) {
+@main(title, footer) {
 	<div class="navbar navbar-fixed-top">
 		<div class="navbar-inner"> @shared.topNavWedding(WeddingContext.current())</div>
 	</div>
