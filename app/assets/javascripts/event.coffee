@@ -1,5 +1,29 @@
 class EventController
   init: =>
+    $.template('fake_task',"""
+      <div id="${slug}" class="accordion-group">
+          <div class="accordion-heading">
+              <a class="accordion-toggle" data-toggle="collapse" data-parent="#task-list" href="#${slug}-container">
+                  ${name}
+              </a>
+          </div>
+          <div id="${slug}-container" data-href="${url}" class="accordion-body collapse" data-target="${mockupId}">
+              <div class="accordion-inner">Loading</div>
+          </div>
+      </div>
+    """)
+    $.template('task', """
+      <div id="${slug}" class="accordion-group">
+          <div class="accordion-heading">
+              <a class="accordion-toggle" data-toggle="collapse" data-parent="#task-list" href="#${slug}-container">
+                  ${name}
+              </a>
+          </div>
+          <div id="${slug}-container" data-href="${url}" class="accordion-body collapse" data-target="${slug}">
+              <div class="accordion-inner">Loading</div>
+          </div>
+      </div>
+    """)
     @$form = $("#event-information form")
     @$form.find(":input").change @onInputChange
 
@@ -16,10 +40,32 @@ class EventController
       error: -> alert("Failed")
 
   updateEventInformation: (json) =>
-    $(".page-header .formatted-range").html(json['formatted_range'])
-    $(".page-header .text-right").effect("highlight", 3000);
+    @updateBudget(json)
+    @updatePendingTasks(json['pendingTasks'])
 
-    # alert("Done!")
+  updateBudget: (json) =>
+    $(".page-header .formatted-range").html(json['formatted_range'])
+    $(".page-header .text-right").effect("highlight", 3000)
+
+  updatePendingTasks: (pendingTasks) =>
+    tasksBySlug = {}
+
+    for task in pendingTasks
+      tasksBySlug[task.slug] = task
+
+      unless $("##{task.slug}").length
+        taskItem = if task.mockupId
+            $.tmpl('fake_task', task)
+          else
+            $.tmpl('task', task)
+        debugger
+
+        taskItem.prependTo($('#tasks-list'))
+        taskItem.effect("highlight", 3000)
+
+    $("#task-list .accordion-group[id]").each ->
+      unless tasksBySlug[this.id]
+        $(this).hide(1500)
 
 # Exports
 window.EventController = EventController

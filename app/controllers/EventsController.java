@@ -4,6 +4,8 @@ import model.dao.EventDAO;
 import model.domain.Wedding;
 import model.domain.Event;
 import model.domain.events.*;
+import model.domain.Task;
+import model.domain.tasks.*;
 
 import views.html.events.*;
 import views.html.errors.*;
@@ -11,6 +13,7 @@ import views.html.helper.budget.*;
 
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.api.mvc.Call;
 import play.data.Form;
 import play.data.DynamicForm;
 import play.libs.Json;
@@ -43,6 +46,10 @@ public class EventsController extends WeddingController {
 			event.updateTasks();
 			EventDAO.instance.save(event);
 
+			// Test adding tasks
+			event.addTask(new FakeTask("Glory to the gods", "102"));
+			event.getTasks().remove(0);
+
 			ObjectNode node = (ObjectNode)Json.toJson(event);
 			node.put("formatted_range", range(event));
 
@@ -59,5 +66,6 @@ public class EventsController extends WeddingController {
 	private static String range(Event event) {
 		return views.html.helper.budget.package$.MODULE$.range(event);
 	}
+
 
 }
