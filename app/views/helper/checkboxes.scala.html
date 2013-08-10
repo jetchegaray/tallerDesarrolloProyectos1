@@ -1,0 +1,16 @@
+@(field: play.api.data.Field, options: Seq[(String, String)], args: (Symbol,Any)*)(implicit handler: FieldConstructor, lang: play.api.i18n.Lang)
+
+@input(field, args:_*) { (id, name, _currentValue, htmlArgs) =>
+    @defining( "%s[]".format(name) ) { inputName =>
+    <input type="hidden" id="@id" name="@inputName" value="">
+
+    @defining(field.indexes.map( i => field("[%s]".format(i)).value ).flatten.toSet) { values =>
+        @for((option, value) <- options) {
+        <label class="checkbox">
+            <input type="checkbox" name="@inputName" value="@value" @if(values.contains(value)){checked}>@option</input>
+        </label>
+        }
+    }
+
+    }
+}

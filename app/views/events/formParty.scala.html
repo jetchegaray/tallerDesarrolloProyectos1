@@ -1,56 +1,21 @@
 @(partyForm: play.data.Form[model.domain.events.Party])
 
 @import helper.bootstrap._
+@import model.domain.events.Party
 
 @helper.form(action = routes.EventsController.update("PARTY"), args = 'class -> "form-horizontal") {
-    @helper.inputText(partyForm("city"),
-        '_label -> "Ciudad", '_help -> "Ciudad dónde querés que sea la fiesta", 'placeholder -> "Ciudad")
+    @helper.select(partyForm("city"),
+        helper.options(Seq("", "Capital Federal", "Pilar", "Quilmes", "Otro")),
+        '_label -> "Ciudad", '_help -> "Ciudad dónde querés que sea la fiesta",
+        Symbol("data-placeholder") -> "Choose a country...")
 
     @helper.inputDate(partyForm("date"),
         '_label -> "Fecha", '_help -> "Fecha deseada para la fiesta")
 
-    <div class="control-group">
-        <label class="control-label">Cuándo?</label>
-        <div class="controls">
-            <div class="btn-group search-buttons" data-toggle="buttons-radio">
-                <button type="button" class="btn btn-info">Día</button>
-                <button type="button" class="btn btn-info">Noche</button>
-            </div>
-        </div>
-    </div>
+    @helper.buttonRadio(partyForm("when"), Seq(("Día", "DAY"), ("Noche", "NIGHT")),
+        '_label -> "Cuándo?")
 
-    <div class="control-group">
-        <label class="control-label" for="city">Extras</label>
-        <div class="controls">
-            <label class="checkbox">
-                <input type="checkbox"> Banda
-            </label>
-            <label class="checkbox">
-                <input type="checkbox"> DJ
-            </label>
-            <label class="checkbox">
-                <input type="checkbox"> Cotillón
-            </label>
-            <label class="checkbox">
-                <input type="checkbox"> Decoración especial
-            </label>
-            <label class="checkbox">
-                <input type="checkbox"> Fotógrafo
-            </label>
-            <label class="checkbox">
-                <input type="checkbox"> Filmación
-            </label>
-            <label class="checkbox">
-                <input type="checkbox"> Fuegos artificiales
-            </label>
-        </div>
-    </div>
-
-<!--
-    <div class="control-group">
-        <div class="controls">
-            <button type="submit" class="btn-success">Registrarme</button>
-        </div>
-    </div>
--->
+    @helper.checkboxes(partyForm("extras"),
+        helper.options(Party.EXTRAS.toSeq),
+        '_label -> "Extras")
 }

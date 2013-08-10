@@ -27,7 +27,7 @@ POST     /ceremonia/expenses        controllers.BudgetController.createExpense(n
 GET      /ceremonia/expenses/new    controllers.BudgetController.newExpense(name = "CEREMONY")
 
 GET      /fiesta                    controllers.EventsController.show(name = "PARTY")
-PATCH    /fiesta                    controllers.EventsController.update(name = "PARTY")
+POST     /fiesta                    controllers.EventsController.update(name = "PARTY")
 POST     /fiesta/expenses           controllers.BudgetController.createExpense(name = "PARTY")
 GET      /fiesta/expenses/new       controllers.BudgetController.newExpense(name = "PARTY")
 
