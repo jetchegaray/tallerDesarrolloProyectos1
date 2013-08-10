@@ -26,6 +26,9 @@ class EventController
     """)
     @$form = $("#event-information form")
     @$form.find(":input").change @onInputChange
+    @$form.find("#city").chosen
+      allow_single_deselect: true
+      no_results_text: "Ups, no tenemos soporte para la ciudad:"
 
   onInputChange: (e) =>
     $target = $(e.currentTarget)
@@ -58,7 +61,6 @@ class EventController
             $.tmpl('fake_task', task)
           else
             $.tmpl('task', task)
-        debugger
 
         taskItem.prependTo($('#tasks-list'))
         taskItem.effect("highlight", 3000)
