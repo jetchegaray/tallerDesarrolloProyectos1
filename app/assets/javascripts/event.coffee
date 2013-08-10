@@ -4,13 +4,14 @@ class EventController
     @$form.find(":input").change @onInputChange
 
   onInputChange: (e) =>
-    $input = $(e.currentTarget)
+    $target = $(e.currentTarget)
+    $inputs = @$form.find(":input[name='#{$target.attr("name")}']")
 
-    return if $input.attr("id") is "date" and $input.val() < "2013-08-15"
+    return if $target.attr("id") is "date" and $target.val() < "2013-08-15"
 
     req = $.ajax @$form.action,
       type: "POST"
-      data: $input.serialize()
+      data: $inputs.serialize()
       success: @updateEventInformation
       error: -> alert("Failed")
 

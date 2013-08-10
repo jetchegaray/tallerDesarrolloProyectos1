@@ -1,0 +1,10 @@
+@(field: play.api.data.Field, options: Seq[(String, String)], args: (Symbol,Any)*)(implicit handler: FieldConstructor, lang: play.api.i18n.Lang)
+
+@input(field, args:_*) { (id, name, currentValue, htmlArgs) =>
+    <div class="btn-group search-buttons" data-toggle="buttons-radio" @toHtmlArgs(htmlArgs)>
+        @for((option, value) <- options) {
+            <button type="button" class="btn btn-info @if(value.equals(currentValue.getOrElse(""))){active}" data-value="@value">@option</button>
+        }
+    </div>
+    <input type="hidden" id="@id" name="@name" value="@currentValue">
+}
