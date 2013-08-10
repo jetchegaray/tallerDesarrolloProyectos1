@@ -15,7 +15,7 @@ import play.mvc.With;
 public class WeddingController extends Controller {
 
 	public static Wedding currentWedding() {
-		return WeddingDAO.instance.get(new ObjectId(WeddingAuthenticator.getWeddingId(session())));
+		return WeddingContext.current();
 	}
 
 }
