@@ -32,5 +32,6 @@ public abstract class Task implements Costable {
 	}
 
 	public abstract void updatePricingEstimate(Event event);
+	public abstract String getUrl();
 
 }
