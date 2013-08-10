@@ -1,0 +1,18 @@
+@(tasks: Seq[model.domain.Task], eventName: String)(content: Html = Html(""))
+
+@import model.domain.Task
+@import model.domain.tasks._
+
+
+@for(task <- tasks) {
+	@task match {
+		case task: FakeTask => {
+			<tr>
+				<td><a href="@eventName.toLowerCase()">@eventName</a></td>
+				<td class="date-cell">@task.dueDate.format("YYYY-MM-dd")</td>
+				<td>@task.name</td>
+				<th><a href="/mockup/tasks/@task.mockupId">ver</a></th>
+			</tr>
+		}
+	}
+}
