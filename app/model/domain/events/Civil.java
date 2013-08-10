@@ -12,6 +12,9 @@ public class Civil extends Event {
 		super("Civil");
 	}
 
+	public void updateTasks() {
+	}
+
 	public String getTypeName() {
 		return EventType.CIVIL.toString();
 	}
