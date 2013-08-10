@@ -40,3 +40,4 @@ POST     /invitados                 controllers.InvitadosController.addGuest()
 
 GET 	  /hiring						controllers.HiringController.hiring()
 GET 	  /hiring/hiringByType/:type			controllers.HiringController.getHiringByType(type: String)
+GET	  	  /hiring/conversation/:name			controllers.HiringController.getConversation(name: String)	

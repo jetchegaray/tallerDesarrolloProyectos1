@@ -23,25 +23,25 @@ public class Hiring {
 	private BigDecimal price;
 	
 	public enum HiringType{
-		PHOTOS{
+		Fotos{
 			@Override
 			public String toString() {
 				return "Fotos";
 			}
 		},
-		PLACE{
+		Lugares{
 			@Override
 			public String toString() {
-				return "Lugar";
+				return "Lugares";
 			}
 		},
-		VIDEOS{
+		Videos{
 			@Override
 			public String toString() {
 				return "Videos";
 			}
 		},
-		MUSIC{
+		Musica{
 			@Override
 			public String toString() {
 				return "Musica";

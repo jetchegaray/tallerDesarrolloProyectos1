@@ -35,5 +35,4 @@ public class HiringDAO extends BasicDAO<Hiring,ObjectId>{
 		Query<Hiring> query = super.ds.createQuery(Hiring.class).field("type").equal(type);
 		return getHiringDAO().find(query).asList();
 	}
-
 }
