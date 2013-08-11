@@ -10,12 +10,14 @@ import java.util.Date;
 public abstract class Task implements Costable {
 
 	public String name;
+	public String slug;
 	public Date dueDate;
 
 	protected Task() {}
 
 	public Task(String name, Date dueDate) {
 		this.name = name;
+		this.slug = name.replaceAll("\\W", "-").toLowerCase();
 		this.dueDate = dueDate;
 	}
 
@@ -28,4 +30,7 @@ public abstract class Task implements Costable {
 	public BigDecimal getUpperEstimate() {
 		return new BigDecimal(0);
 	}
+
+	public abstract void updatePricingEstimate(Event event);
+
 }

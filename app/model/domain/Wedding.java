@@ -19,13 +19,12 @@ import org.apache.commons.collections.PredicateUtils;
 import com.google.code.morphia.annotations.Entity;
 import com.google.code.morphia.annotations.Id;
 import com.google.code.morphia.annotations.Transient;
-import com.google.code.morphia.annotations.Embedded;
+import com.google.code.morphia.annotations.Reference;
 
 @Entity("weddings")
 public class Wedding implements Budgetable {
 
-	@Id
-	ObjectId id;
+	@Id ObjectId id;
 
 	@Transient Calendar calendar;
 
@@ -41,9 +40,9 @@ public class Wedding implements Budgetable {
 
 	@Transient private List<Event> events;
 	List<Expense> expenses;
-	@Embedded public Civil civil;
-	@Embedded public Ceremony ceremony;
-	@Embedded public Party party;
+	@Reference public Civil civil;
+	@Reference public Ceremony ceremony;
+	@Reference public Party party;
 
 	// Initial estimates
 	public Integer budgetEstimate;

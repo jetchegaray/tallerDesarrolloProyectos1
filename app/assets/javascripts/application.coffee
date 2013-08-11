@@ -20,7 +20,7 @@ spinnerOpts =
 
 $ ->
   # Handle ajax tasks
-  $("#task-list").on "show", (e)->
+  $("#tasks-list").on "show", (e)->
 
     $target = $(e.target)
     spinner = new Spinner(spinnerOpts)

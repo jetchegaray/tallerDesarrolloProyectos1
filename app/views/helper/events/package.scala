@@ -2,6 +2,8 @@ package views.html.helper
 
 import play.data.Form
 import play.api.mvc.Call
+import model.domain.Task
+import model.domain.tasks._
 
 package object events {
 
