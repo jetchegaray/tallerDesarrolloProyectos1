@@ -17,6 +17,7 @@
         @* Body *@
         @task match {
             case task: SimpleHire => { @particularHireForm(event, task) }
+            case task: HireProvider => { @providerHire(event, task) }
             case information: Informative => {
                 @for(_ <- (1 to 4)) {
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod

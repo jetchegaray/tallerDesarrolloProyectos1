@@ -41,10 +41,6 @@ public class FakeTask extends Task implements Costable {
 	}
 
 	public void updatePricingEstimate(Event event) {
-		if (slug.equals("contratar-sal-n")) {
-			lowerEstimate = lowerEstimate.add(new BigDecimal(1000));
-			upperEstimate = upperEstimate.add(new BigDecimal(1000));
-		}
 	}
 
 	@Override
