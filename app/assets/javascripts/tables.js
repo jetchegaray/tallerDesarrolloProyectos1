@@ -45,10 +45,19 @@ var picker = [
 				{id: 14, name: 'Richelle Dials', state: 'Confirmado'}
 				];
 
+$.extend($.expr[':'], {
+  'containsi': function(elem, i, match, array)
+  {
+    return (elem.textContent || elem.innerText || '').toLowerCase()
+    .indexOf((match[3] || "").toLowerCase()) >= 0;
+  }
+});
+
 $(document).ready(function(){
 	
 	$.template('table_item','<div class="table"><h4>${name}<small>(Restantes <span>0</span>/<span>${max}</span>)</small></h4><ul class="unstyled guests-tables"></ul></div>');
-	$.template('list_item','<li value="${id}">${name} <span class="label label-success">${state}</span></li>');
+	$.template('list_item','<li class="sortable-item" value="${id}">${name} <span class="label label-success">${state}</span></li>');
+	$.template('list_without_items','<li class="without-items">Arrastre un invitado aqui</li>');
 	
 	var addGuestsTo = function(to,guests){
 		$.each(guests,function(index,object){
@@ -66,18 +75,26 @@ $(document).ready(function(){
 			
 	$('.guests-tables').sortable(
 	{
+		items: 'li.sortable-item',
 		connectWith: '.guests-tables',
 		create: function(){
 			var target=$($(this).parent()).find('small span')[0];
 			var max=$($(this).parent()).find('small span')[1];
-			var count=$(this).find('li').length;
+			if(!max)
+				return;
+			var count=$(this).find('li.sortable-item').length;
 			
 			$(target).html(parseInt(max.innerHTML) - count);
+			$.tmpl('list_without_items',null).appendTo($(this));
+			if(count>0)
+				$(this).find('.without-items').hide();
 		},
-		receive: function(){
+		remove: function(){
 			var target=$($(this).parent()).find('small span')[0];
 			var max=$($(this).parent()).find('small span')[1];
-			var count=$(this).find('li').length;
+			if(!max)
+				return;
+			var count=$(this).find('li.sortable-item').length;
 			
 			var guests_in_this_table = parseInt(max.innerHTML) - count;
 			if(guests_in_this_table>=0){
@@ -85,9 +102,41 @@ $(document).ready(function(){
 			}else{
 				$('.guests-tables').sortable( "cancel" );
 			}
+			if(count==0)
+				$(this).find('.without-items').show();
+
+		},
+		receive: function(){
+			var target=$($(this).parent()).find('small span')[0];
+			
+			var max=$($(this).parent()).find('small span')[1];
+			if(!max)
+				return;
+			var count=$(this).find('li.sortable-item').length;
+			
+			var guests_in_this_table = parseInt(max.innerHTML) - count;
+			if(guests_in_this_table>=0){
+				$(target).html(parseInt(max.innerHTML) - count);
+			}else{
+				$('.guests-tables').sortable( "cancel" );
+			}
+			$(this).find('.without-items').hide();
 
 		}
 	}).disableSelection();
+	
+	$('#filter').on('input',
+		function(e){
+				if($(this).val().trim()==''){
+					$("ul.guests-picker li").show();		
+				}else{
+					$("ul.guests-picker li").hide();	
+					$("ul.guests-picker li:containsi('" + $(this).val() + "')" ).show();	
+				}		
+						
+			}	
+	);	
+	
 });
 
 
