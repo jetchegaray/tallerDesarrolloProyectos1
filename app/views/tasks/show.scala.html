@@ -1,0 +1,14 @@
+@(event: model.domain.Event, task: model.domain.Task)
+
+@import model.domain.tasks._
+
+@account(event.name) {
+    <article>
+        <h3>@task.name</h3>
+        <div id="@task.slug">
+        @task match {
+            case task: SimpleHire => { @particularHireForm(event, task) }
+        }
+        </div>
+    </article>
+}

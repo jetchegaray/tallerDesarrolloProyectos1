@@ -24,7 +24,13 @@ public class EventsController extends WeddingController {
 	public static Result show(String name) {
 		Event event = currentWedding().getEvent(name);
 		if (event != null) {
-			return ok(show.render(event));
+			/// Couldn't get request().accepts("application/json") to work
+			/// Because jquery appends */*
+			if (request().headers().get("X-Requested-With") != null) {
+				return ok( jsonEvent(event) );
+			} else {
+				return ok(show.render(event));
+			}
 		} else {
 			return notFound(e404.render());
 		}
@@ -46,10 +52,7 @@ public class EventsController extends WeddingController {
 			event.updateTasks();
 			EventDAO.instance.save(event);
 
-			ObjectNode node = (ObjectNode)Json.toJson(event);
-			node.put("formatted_range", range(event));
-
-			return ok( node );
+			return ok( jsonEvent(event) );
 		} else {
 			return notFound( e404.render() );
 		}
@@ -63,5 +66,11 @@ public class EventsController extends WeddingController {
 		return views.html.helper.budget.package$.MODULE$.range(event);
 	}
 
+	private static ObjectNode jsonEvent(Event event) {
+			ObjectNode node = (ObjectNode)Json.toJson(event);
+			node.put("formatted_range", range(event));
+
+			return node;
+	}
 
 }

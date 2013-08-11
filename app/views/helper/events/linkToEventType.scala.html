@@ -1,0 +1,10 @@
+@(eventType: String)
+
+@import views.html.helper.events._
+
+@eventType match {
+    case ("CIVIL" | "PARTY" | "CEREMONY") => {
+        <a href="@routes.EventsController.show(eventType)">@titleFromType(eventType)</a>
+    }
+    case _ => {}
+}
