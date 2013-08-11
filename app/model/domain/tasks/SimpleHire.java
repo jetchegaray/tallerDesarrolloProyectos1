@@ -31,7 +31,7 @@ public class SimpleHire extends Task {
 		eventType = event.name.toLowerCase();
 		Random random = new Random();
 		lowerEstimate = new BigDecimal(random.nextInt(10) * 100 + baseEstimate);
-		upperEstimate = new BigDecimal(random.nextInt(10) * 100 + lowerEstimate.intValue());
+		upperEstimate = new BigDecimal((random.nextInt(9) + 1) * 100 + lowerEstimate.intValue());
 	}
 
 	public void updatePricingEstimate(Event event) {

@@ -1,0 +1,27 @@
+@(civilForm: play.data.Form[model.domain.events.Civil])
+
+@import helper.bootstrap._
+@import model.domain.events.Civil
+
+@helper.form(action = routes.EventsController.update("CIVIL"), args = 'class -> "form-horizontal") {
+
+    @helper.select(civilForm("city"),
+        helper.options(Seq("", "Capital Federal", "Pilar", "Quilmes", "Otro")),
+        '_label -> "Lugar", '_help -> "Ciudad/Zona dónde querés que sea el civil",
+        Symbol("data-placeholder") -> "Elige la ciudad/zona...")
+
+    @helper.inputDate(civilForm("date"),
+        '_label -> "Fecha", '_help -> "Fecha deseada para el civil")
+
+    <div class="control-group">
+        <label class="control-label" for="city">Fotógrafo</label>
+        <div class="controls">
+            <select>
+                <option></option>
+                <option>Si</option>
+                <option>No</option>
+            </select>
+            <span class="help-inline">¿Querés contratar un fotógrafo para la fecha del civil?</span>
+        </div>
+    </div>
+}

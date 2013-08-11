@@ -28,11 +28,15 @@ public class FakeTask extends Task {
 	}
 
 	public FakeTask(String name, String id, Date dueDate) {
+		this(name, id, dueDate, 0);
+	}
+
+	public FakeTask(String name, String id, Date dueDate, Integer base) {
 		super(name, dueDate);
 		this.mockupId = id;
 		Random random = new Random();
-		lowerEstimate = new BigDecimal(random.nextInt(150) * 100 + 500);
-		upperEstimate = new BigDecimal(random.nextInt(150) * 100 + lowerEstimate.intValue());
+		lowerEstimate = new BigDecimal(base);
+		upperEstimate = new BigDecimal((random.nextInt(4) + 2) * base);
 	}
 
 	public void updatePricingEstimate(Event event) {

@@ -1,0 +1,54 @@
+@(ceremonyForm: play.data.Form[model.domain.events.Ceremony])
+
+@import helper.bootstrap._
+@import model.domain.events.Ceremony
+
+@helper.form(action = routes.EventsController.update("CEREMONY"), args = 'class -> "form-horizontal") {
+
+    <div class="control-group">
+        <label class="control-label" for="city">Religión</label>
+        <div class="controls">
+            <select>
+                <option></option>
+                <option>Católica</option>
+                <option>Judía</option>
+                <option>Musulmana</option>
+                <option>Griega</option>
+            </select>
+            <span class="help-inline">De acuerdo a la religión de la ceremonia, se ajustarán las tareas y el listado de templos</span>
+        </div>
+    </div>
+
+    @helper.select(ceremonyForm("city"),
+        helper.options(Seq("", "Capital Federal", "Pilar", "Quilmes", "Otro")),
+        '_label -> "Lugar", '_help -> "Ciudad/Zona dónde querés que sea la ceremonia",
+        Symbol("data-placeholder") -> "Elige la ciudad/zona...")
+
+    @helper.inputDate(ceremonyForm("date"),
+        '_label -> "Fecha", '_help -> "Fecha deseada para la ceremonia")
+
+    <div class="control-group">
+        <label class="control-label" for="city">Fotógrafo</label>
+        <div class="controls">
+            <select>
+                <option></option>
+                <option>Si</option>
+                <option>No</option>
+            </select>
+            <span class="help-inline">¿Querés contratar un fotógrafo para la ceremonia?</span>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label" for="city">Recepción</label>
+        <div class="controls">
+            <select>
+                <option></option>
+                <option>Si</option>
+                <option>No</option>
+            </select>
+            <span class="help-inline">¿Querés hacer una recepción luego del civil?</span>
+        </div>
+    </div>
+
+}

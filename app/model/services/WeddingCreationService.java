@@ -56,13 +56,13 @@ public class WeddingCreationService {
 
 	private Party initializeParty(Wedding wedding) {
 		Party party = new Party();
-		party.addTask(new FakeTask("Contratar Salón", "hire", daysBefore(wedding, 30 * 8)));
+		party.addTask(new FakeTask("Contratar Salón", "hire", daysBefore(wedding, 30 * 8), 2000));
 		party.addTask(new SimpleHire(party, "Contratar Catering", 5000, daysBefore(wedding, 30 * 7)));
 		party.addTask(new SimpleHire(party, "Contratar Peluqueria", 500, daysBefore(wedding, 30 * 3)));
 		party.addTask(new SimpleHire(party, "Contratar Florista", 1000, daysBefore(wedding, 30 * 6)));
 		party.addTask(new SimpleHire(party, "Contratar impresión de invitaciones", 750, daysBefore(wedding, 30 * 4)));
-		party.addTask(new FakeTask("Comprar traje del novio", "hire", daysBefore(wedding, 30 * 4)));
-		party.addTask(new FakeTask("Comprar vestido de novia", "hire-dress", daysBefore(wedding, 30 * 6)));
+		party.addTask(new FakeTask("Comprar traje del novio", "hire", daysBefore(wedding, 30 * 4), 750));
+		party.addTask(new FakeTask("Comprar vestido de novia", "hire-dress", daysBefore(wedding, 30 * 6), 2500));
 		party.addTask(new SimpleHire(party, "Comprar souvenires", 1000, daysBefore(wedding, 30 * 3)));
 		party.addTask(new FakeTask("Elegir casa de regalos y armar la lista", "hire", daysBefore(wedding, 30 * 2)));
 		party.addTask(new FakeTask("Definir lista de invitados", "102", daysBefore(wedding, 30 * 3)));
