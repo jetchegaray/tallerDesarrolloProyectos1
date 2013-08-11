@@ -7,7 +7,6 @@
     @if(expenseType == null)  {
         @helper.select(expenseForm("type"),  helper.wedding.expenseTypeOptions(WeddingContext.current()),
             '_label -> "Evento", '_help -> "A qué evento corresponde el gasto?")
-
     }
 
     @helper.inputText(expenseForm("reason"),

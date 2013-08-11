@@ -16,6 +16,7 @@ import extensions.morphia.BigDecimalConverter;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Predicate;
+import org.apache.commons.collections.PredicateUtils;
 
 @Converters({BigDecimalConverter.class})
 @Entity("events")
@@ -47,8 +48,7 @@ public abstract class Event implements Budgetable {
 	}
 
 	public List<Task> getPendingTasks() {
-		// We should filter tasks that have been completed or canceled
-		return tasks;
+		return (List<Task>)CollectionUtils.select(tasks, PredicateUtils.invokerPredicate("isPending"));
 	}
 
 	public List<Expense> getActiveExpenses() {
@@ -125,6 +125,7 @@ public abstract class Event implements Budgetable {
 	}
 
 	public void addExpense(Expense expense) {
+		expense.eventOrigin = getTypeName();
 		expenses.add(expense);
 	}
 
