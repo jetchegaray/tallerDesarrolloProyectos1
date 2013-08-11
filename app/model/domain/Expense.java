@@ -13,12 +13,13 @@ import play.data.validation.Constraints.Required;
 public class Expense {
 	@Required public String reason;
 	@Required public BigDecimal total;
+	public String eventOrigin;
 	public BigDecimal paid;
 	public Date date;
-	@Transient String type;
 
 	public Expense() {
 		this.paid = new BigDecimal(0);
+		this.date = new Date();
 	}
 	public Expense(String reason, BigDecimal total) {
 		this();
@@ -32,4 +33,17 @@ public class Expense {
 	// Amount that has to be paid in the future
 	public BigDecimal getAmountComprised() { return total.subtract(paid); }
 
+	public static class CustomHire extends Expense {
+		public String description;
+		public String name;
+		public String email;
+
+		public CustomHire() { super(); }
+
+		public CustomHire(Task task, BigDecimal total) {
+			super(task.name, total);
+			this.eventOrigin = task.eventType;
+			this.paid = total;
+		}
+	}
 }

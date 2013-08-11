@@ -16,6 +16,7 @@ import extensions.morphia.BigDecimalConverter;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Predicate;
+import org.apache.commons.collections.PredicateUtils;
 
 @Converters({BigDecimalConverter.class})
 @Entity("events")
@@ -49,16 +50,9 @@ public abstract class Event implements Budgetable {
 	public List<Task> getAllTasks() {
 		return tasks;
 	}
-	
+
 	public List<Task> getPendingTasks() {
-		// We should filter tasks that have been completed or canceled (not done)
-		List<Task> tasksAux = new ArrayList<Task>();
-		for(Task task : getAllTasks()) {
-			if (! task.done){
-				tasksAux.add(task);
-			}
-		}
-		return tasksAux;
+		return (List<Task>)CollectionUtils.select(tasks, PredicateUtils.invokerPredicate("isPending"));
 	}
 
 	public List<Expense> getActiveExpenses() {
@@ -88,7 +82,7 @@ public abstract class Event implements Budgetable {
 	// Lower end for the current estimated cost
 	public BigDecimal getLowerEstimate() {
 		BigDecimal acum = new BigDecimal(0);
-		for(Task task : getAllTasks()) {
+		for(Task task : getPendingTasks()) {
 			acum = acum.add(task.getLowerEstimate());
 		}
 		return acum.add(getAmountSpent());
@@ -97,7 +91,7 @@ public abstract class Event implements Budgetable {
 	// Upper end for the current estimated cost
 	public BigDecimal getUpperEstimate() {
 		BigDecimal acum = new BigDecimal(0);
-		for(Task task : getAllTasks()) {
+		for(Task task : getPendingTasks()) {
 			acum = acum.add(task.getUpperEstimate());
 		}
 		return acum.add(getAmountSpent());
@@ -135,6 +129,7 @@ public abstract class Event implements Budgetable {
 	}
 
 	public void addExpense(Expense expense) {
+		expense.eventOrigin = getTypeName();
 		expenses.add(expense);
 	}
 

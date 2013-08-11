@@ -13,8 +13,9 @@ public abstract class Task implements Costable {
 	public String slug;
 	public Date dueDate;
 	public boolean done = false;
+	public String eventType;
 
-	protected Task() {}
+	protected Task() { }
 
 	public Task(String name, Date dueDate) {
 		this.name = name;
@@ -32,8 +33,16 @@ public abstract class Task implements Costable {
 		return new BigDecimal(0);
 	}
 
-	public void completeTask(){
+	public void complete() {
 		this.done = true;
+	}
+
+	public boolean isPending() {
+		return !done;
+	}
+
+	public String getUrl() {
+		return "/tasks/" + eventType + "/" + slug;
 	}
 
 	public abstract void updatePricingEstimate(Event event);

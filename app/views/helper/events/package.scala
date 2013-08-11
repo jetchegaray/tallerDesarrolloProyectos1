@@ -20,4 +20,11 @@ package object events {
         }
     }
 
+    def titleFromType(eventType: String) : String = {
+        eventType match {
+            case "CIVIL"    => "Civil"
+            case "CEREMONY" => "Ceremonia"
+            case "PARTY"    => "Fiesta"
+        }
+    }
 }

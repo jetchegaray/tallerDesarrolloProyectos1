@@ -17,6 +17,16 @@
                 <div class="accordion-inner">Loading</div>
             </div>
         }
+        case _ => {
+            <div class="accordion-heading">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#tasks-list" href="#@{task.slug}-container">
+                    @task.name
+                </a>
+            </div>
+            <div id="@{task.slug}-container" data-href="@task.getUrl()" class="accordion-body collapse" data-target="@task.slug">
+                <div class="accordion-inner">Loading</div>
+            </div>
+        }
     }
 </div>
 }

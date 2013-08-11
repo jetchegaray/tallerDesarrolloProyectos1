@@ -1,0 +1,27 @@
+@(event: model.domain.Event, task: model.domain.Task)
+
+@import helper.bootstrap._
+
+@defining(Form.form()) { form =>
+
+@helper.form(action = routes.TasksController.update(event.getTypeName(), task.slug), args = 'class -> "form-horizontal") {
+
+    @helper.inputText(form("hire[name]"),
+        '_label -> "Nombre / Empresa", 'placeholder -> "Susana")
+    @helper.inputText(form("hire[email]"),
+        '_label -> "E-mail de contacto", 'placeholder -> "someone@gmail.com")
+
+    @helper.inputMoney(form("expense[total]"),
+        '_label -> "Monto", 'placeholder -> "3.000,00")
+
+    @helper.textarea(form("hire[description]"),
+        '_label -> "Descripción", 'placeholder -> "Descripción de qué se contrató", 'rows -> "10")
+
+    <div class="control-group">
+        <div class="controls">
+            <button type="submit" class="btn" name="particular_hire">Confirmar compra particular</button>
+        </div>
+    </div>
+}
+
+}
