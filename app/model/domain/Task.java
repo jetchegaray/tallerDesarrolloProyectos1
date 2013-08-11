@@ -42,7 +42,11 @@ public abstract class Task implements Costable {
 	public boolean isPending() {
 		return !done;
 	}
+
+	public String getUrl() {
+		return "/tasks/" + eventType + "/" + slug;
+	}
+
 	public abstract void updatePricingEstimate(Event event);
-	public abstract String getUrl();
 
 }

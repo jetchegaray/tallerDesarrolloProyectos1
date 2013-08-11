@@ -37,10 +37,6 @@ public class SimpleHire extends Task {
 	public void updatePricingEstimate(Event event) {
 	}
 
-	public String getUrl() {
-		return "/tasks/" + eventType + "/" + slug;
-	}
-
 	@Override
 	public BigDecimal getLowerEstimate() {
 		return lowerEstimate;
