@@ -26,7 +26,7 @@ class EventController
     """)
     @$form = $("#event-information form")
     @$form.find(":input").change @onInputChange
-    @$form.find("#city").chosen
+    @$form.find("select#city").chosen
       allow_single_deselect: true
       no_results_text: "Ups, no tenemos soporte para la ciudad:"
 

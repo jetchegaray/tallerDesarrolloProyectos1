@@ -38,6 +38,7 @@
 @account("Contrataciones", extraScripts) {
 
 <h2>Contrataciones</h2>
+@if(hiring != null) {
 <article>
     <h3>Novedades</h3>
     <ul>
@@ -57,23 +58,27 @@
         </li>
     </ul>
 </article>
-
-<div id="actions" class="btn-group">
-  <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-    Buscar mas..
-    <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu">
-    <li><a href="@routes.HiringController.getHiringByType(model.domain.Hiring.HiringType.Lugares.toString())" onclick="return false;">@model.domain.Hiring.HiringType.Lugares</a></li>
-    <li class="divider"></li>
-    <li><a href="@routes.HiringController.getHiringByType(model.domain.Hiring.HiringType.Fotos.toString())" onclick="return false;">@model.domain.Hiring.HiringType.Fotos</a></li>
-    <li class="divider"></li>
-    <li><a href="@routes.HiringController.getHiringByType(model.domain.Hiring.HiringType.Videos.toString())" onclick="return false;">@model.domain.Hiring.HiringType.Videos</a></li>
-    <li class="divider"></li>
-    <li><a href="@routes.HiringController.getHiringByType(model.domain.Hiring.HiringType.Musica.toString())" onclick="return false;">@model.domain.Hiring.HiringType.Musica</a></li>
-  </ul>
+}
+<div id="hiring-actions">
+  <div class="btn-group">
+    <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+      Buscar mas..
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+      <li><a href="@routes.HiringController.getHiringByType(model.domain.Hiring.HiringType.Lugares.toString())" onclick="return false;">@model.domain.Hiring.HiringType.Lugares</a></li>
+      <li class="divider"></li>
+      <li><a href="@routes.HiringController.getHiringByType(model.domain.Hiring.HiringType.Fotos.toString())" onclick="return false;">@model.domain.Hiring.HiringType.Fotos</a></li>
+      <li class="divider"></li>
+      <li><a href="@routes.HiringController.getHiringByType(model.domain.Hiring.HiringType.Videos.toString())" onclick="return false;">@model.domain.Hiring.HiringType.Videos</a></li>
+      <li class="divider"></li>
+      <li><a href="@routes.HiringController.getHiringByType(model.domain.Hiring.HiringType.Musica.toString())" onclick="return false;">@model.domain.Hiring.HiringType.Musica</a></li>
+    </ul>
+  </div>
+  <div>
+    <div id="tableContainer" class="table table-striped media"></div>
+  </div>
 </div>
 
-<div id="tableContainer" class="table table-bordered table-striped media"></div>
 
 }
