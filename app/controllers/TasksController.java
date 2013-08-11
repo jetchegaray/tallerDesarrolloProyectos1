@@ -34,10 +34,14 @@ public class TasksController extends WeddingController {
 		Event event = wedding.getEvent(eventType);
 		Task  task  = event.findTaskBySlug(slug);
 		DynamicForm params = new DynamicForm().bindFromRequest();
+
 		if (params.get("particular_hire") != null) {
 			return createPersonalHire(wedding, event, task, params.data());
+		} else if (params.get("complete") != null) {
+			return completeTask(wedding, event, task);
 		}
-		return redirect( routes.TasksController.show(eventType, slug) );
+
+		return redirect( routes.TasksController.show(event.getTypeName(), slug) );
 	}
 
 	private static Result createPersonalHire(Wedding wedding, Event event, Task task, Map<String, String> data) {
@@ -48,9 +52,14 @@ public class TasksController extends WeddingController {
 		expense.description = data.get("hire[description]");
 
 		event.addExpense(expense);
-		task.complete();
 
+		return completeTask(wedding, event, task);
+	}
+
+	private static Result completeTask(Wedding wedding, Event event, Task task) {
+		task.complete();
 		EventDAO.instance.save(event);
+
 		return redirect( routes.EventsController.show(event.getTypeName()) );
 	}
 

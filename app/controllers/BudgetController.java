@@ -24,7 +24,7 @@ public class BudgetController extends WeddingController {
 	public static Form<Expense> expenseForm = Form.form(Expense.class);
 
 	public static Result show() {
-		return ok(show.render(currentWedding()));
+		return ok( show.render(currentWedding()) );
 	}
 
 	public static Result newExpense(String expenseType) {
