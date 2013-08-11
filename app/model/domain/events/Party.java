@@ -2,7 +2,7 @@ package model.domain.events;
 
 import model.domain.Event;
 import model.domain.Task;
-import model.domain.tasks.FakeTask;
+import model.domain.tasks.SimpleHire;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -38,7 +38,7 @@ public class Party extends Event {
 			Task task = findTaskBySlug(slugify(taskName));
 
 			if (wantsExtra(extra)) {
-				if (task == null) addTask(new FakeTask(taskName, "hire"));
+				if (task == null) addTask(new SimpleHire(this, taskName, 2000));
 			} else {
 				if (task != null) tasks.remove(task);
 			}

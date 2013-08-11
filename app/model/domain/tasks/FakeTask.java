@@ -1,5 +1,6 @@
 package model.domain.tasks;
 
+import model.domain.Costable;
 import model.domain.Task;
 import model.domain.Event;
 
@@ -13,7 +14,7 @@ import java.math.BigDecimal;
 /*
 	Fake task class to simplify integration with mockup tasks
 */
-public class FakeTask extends Task {
+public class FakeTask extends Task implements Costable {
 
 	public String mockupId;
 	BigDecimal lowerEstimate;

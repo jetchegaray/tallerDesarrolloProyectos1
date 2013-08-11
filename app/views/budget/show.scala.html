@@ -1,6 +1,6 @@
 @(wedding: model.domain.Wedding)
 
-@import model.domain.tasks._
+@import model.domain.Costable
 
 @account("Presupuesto") {
 
@@ -30,12 +30,12 @@
             @for(event <- wedding.getEvents()) {
                 @for(task <- event.getPendingTasks()) {
                     @task match {
-                        case hire: SimpleHire => {
+                        case cost: Costable => {
                             <tr>
                                 <td><a href="@routes.EventsController.show(event.getTypeName())">@event.name</a></td>
                                 <td>@task.name</td>
-                                <td class="text-right">@helper.budget.range(task)</td>
-                                <td class="text-center"><a href="@routes.TasksController.show(event.getTypeName(), task.slug)">ver</a></td>
+                                <td class="text-right">@helper.budget.range(cost)</td>
+                                <td class="text-center"><a href="@task.getUrl()">ver</a></td>
                             </tr>
                         }
                         case _ => {@* Ignore task if it isn't a hire task *@ }

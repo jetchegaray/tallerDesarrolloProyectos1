@@ -2,4 +2,12 @@
 
 @formCivil(helper.events.formFor(civil))
 
-@tasks.listPending(civil.getPendingTasks())()
+@tasks.listPending(civil.getPendingTasks()) {
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle" href="@routes.InvitadosController.index()">
+                Definir lista de invitados
+            </a>
+        </div>
+    </div>
+}

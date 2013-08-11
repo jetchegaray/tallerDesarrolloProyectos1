@@ -34,7 +34,11 @@ class EventController
       e.preventDefault()
       $form = $(e.currentTarget)
       data = $form.serializeArray()
-      data.push(name: "particular_hire", value: true) # FIXME: We shouldn't force it
+
+      if $form.find("button[name=particular_hire]").length
+        data.push(name: "particular_hire", value: true) # FIXME: We shouldn't force it
+      if $form.find("button[name=complete]").length
+        data.push(name: "complete", value: true) # FIXME: We shouldn't force it
 
       $.ajax $form.attr("action"),
         method: $form.attr("method")

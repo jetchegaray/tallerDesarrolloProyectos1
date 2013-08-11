@@ -43,10 +43,6 @@ public abstract class Event implements Budgetable {
 		this.budget = new BigDecimal(0);
 	}
 
-	public void addTask(Task t) {
-		tasks.add(t);
-	}
-
 	public List<Task> getPendingTasks() {
 		return (List<Task>)CollectionUtils.select(tasks, PredicateUtils.invokerPredicate("isPending"));
 	}
@@ -75,10 +71,15 @@ public abstract class Event implements Budgetable {
 		return budget;
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<Costable> getPendingCostableTasks() {
+		return (List<Costable>)CollectionUtils.select(tasks, PredicateUtils.instanceofPredicate(Costable.class));
+	}
+
 	// Lower end for the current estimated cost
 	public BigDecimal getLowerEstimate() {
 		BigDecimal acum = new BigDecimal(0);
-		for(Task task : getPendingTasks()) {
+		for(Costable task : getPendingCostableTasks()) {
 			acum = acum.add(task.getLowerEstimate());
 		}
 		return acum.add(getAmountSpent());
@@ -87,7 +88,7 @@ public abstract class Event implements Budgetable {
 	// Upper end for the current estimated cost
 	public BigDecimal getUpperEstimate() {
 		BigDecimal acum = new BigDecimal(0);
-		for(Task task : getPendingTasks()) {
+		for(Costable task : getPendingCostableTasks()) {
 			acum = acum.add(task.getUpperEstimate());
 		}
 		return acum.add(getAmountSpent());
@@ -122,6 +123,13 @@ public abstract class Event implements Budgetable {
 			acum = acum.add(expense.getTotal());
 		}
 		return acum;
+	}
+
+	public void addTask(Task t) {
+		// FIXME: Using name for now, because its used on urls...
+		// t.eventType = getTypeName();
+		t.eventType = name.toLowerCase();
+		tasks.add(t);
 	}
 
 	public void addExpense(Expense expense) {
