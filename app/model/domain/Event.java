@@ -47,6 +47,10 @@ public abstract class Event implements Budgetable {
 		tasks.add(t);
 	}
 
+	public List<Task> getAllTasks() {
+		return tasks;
+	}
+
 	public List<Task> getPendingTasks() {
 		return (List<Task>)CollectionUtils.select(tasks, PredicateUtils.invokerPredicate("isPending"));
 	}

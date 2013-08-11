@@ -1,0 +1,84 @@
+@(hirings: List[model.domain.Hiring], hiring: model.domain.Hiring)
+
+@import helper.bootstrap._
+
+@extraScripts = {
+  <script type="text/javascript">
+    //begin main function
+    $(".dropdown-menu li a").click(function(){
+      $.getJSON($(this).attr("href"), function(json){
+        renderHandlebarsTemplate("@routes.Assets.at("javascripts/template_tableHiring.handlebars")", '#tableContainer', json);
+      });
+    });
+    //end main function
+
+    // function to compile handlebars template
+    function renderHandlebarsTemplate(withTemplate,inElement,json){
+      getTemplateAjax(withTemplate, function(template) {
+        $(inElement).html(template(json));
+      })
+    };
+
+    // render handlebars templates via ajax
+    function getTemplateAjax(path, callback) {
+      var source, template;
+      $.ajax({
+        url: path,
+        success: function (data) {
+          source   = data;
+          template = Handlebars.compile(source);
+          if (callback)
+            callback(template);
+        }
+      });
+    };
+  </script>
+}
+
+@account("Contrataciones", extraScripts) {
+
+<h2>Contrataciones</h2>
+@if(hiring != null) {
+<article>
+    <h3>Novedades</h3>
+    <ul>
+        <li>
+            Nueva Respuesta:
+            <figure class="media">
+                <a href="/mockup/Contact" alt="Contactar" class="pull-left">
+                    <img class="media-object" src="@routes.Assets.at("images/app")/@hiring.getPicture()" alt="someone else"/>
+                </a>
+                <div class="media-body">
+                    <h6>Bonifacia Eventos</h6>
+                    <small>
+                        @hiring.getHiredMessages().get(hiring.getHiredMessages().size()-1) <a href="/hiring/conversation/@hiring.getName()">Leer</a>
+                    </small>
+                </div>
+            </figure>
+        </li>
+    </ul>
+</article>
+}
+<div id="hiring-actions">
+  <div class="btn-group">
+    <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+      Buscar mas..
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+      <li><a href="@routes.HiringController.getHiringByType(model.domain.Hiring.HiringType.Lugares.toString())" onclick="return false;">@model.domain.Hiring.HiringType.Lugares</a></li>
+      <li class="divider"></li>
+      <li><a href="@routes.HiringController.getHiringByType(model.domain.Hiring.HiringType.Fotos.toString())" onclick="return false;">@model.domain.Hiring.HiringType.Fotos</a></li>
+      <li class="divider"></li>
+      <li><a href="@routes.HiringController.getHiringByType(model.domain.Hiring.HiringType.Videos.toString())" onclick="return false;">@model.domain.Hiring.HiringType.Videos</a></li>
+      <li class="divider"></li>
+      <li><a href="@routes.HiringController.getHiringByType(model.domain.Hiring.HiringType.Musica.toString())" onclick="return false;">@model.domain.Hiring.HiringType.Musica</a></li>
+    </ul>
+  </div>
+  <div>
+    <div id="tableContainer" class="table table-striped media"></div>
+  </div>
+</div>
+
+
+}

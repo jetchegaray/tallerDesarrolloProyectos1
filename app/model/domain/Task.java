@@ -12,12 +12,10 @@ public abstract class Task implements Costable {
 	public String name;
 	public String slug;
 	public Date dueDate;
-	public Boolean done;
+	public boolean done = false;
 	public String eventType;
 
-	protected Task() {
-		this.done = false;
-	}
+	protected Task() { }
 
 	public Task(String name, Date dueDate) {
 		this.name = name;
