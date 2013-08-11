@@ -23,21 +23,10 @@
             @for(expense <- expensesSeq) {
                 <tr>
                     <td>@expense.date.format("YYYY-MM-dd")</td>
-                    <td><a href="/mockup/Ceremonia">Ceremonia</a></td>
+                    <td>@helper.events.linkToEventType(expense.eventOrigin) </td>
                     <td>@expense.reason</td>
                     <td class="media">
-                        <a href="/mockup/Conversation" alt="Contactar" class="pull-left">
-                            <img class="media-object" src="http://lorempixel.com/64/64/people" alt="someone"/>
-                        </a>
-                        <div class="media-body">
-                            <h6>Some provider</h6>
-                            <small>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                consequat.
-                            </small>
-                        </div>
+                        @embedMedia(expense)
                     </td>
                     <td class="text-right">@helper.budget.toMoney(expense.getTotal())</td>
                 </tr>

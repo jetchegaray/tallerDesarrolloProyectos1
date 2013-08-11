@@ -17,7 +17,6 @@ public class SimpleHire extends Task {
 
 	BigDecimal lowerEstimate;
 	BigDecimal upperEstimate;
-	String eventType;
 
 	public SimpleHire() {
 		super();

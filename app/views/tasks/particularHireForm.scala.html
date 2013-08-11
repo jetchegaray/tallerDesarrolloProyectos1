@@ -11,14 +11,15 @@
     @helper.inputText(form("hire[email]"),
         '_label -> "E-mail de contacto", 'placeholder -> "someone@gmail.com")
 
-    @helper.inputText(form("expense[total]"),
+    @helper.inputMoney(form("expense[total]"),
         '_label -> "Monto", 'placeholder -> "3.000,00")
-    @helper.inputText(form("hire[description]"),
-        '_label -> "Monto", 'placeholder -> "Mini descripción de la contratación", 'type -> "textarea", 'rows -> 10)
+
+    @helper.textarea(form("hire[description]"),
+        '_label -> "Descripción", 'placeholder -> "Descripción de qué se contrató", 'rows -> "10")
 
     <div class="control-group">
         <div class="controls">
-            <button type="submit" class="btn">Confirmar compra particular</button>
+            <button type="submit" class="btn" name="particular_hire">Confirmar compra particular</button>
         </div>
     </div>
 }
