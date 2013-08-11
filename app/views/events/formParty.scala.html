@@ -6,8 +6,8 @@
 @helper.form(action = routes.EventsController.update("PARTY"), args = 'class -> "form-horizontal") {
     @helper.select(partyForm("city"),
         helper.options(Seq("", "Capital Federal", "Pilar", "Quilmes", "Otro")),
-        '_label -> "Ciudad", '_help -> "Ciudad dónde querés que sea la fiesta",
-        Symbol("data-placeholder") -> "Choose a country...")
+        '_label -> "Lugar", '_help -> "Ciudad/Zona dónde querés que sea la fiesta",
+        Symbol("data-placeholder") -> "Elige la ciudad/zona...")
 
     @helper.inputDate(partyForm("date"),
         '_label -> "Fecha", '_help -> "Fecha deseada para la fiesta")

@@ -1,58 +1,13 @@
 @(ceremony: model.domain.events.Ceremony)
 
-<form class="form-horizontal">
-    <fieldset>
-        <div class="control-group">
-            <label class="control-label" for="city">Tipo de ceremonia</label>
-            <div class="controls">
-                <select>
-                    <option></option>
-                    <option>Católica</option>
-                    <option>Judía</option>
-                    <option>Musulmana</option>
-                    <option>Griega</option>
-                </select>
-                <span class="help-inline">Lorem ipsum helpum</span>
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label" for="city">Ciudad</label>
-            <div class="controls">
-                <input id="city" type="text" placeholder="Ciudad">
-                <span class="help-inline">Lorem ipsum helpum</span>
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label" for="city">Fecha</label>
-            <div class="controls">
-                <input id="city" type="date">
-                <span class="help-inline">Lorem ipsum helpum</span>
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label" for="city">Fotografo</label>
-            <div class="controls">
-                <select>
-                    <option></option>
-                    <option>Si</option>
-                    <option>No</option>
-                </select>
-                <span class="help-inline">Lorem ipsum helpum</span>
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label" for="city">Arreglo o decoración especial?</label>
-            <div class="controls">
-                <select>
-                    <option></option>
-                    <option>Si</option>
-                    <option>No</option>
-                </select>
-                <span class="help-inline">Lorem ipsum helpum</span>
-            </div>
-        </div>
-    </fieldset>
-</form>
+@formCeremony(helper.events.formFor(ceremony))
 
-
-@tasks.listPending(ceremony.getPendingTasks())()
+@tasks.listPending(ceremony.getPendingTasks()) {
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle" href="@routes.InvitadosController.index()">
+                Definir lista de invitados
+            </a>
+        </div>
+    </div>
+}
