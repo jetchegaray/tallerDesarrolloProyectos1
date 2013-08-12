@@ -51,4 +51,5 @@ GET 	  /hiring						controllers.HiringController.hiring()
 GET	  	  /hiring/conversation/:name			controllers.HiringController.getConversation(name: String)
 
 
+GET       /providers/:id            controllers.ProviderController.show(id: String)
 GET 	  /provider/providerByType/:type			controllers.ProviderController.getProviderByType(type: String)

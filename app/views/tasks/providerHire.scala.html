@@ -1,0 +1,57 @@
+@(event: model.domain.Event, task: model.domain.tasks.HireProvider)
+
+@import model.dao.ProviderDAO
+
+<h4>Proveedores disponibles</h4>
+<table class="table table-hover">
+    <tbody>
+    @for(provider <- ProviderDAO.getProviderDAO().getProviderByType(task.providerType)) {
+        <tr>
+            <td class="media" width="80%">
+                <a href="@routes.ProviderController.show(provider.id.toString())" alt="Contactar" class="pull-left">
+                    <img class="media-object" width="200" height="133"
+                         src="/assets/images/app/@provider.getPicture()" alt="someone"/>
+                </a>
+                <div class="media-body">
+                    <h6>@provider.getName()</h6>
+                    <small>@provider.getDescription()</small>
+                </div>
+            </td>
+            <td width="20%">
+                @helper.budget.toMoney(provider.getPrice()) <em>(aprox.)</em>
+                <br/>
+                <a href="@routes.ProviderController.show(provider.id.toString())">Ver</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<h4>Proveedores contactados</h4>
+<table class="table table-hover">
+    <tbody>
+        <tr>
+            <td class="media">
+                <a href="/mockup/Conversation" alt="Contactar" class="pull-left">
+                    <img class="media-object" src="http://lorempixel.com/64/64/people" alt="someone"/>
+                </a>
+                <div class="media-body">
+                    <h6>Some provider</h6>
+                    <small>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat.
+                    </small>
+                </div>
+            </td>
+            <td>
+                $X.XXX a $XX.XXX <span class="label label-success">Esperando</span>
+                <br/>
+                <a href="/mockup/Conversation">Ver Conversación</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+@particularHireForm(event, task)
