@@ -13,14 +13,23 @@
 
 		@helper.form(action = routes.UserController.addUser(), args = 'class -> "form-horizontal") {
 
+			@helper.inputText(userForm("wedding.bridesName"),
+				'_label -> "Nombre de la Novia", '_help -> "", 'placeholder -> "María Antonieta de las Novias")
+
+			@helper.inputText(userForm("wedding.groomsName"),
+				'_label -> "Nombre de la Novio", '_help -> "", 'placeholder -> "Miguel del Novio")
+
 			@helper.inputText(userForm("email"),
-				'_label -> "Email", '_help -> "", 'placeholder -> "email")
+				'_label -> "Email", '_help -> "Este mail lo vas a usar para acceder a tu cuenta", 'placeholder -> "bride@mail.com")
 
 			@helper.inputPassword(userForm("password"),
 				'_label -> "Contraseña", '_help -> "", 'placeholder -> "password")
 
-			@helper.inputText(userForm("Presupuesto aproximado"),
-				'_label -> "Presupuesto aproximado", '_help -> "", 'placeholder -> "45000")
+			@helper.inputMoney(userForm("wedding.budgetEstimate"),
+				'_label -> "Presupuesto aproximado", '_help -> "", 'placeholder -> "80.000")
+
+			@helper.inputDate(userForm("wedding.dateEstimate"),
+				'_label -> "Fecha aproximada", '_help -> "", 'placeholder -> "2014-03-09")
 
 			<div class="control-group">
 				<div class="controls">

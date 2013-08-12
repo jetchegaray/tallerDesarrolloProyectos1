@@ -8,8 +8,8 @@ import collection.JavaConversions._
 package object wedding {
 
     def nameCouple(wedding: Wedding): String = {
-        val left = "Jorgelina"
-        val right = wedding.getId()
+        val left = wedding.bridesName;
+        val right = wedding.groomsName;
         f"$left y $right"
     }
 
