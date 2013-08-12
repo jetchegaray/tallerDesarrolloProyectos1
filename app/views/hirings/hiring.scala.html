@@ -7,7 +7,7 @@
     //begin main function
     $(".dropdown-menu li a").click(function(){
       $.getJSON($(this).attr("href"), function(json){
-        renderHandlebarsTemplate("@routes.Assets.at("javascripts/template_tableHiring.handlebars")", '#tableContainer', json);
+        renderHandlebarsTemplate("@routes.Assets.at("javascripts/template_tableProvider.handlebars")", '#tableContainer', json);
       });
     });
     //end main function
@@ -42,18 +42,7 @@
     <h3>Novedades</h3>
     <ul>
         <li>
-            Nueva Respuesta:
-            <figure class="media">
-                <a href="/mockup/Contact" alt="Contactar" class="pull-left">
-                    <img class="media-object" src="@routes.Assets.at("images/app")/@hiring.getPicture()" alt="someone else"/>
-                </a>
-                <div class="media-body">
-                    <h6>Bonifacia Eventos</h6>
-                    <small>
-                        @hiring.getHiredMessages().get(hiring.getHiredMessages().size()-1) <a href="/hiring/conversation/@hiring.getName()">Leer</a>
-                    </small>
-                </div>
-            </figure>
+                    No tiene novedades por el momento
         </li>
     </ul>
 </article>
@@ -64,13 +53,15 @@
     <span class="caret"></span>
   </button>
   <ul class="dropdown-menu">
-    <li><a href="@routes.HiringController.getHiringByType(model.domain.Hiring.HiringType.Lugares.toString())" onclick="return false;">@model.domain.Hiring.HiringType.Lugares</a></li>
+    <li><a href="@routes.ProviderController.getProviderByType(model.domain.Provider.ProviderType.Lugares.toString())" onclick="return false;">@model.domain.Provider.ProviderType.Lugares</a></li>
     <li class="divider"></li>
-    <li><a href="@routes.HiringController.getHiringByType(model.domain.Hiring.HiringType.Fotos.toString())" onclick="return false;">@model.domain.Hiring.HiringType.Fotos</a></li>
+    <li><a href="@routes.ProviderController.getProviderByType(model.domain.Provider.ProviderType.Fotos.toString())" onclick="return false;">@model.domain.Provider.ProviderType.Fotos</a></li>
     <li class="divider"></li>
-    <li><a href="@routes.HiringController.getHiringByType(model.domain.Hiring.HiringType.Videos.toString())" onclick="return false;">@model.domain.Hiring.HiringType.Videos</a></li>
+    <li><a href="@routes.ProviderController.getProviderByType(model.domain.Provider.ProviderType.Videos.toString())" onclick="return false;">@model.domain.Provider.ProviderType.Videos</a></li>
     <li class="divider"></li>
-    <li><a href="@routes.HiringController.getHiringByType(model.domain.Hiring.HiringType.Musica.toString())" onclick="return false;">@model.domain.Hiring.HiringType.Musica</a></li>
+    <li><a href="@routes.ProviderController.getProviderByType(model.domain.Provider.ProviderType.Musica.toString())" onclick="return false;">@model.domain.Provider.ProviderType.Musica</a></li>
+ 	<li class="divider"></li>
+    <li><a href="@routes.ProviderController.getProviderByType(model.domain.Provider.ProviderType.Otros.toString())" onclick="return false;">@model.domain.Provider.ProviderType.Otros</a></li>
   </ul>
 </div>
 
