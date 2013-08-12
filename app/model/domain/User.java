@@ -13,17 +13,10 @@ import com.google.code.morphia.annotations.Reference;
 @Entity("users")
 public class User {
 
-	@Id
-	ObjectId id;
+	@Id ObjectId id;
 
-	@Required
-	public String userName;
-
-	@Required
-	public String password;
-
-	@Required
-	public String email;
+	@Required public String password;
+	@Required public String email;
 
 	@Reference(ignoreMissing = true)
 	public Wedding wedding;
@@ -31,6 +24,10 @@ public class User {
 	public static User create(User user){
 		UserDAO.getUserDAO().save(user);
 		return user;
+	}
+
+	public String getId() {
+		return id.toString();
 	}
 
 }

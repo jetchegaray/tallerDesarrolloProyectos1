@@ -13,16 +13,18 @@
 
 		@helper.form(action = routes.UserController.login(), args = 'class -> "form-horizontal") {
 
-			@helper.inputText(userForm("userName"),
-				'_label -> "Usuario", '_help -> "", 'placeholder -> "username")
+			@helper.inputText(userForm("email"),
+				'_label -> "Email", '_help -> "", 'placeholder -> "brides@mail.com")
 
 			@helper.inputPassword(userForm("password"),
 				'_label -> "Contraseña", '_help -> "", 'placeholder -> "password")
 
 			<div class="control-group">
 				<div class="controls">
-					<button type="submit" class="btn-success">Registrarme</button>
+					<button type="submit" class="btn-success">Ingresar</button>
+					<a href="@routes.UserController.user()">Registrarme</a>
 				</div>
+
 			</div>
 		}
 	</div>

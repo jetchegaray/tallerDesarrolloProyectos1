@@ -48,6 +48,9 @@ public class Wedding implements Budgetable {
 	public Integer budgetEstimate;
 	public Date dateEstimate;
 
+	public String bridesName;
+	public String groomsName;
+
 	public Wedding() {
 		calendar = new GregorianCalendar(2014, 5, 30);
 		dateEstimate = calendar.getTime();
