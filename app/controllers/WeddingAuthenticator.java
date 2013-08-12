@@ -26,7 +26,7 @@ public class WeddingAuthenticator extends Security.Authenticator {
 
 	@Override
 	public Result onUnauthorized(Context ctx) {
-		return redirect(routes.UserController.getLogin());
+		return redirect( routes.UserController.getLogin() );
 	}
 
 	public static void signout(Session session) {
@@ -34,12 +34,7 @@ public class WeddingAuthenticator extends Security.Authenticator {
 	}
 
 	public static void signin(Session session, User user) {
-		session.put("userId", user.userName);
-		// Hack until there's a better signup
-		if (user.wedding == null) {
-			user.wedding = new WeddingCreationService().createWedding(new Wedding());
-			UserDAO.getUserDAO().save(user);
-		}
+		session.put("userId", user.getId());
 		setWeddingId(session, user.wedding.getId());
 	}
 

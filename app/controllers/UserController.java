@@ -2,6 +2,8 @@ package controllers;
 
 import model.domain.User;
 import model.dao.UserDAO;
+import model.services.WeddingCreationService;
+
 import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.Controller;
@@ -47,10 +49,13 @@ public class UserController extends Controller {
 		if(filledForm.hasErrors()) {
 			return badRequest(signup.render(filledForm));
 		} else {
-			User user = User.create(filledForm.get());
+			User user = filledForm.get();
+			user.wedding = new WeddingCreationService().createWedding(user.wedding);
+
+			User.create(user);
 			WeddingAuthenticator.signin(session(), user);
 
-			return redirect(routes.Mockup.at("Dashboard"));
+			return redirect(routes.DashboardController.show());
 		}
 	}
 
