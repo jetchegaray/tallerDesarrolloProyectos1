@@ -10,6 +10,7 @@
             </a>
         </div>
     </div>
+    @if(!party.findTaskBySlug("contratar-sal-n").isPending()){
     <div class="accordion-group">
         <div class="accordion-heading">
             <a class="accordion-toggle" href="/mockup/tasks/tables">
@@ -17,4 +18,5 @@
             </a>
         </div>
     </div>
+    }
 }

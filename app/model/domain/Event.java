@@ -3,6 +3,9 @@ package model.domain;
 import model.domain.events.*;
 
 import java.util.Collection;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
@@ -155,6 +158,19 @@ public abstract class Event implements Budgetable {
 
 	protected enum EventType {
 		CIVIL, CEREMONY, PARTY
+	}
+
+
+	protected Date daysBefore(Integer count) {
+		GregorianCalendar calendar = new GregorianCalendar(2013, 11, 21);
+
+		if (date != null) {
+			calendar.setGregorianChange(date);
+		}
+
+		calendar.add(Calendar.DATE, -count);
+
+		return calendar.getTime();
 	}
 
 }
