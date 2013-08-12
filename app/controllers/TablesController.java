@@ -16,7 +16,8 @@ import views.html.tasks.tables;
 public class TablesController extends WeddingController {
 
 	public static Result index() {
-		
-		return ok(tables.render());
+        List<Guest> guestQueryList = GuestDAO.getGuestDAO().listGuests(currentWedding());
+
+		return ok(tables.render(guestQueryList));
 	}
 }

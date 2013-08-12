@@ -29,20 +29,20 @@ var data=[
 			];
 
 var picker = [
-				{id: 1 , name: 'Belia Casiano', state: 'Confirmado'},
-     			{id: 2 , name: 'Duncan Bothe', state: 'Confirmado'},
-				{id: 3 , name: 'Ericka Loesch', state: 'Confirmado'},
-				{id: 4 , name: 'Fermina Rexford', state: 'Confirmado'},
-				{id: 5 , name: 'Gabriel Harrah', state: 'Confirmado'},
-				{id: 6 , name: 'Sena Loso', state: 'Confirmado'},
-				{id: 7 , name: 'Laurine Jacinto', state: 'Confirmado'},
-				{id: 8 , name: 'Levi Myrick', state: 'Confirmado'},
-				{id: 9 , name: 'Meryl Guerrant', state: 'Confirmado'},
-				{id: 10 , name: 'Milissa Hove', state: 'Confirmado'},
-				{id: 11, name: 'Neomi Karl', state: 'Confirmado'},
-				{id: 12, name: 'Niki Dimond', state: 'Confirmado'},
-				{id: 13, name: 'Odessa Melia', state: 'Confirmado'},
-				{id: 14, name: 'Richelle Dials', state: 'Confirmado'}
+				//{id: 1 , name: 'Belia Casiano', state: 'Confirmado'},
+     			//{id: 2 , name: 'Duncan Bothe', state: 'Confirmado'},
+				//{id: 3 , name: 'Ericka Loesch', state: 'Confirmado'},
+				//{id: 4 , name: 'Fermina Rexford', state: 'Confirmado'},
+				//{id: 5 , name: 'Gabriel Harrah', state: 'Confirmado'},
+				//{id: 6 , name: 'Sena Loso', state: 'Confirmado'},
+				//{id: 7 , name: 'Laurine Jacinto', state: 'Confirmado'},
+				//{id: 8 , name: 'Levi Myrick', state: 'Confirmado'},
+				//{id: 9 , name: 'Meryl Guerrant', state: 'Confirmado'},
+				//{id: 10 , name: 'Milissa Hove', state: 'Confirmado'},
+				//{id: 11, name: 'Neomi Karl', state: 'Confirmado'},
+				//{id: 12, name: 'Niki Dimond', state: 'Confirmado'},
+				//{id: 13, name: 'Odessa Melia', state: 'Confirmado'},
+				//{id: 14, name: 'Richelle Dials', state: 'Confirmado'}
 				];
 
 $.extend($.expr[':'], {

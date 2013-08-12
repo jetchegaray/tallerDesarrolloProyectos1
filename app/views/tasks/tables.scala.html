@@ -1,3 +1,5 @@
+@(invitados: List[model.domain.guests.Guest])
+
 @account("Organizacion de mesas"){
 
 <h3>Organización de mesas</h3>
@@ -19,6 +21,19 @@
             <input id="filter" type="text" placeholder="Filtrar invitados">
        
         <ul class="unstyled guests-tables guests-picker">
+            @for(invitado <- invitados){
+            <li class="sortable-item" style="display: list-item;" value="2">
+                @invitado.getName()
+                <span class="label label-success">
+                    @invitado.getStatusFiesta().getCode() match{
+                        case "confirmed" => {Confirmado}
+                        case "invited" => {Invitado}
+                        case "canceled" => {Cancelado}
+                        case "not-invited" => {No Invitado}
+                    }
+                </span>
+            </li>
+            }
            
         </ul>
     </aside>
