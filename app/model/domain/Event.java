@@ -2,6 +2,7 @@ package model.domain;
 
 import model.domain.events.*;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
@@ -43,6 +44,11 @@ public abstract class Event implements Budgetable {
 		this.budget = new BigDecimal(0);
 	}
 
+	public List<Task> getAllTasks() {
+		return tasks;
+	}
+
+	@SuppressWarnings("unchecked")
 	public List<Task> getPendingTasks() {
 		return (List<Task>)CollectionUtils.select(tasks, PredicateUtils.invokerPredicate("isPending"));
 	}
@@ -72,8 +78,8 @@ public abstract class Event implements Budgetable {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Costable> getPendingCostableTasks() {
-		return (List<Costable>)CollectionUtils.select(tasks, PredicateUtils.instanceofPredicate(Costable.class));
+	public Collection<Costable> getPendingCostableTasks() {
+		return (Collection<Costable>)CollectionUtils.select(tasks, PredicateUtils.instanceofPredicate(Costable.class));
 	}
 
 	// Lower end for the current estimated cost

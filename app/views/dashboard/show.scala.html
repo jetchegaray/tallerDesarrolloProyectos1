@@ -1,0 +1,73 @@
+@(wedding: model.domain.Wedding)
+
+@import model.domain.Event
+
+@eventExpenseRow(event: Event) = {
+	<tr>
+		<td><a href="@routes.EventsController.show(event.getTypeName())">@event.name</a></td>
+		<td class="text-right">@helper.budget.toMoney(event.getAmountSpent())</td>
+		<td class="text-right">@helper.budget.toMoney(event.getAmountComprised())</td>
+		<td class="text-right">@helper.budget.range(event)</td>
+	</tr>
+}
+
+@account("Dashboard") {
+
+<h2>Tareas pendientes</h2>
+<table class='table table-hover'>
+	<thead>
+		<tr>
+			<th>Origen</th>
+			<th>Fecha límite</th>
+			<th>Descripción</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+
+		@tasks.showTask(wedding.civil, wedding.civil.getPendingTasks().take(3))
+
+		@tasks.showTask(wedding.ceremony, wedding.ceremony.getPendingTasks().take(3))
+
+		@tasks.showTask(wedding.party, wedding.party.getPendingTasks().take(3))
+
+	</tbody>
+</table>
+
+<h2>Resumen de gastos</h2>
+<table class='table table-hover'>
+	<thead>
+		<tr>
+			<th>Origen</th>
+			<th class="text-center">Concretado</th>
+			<th class="text-center">Pendiente</th>
+			<th class="text-center">Total Estimado</th>
+		</tr>
+	</thead>
+	<tbody>
+		@eventExpenseRow(wedding.civil)
+		@eventExpenseRow(wedding.ceremony)
+		@eventExpenseRow(wedding.party)
+	</tbody>
+</table>
+
+<h2>Eventos próximos en Agenda</h2>
+<table class='table table-hover'>
+	<thead>
+		<tr>
+			<th>Fecha</th>
+			<th>Origen</th>
+			<th>Descripción</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td class="date-cell">2013-07-08</td>
+			<td><a href="civil">Civil</a></td>
+			<td>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</td>
+		</tr>
+	</tbody>
+</table>
+
+
+}

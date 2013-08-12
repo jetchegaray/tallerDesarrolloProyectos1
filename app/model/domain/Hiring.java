@@ -1,14 +1,18 @@
 package model.domain;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import org.bson.types.ObjectId;
 
 import com.google.code.morphia.annotations.Entity;
 import com.google.code.morphia.annotations.Id;
+import com.google.code.morphia.annotations.Indexed;
+import com.google.code.morphia.annotations.Reference;
+import com.google.common.collect.Lists;
 
-@Entity("provider")
-public class Provider {
+@Entity("hirings")
+public class Hiring {
 
 	@Id
 	public ObjectId id;
@@ -16,13 +20,12 @@ public class Provider {
 	private String name;
 	private String address;
 	private String mail;
-	private ProviderType type;
+	private HiringType type;
 	
 	private String picture;
 	private BigDecimal price;
-	private String description;
 	
-	public enum ProviderType{
+	public enum HiringType{
 		Fotos{
 			@Override
 			public String toString() {
@@ -46,15 +49,13 @@ public class Provider {
 			public String toString() {
 				return "Musica";
 			}
-		},
-		Otros{
-			@Override
-			public String toString() {
-				return "Otros";
-			}
 		}
 	}
 	
+	private List<String> userMessages = Lists.newArrayList();
+	private List<String> hiredMessages = Lists.newArrayList();
+	
+
 	public String getName() {
 		return name;
 	}
@@ -79,13 +80,23 @@ public class Provider {
 		this.mail = mail;
 	}
 
-	public ProviderType getType() {
+	public HiringType getType() {
 		return type;
 	}
 
-	public void setType(ProviderType type) {
+	public void setType(HiringType type) {
 		this.type = type;
 	}
+
+	
+	public void addConversationMessageUser(String message) {
+		 userMessages.add(message);
+	}
+
+	public void addConversationMessageHireUser(String message) {
+		hiredMessages.add(message);
+	}
+	
 
 	public String getPicture() {
 		return picture;
@@ -103,13 +114,20 @@ public class Provider {
 		this.price = price;
 	}
 
-	public String getDescription() {
-		return description;
+	public List<String> getUserMessages() {
+		return userMessages;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setUserMessages(List<String> userMessages) {
+		this.userMessages = userMessages;
 	}
 
+	public List<String> getHiredMessages() {
+		return hiredMessages;
+	}
+
+	public void setHiredMessages(List<String> hiredMessages) {
+		this.hiredMessages = hiredMessages;
+	}
 	
 }

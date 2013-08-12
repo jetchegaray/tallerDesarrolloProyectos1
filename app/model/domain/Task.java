@@ -35,6 +35,10 @@ public abstract class Task {
 		return "/tasks/" + eventType + "/" + slug;
 	}
 
+	public void completeTask(){
+		this.done = true;
+	}
+
 	public abstract void updatePricingEstimate(Event event);
 
 }
