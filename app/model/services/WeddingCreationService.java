@@ -56,7 +56,7 @@ public class WeddingCreationService {
 
 	private Party initializeParty(Wedding wedding) {
 		Party party = new Party(wedding.dateEstimate);
-		party.addTask(new HireProvider(party, "Contratar Salón", 2000, daysBefore(wedding, 30 * 8), "Lugares"));
+		party.addTask(new HireProvider(party, "Contratar Salón", 35000, daysBefore(wedding, 30 * 8), "Lugares"));
 		party.addTask(new SimpleHire(party, "Contratar Catering", 5000, daysBefore(wedding, 30 * 7)));
 		party.addTask(new SimpleHire(party, "Contratar Peluqueria", 500, daysBefore(wedding, 30 * 3)));
 		party.addTask(new SimpleHire(party, "Contratar Florista", 1000, daysBefore(wedding, 30 * 6)));

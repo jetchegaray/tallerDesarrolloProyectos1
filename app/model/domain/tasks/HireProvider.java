@@ -20,7 +20,7 @@ public class HireProvider extends Task implements Costable {
 	BigDecimal lowerEstimate;
 	BigDecimal upperEstimate;
 	Integer baseEstimate;
-	String providerType;
+	public String providerType;
 
 	public HireProvider() {
 		super();
