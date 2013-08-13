@@ -30,16 +30,16 @@ public class UserController extends Controller {
 
 		if ((user != null) && user.password.equals(password)) {
 			WeddingAuthenticator.signin(session(), user);
-			return redirect(routes.Mockup.at("Dashboard"));
+			return redirect( routes.DashboardController.show() );
 		} else {
 			Form<User> filledForm = userForm.bindFromRequest();
-			return badRequest(login.render(filledForm));
+			return badRequest( login.render(filledForm) );
 		}
 	}
 
 	public static Result logout() {
 		WeddingAuthenticator.signout(session());
-		return redirect( routes.Application.index() );
+		return redirect( routes.UserController.getLogin() );
 	}
 
 	public static Result addUser(){

@@ -16,7 +16,7 @@ package object events {
             case "Civil"     => controllers.routes.EventsController.show("CIVIL")
             case "Ceremonia" => controllers.routes.EventsController.show("CEREMONY")
             case "Fiesta"    => controllers.routes.EventsController.show("PARTY")
-            case _ => controllers.routes.Application.index()
+            case _ => controllers.routes.UserController.user()
         }
     }
 

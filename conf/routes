@@ -3,7 +3,7 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index()
+GET     /                           controllers.UserController.user()
 GET     /mockup/*file               controllers.Mockup.at(file)
 
 # Map static resources from the /public folder to the /assets URL path
