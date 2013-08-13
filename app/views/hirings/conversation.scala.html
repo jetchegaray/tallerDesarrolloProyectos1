@@ -10,7 +10,7 @@
                         });
    </script>
 }
-@account("Conversation", extraScripts) {
+@account(helper.events.titleFromType(hiring.eventType), extraScripts) {
 
 <section class="tabbable">
     <h2>@hiring.getName()</h2>
@@ -121,7 +121,7 @@
                 <div class="control-group">
                     <div class="controls">
                         <button id="agregarNuevoMensaje" type="button" class="btn">Enviar
-                        
+
                         </button>
                     </div>
                 </div>

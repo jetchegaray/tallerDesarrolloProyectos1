@@ -10,18 +10,17 @@ import com.google.code.morphia.annotations.Id;
 @Entity("provider")
 public class Provider {
 
-	@Id
-	public ObjectId id;
-	
+	@Id public ObjectId id;
+
 	private String name;
 	private String address;
 	private String mail;
 	private ProviderType type;
-	
+
 	private String picture;
 	private BigDecimal price;
 	private String description;
-	
+
 	public enum ProviderType{
 		Fotos{
 			@Override
@@ -54,7 +53,7 @@ public class Provider {
 			}
 		}
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -111,5 +110,5 @@ public class Provider {
 		this.description = description;
 	}
 
-	
+
 }
