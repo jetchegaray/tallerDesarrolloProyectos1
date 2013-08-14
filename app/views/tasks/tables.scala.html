@@ -24,7 +24,7 @@
             @for(invitado <- invitados){
             <li class="sortable-item" style="display: list-item;" value="2">
                 @invitado.getName()
-                <span class="label label-success">
+                <span class="label label-@invitado.getStatusFiesta().getCode()">
                     @invitado.getStatusFiesta().getCode() match{
                         case "confirmed" => {Confirmado}
                         case "invited" => {Invitado}

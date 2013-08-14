@@ -1,24 +1,24 @@
 var data=[
 				{name: 'Mesa 1', max: 8,
 					guests:[				
-						{id: 15 , name: 'Hilary Picou', state: 'Confirmado'},
-         			{id: 16, name: 'Idalia Malone', state: 'Confirmado'},
-						{id: 17, name: 'Ileen Lenz', state: 'Confirmado'},
-						{id: 18, name: 'Jeneva Hertzler', state: 'Confirmado'}
+						{id: 15 , name: 'Hilary Picou', state: 'confirmed', state_localized: 'Confirmado'},
+         			{id: 16, name: 'Idalia Malone', state: 'confirmed', state_localized: 'Confirmado'},
+						{id: 17, name: 'Ileen Lenz', state: 'confirmed', state_localized: 'Confirmado'},
+						{id: 18, name: 'Jeneva Hertzler', state: 'confirmed', state_localized: 'Confirmado'}
 					]
 				},
 				{name: 'Mesa 2', max: 8,
 					guests:[				
-						{id: 19 , name: 'Kemal Zhong', state: 'Pendiente'}
+						{id: 19 , name: 'Kemal Zhong', state: 'invited', state_localized: 'Invitado'}
 					]
 				},
 				{name: 'Mesa 3', max: 8,
 					guests:[				
-						{id: 20 , name: 'Kyung Fairley', state: 'Confirmado'},
-         			{id: 21 , name: 'Xyrtranna Lightouch', state: 'Confirmado'},
-						{id: 22 , name: 'Xabier Aqissiaq', state: 'Confirmado'},
-						{id: 23 , name: 'Willy Kleopatros', state: 'Confirmado'},
-						{id: 24, name: 'Sheldon Peskin', state: 'Confirmado'}
+						{id: 20 , name: 'Kyung Fairley', state: 'confirmed', state_localized: 'Confirmado'},
+         			{id: 21 , name: 'Xyrtranna Lightouch', state: 'invited', state_localized: 'Invitado'},
+						{id: 22 , name: 'Xabier Aqissiaq', state: 'invited', state_localized: 'Invitado'},
+						{id: 23 , name: 'Willy Kleopatros', state: 'confirmed', state_localized: 'Confirmado'},
+						{id: 24, name: 'Sheldon Peskin', state: 'canceled', state_localized: 'Cancelado'}
 					]
 				}	,
 				{name: 'Mesa 4', max: 8,
@@ -56,7 +56,7 @@ $.extend($.expr[':'], {
 $(document).ready(function(){
 	
 	$.template('table_item','<div class="table"><h4>${name}<small>(Restantes <span>0</span>/<span>${max}</span>)</small></h4><ul class="unstyled guests-tables"></ul></div>');
-	$.template('list_item','<li class="sortable-item" value="${id}">${name} <span class="label label-success">${state}</span></li>');
+	$.template('list_item','<li class="sortable-item" value="${id}">${name} <span class="label label-${state}">${state_localized}</span></li>');
 	$.template('list_without_items','<li class="without-items">Arrastre un invitado aqui</li>');
 	
 	var addGuestsTo = function(to,guests){
