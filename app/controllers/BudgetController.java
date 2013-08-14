@@ -1,7 +1,9 @@
 package controllers;
 
 import model.dao.WeddingDAO;
+import model.dao.EventDAO;
 import model.domain.Wedding;
+import model.domain.Event;
 import model.domain.Expense;
 import model.domain.Budgetable;
 
@@ -11,6 +13,7 @@ import views.html.errors.*;
 import play.data.Form;
 import play.data.DynamicForm;
 
+import java.math.BigDecimal;
 import play.mvc.Call;
 import play.mvc.Controller;
 import play.mvc.Http.Context.Implicit;
@@ -21,7 +24,7 @@ public class BudgetController extends WeddingController {
 	public static Form<Expense> expenseForm = Form.form(Expense.class);
 
 	public static Result show() {
-		return ok(show.render(currentWedding()));
+		return ok( show.render(currentWedding()) );
 	}
 
 	public static Result newExpense(String expenseType) {
@@ -36,11 +39,16 @@ public class BudgetController extends WeddingController {
 			if (expenseType == null) {
 				expenseType = new DynamicForm().bindFromRequest().get("type");
 			}
-
-			Budgetable budgeteable = selectBudget(wedding, expenseType);
 			Expense expense = filledForm.get();
-			budgeteable.addExpense(expense);
-			WeddingDAO.instance.save(wedding);
+
+			if (expenseType != null && !expenseType.isEmpty()) {
+				Event event = wedding.getEvent(expenseType);
+				event.addExpense(expense);
+				EventDAO.instance.save(event);
+			} else {
+				wedding.addExpense(expense);
+				WeddingDAO.instance.save(wedding);
+			}
 
 			return redirect(parent(expenseType));
 
@@ -52,18 +60,11 @@ public class BudgetController extends WeddingController {
 	}
 
 	public static Call parent(String expenseType) {
-		if (expenseType != null) {
+		if (expenseType != null && !expenseType.isEmpty()) {
 			return routes.EventsController.show(expenseType);
 		} else {
 			return routes.BudgetController.show();
 		}
 	}
 
-	public static Budgetable selectBudget(Wedding wedding, String expenseType) {
-		if (expenseType != null && !expenseType.isEmpty()) {
-			return wedding.getEvent(expenseType);
-		} else {
-			return wedding;
-		}
-	}
 }

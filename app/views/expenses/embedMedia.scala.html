@@ -1,0 +1,29 @@
+@(expense: model.domain.Expense)
+
+@import model.domain.Expense
+
+@expense match {
+    case hire: Expense.CustomHire => {
+        <div class="pull-left">
+            <img class="media-object" src="@routes.Assets.at("images/custom-hire.jpg")" alt="@hire.name"/>
+        </div>
+        <div class="media-body">
+            <h6>@hire.name <em>@hire.email</em></h6>
+            <small>@hire.description</small>
+        </div>
+    }
+    case _ => {
+        <a href="/mockup/Conversation" alt="Contactar" class="pull-left">
+            <img class="media-object" src="http://lorempixel.com/64/64/people" alt="someone"/>
+        </a>
+        <div class="media-body">
+            <h6>Some provider</h6>
+            <small>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                consequat.
+            </small>
+        </div>
+    }
+}

@@ -2,8 +2,9 @@ package model.domain.events;
 
 import model.domain.Event;
 import model.domain.Task;
-import model.domain.tasks.FakeTask;
+import model.domain.tasks.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -12,13 +13,17 @@ public class Party extends Event {
 	public static final String[] EXTRAS = { "Banda", "DJ", "Cotillón", "Decoración especial",
             "Fotógrafo", "Filmación", "Fuegos artificiales" };
 
-	public String city;
 	public String when;
 	public List<String> extras;
 
 	public Party() {
 		super("Fiesta");
 		extras = new ArrayList<String>();
+	}
+
+	public Party(Date date) {
+		this();
+		this.date = date;
 	}
 
 	public String getTypeName() {
@@ -38,7 +43,7 @@ public class Party extends Event {
 			Task task = findTaskBySlug(slugify(taskName));
 
 			if (wantsExtra(extra)) {
-				if (task == null) addTask(new FakeTask(taskName, "hire"));
+				if (task == null) addExtra(taskName, extra);
 			} else {
 				if (task != null) tasks.remove(task);
 			}
@@ -58,4 +63,23 @@ public class Party extends Event {
 		return string.replaceAll("\\W","-").toLowerCase();
 	}
 
+	private void addExtra(String taskName, String extra) {
+		Task task = null;
+
+		if (extra.equals("Banda") || extra.equals("DJ")) {
+			task = new HireProvider(this, taskName, 1000, daysBefore(30 * 2), "Musica");
+		}
+		if (extra.equals("Fotógrafo")) {
+			task = new HireProvider(this, taskName, 1500, daysBefore(30 * 2), "Fotos");
+		}
+		if (extra.equals("Filmación")) {
+			task = new HireProvider(this, taskName, 2000, daysBefore(30 * 2), "Videos");
+		}
+		if (task == null) {
+			task = new SimpleHire(this, taskName, 2000, daysBefore(30));
+		}
+
+		addTask(task);
+
+	}
 }

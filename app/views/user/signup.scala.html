@@ -2,31 +2,45 @@
 
 @import helper.bootstrap._
 
-@main("Signup") {
+@main("Registrarme en miBoda.com", bodyId = "signup") {
 
 	<div class="navbar navbar-fixed-top">
 		<div class="navbar-inner"> @shared.topNav()() </div>
 	</div>
 
 	<div class="container">
-		<h1>Signup</h1>
+		<div class="row">
+			<div class="span7 offset2 form-container">
+			<h3 class="text-center">Crear nueva cuenta</h3>
 
-		@helper.form(action = routes.UserController.addUser(), args = 'class -> "form-horizontal") {
+			@helper.form(action = routes.UserController.addUser(), args = 'class -> "form-horizontal") {
 
-			@helper.inputText(userForm("email"),
-				'_label -> "Email", '_help -> "", 'placeholder -> "email")
+				@helper.inputText(userForm("wedding.bridesName"),
+					'_label -> "Nombre de la Novia", '_help -> "", 'placeholder -> "María Antonieta de las Novias")
 
-			@helper.inputText(userForm("userName"),
-				'_label -> "Usuario", '_help -> "", 'placeholder -> "username")
+				@helper.inputText(userForm("wedding.groomsName"),
+					'_label -> "Nombre de la Novio", '_help -> "", 'placeholder -> "Miguel del Novio")
 
-			@helper.inputPassword(userForm("password"),
-				'_label -> "Contraseña", '_help -> "", 'placeholder -> "password")
+				@helper.inputText(userForm("email"),
+					'_label -> "Email", '_help -> "Este mail lo vas a usar para acceder a tu cuenta", 'placeholder -> "bride@mail.com")
 
-			<div class="control-group">
-				<div class="controls">
-					<button type="submit" class="btn-success">Registrarme</button>
+				@helper.inputPassword(userForm("password"),
+					'_label -> "Contraseña", '_help -> "", 'placeholder -> "password")
+
+				@helper.inputMoney(userForm("wedding.budgetEstimate"),
+					'_label -> "Presupuesto aproximado", '_help -> "", 'placeholder -> "80.000")
+
+				@helper.inputDate(userForm("wedding.dateEstimate"),
+					'_label -> "Fecha aproximada", '_help -> "", 'placeholder -> "2014-03-09")
+
+				<div class="control-group">
+					<div class="controls">
+						<button type="submit" class="btn-success">Registrarme</button>
+						<a href="@routes.UserController.getLogin()"><small>Ya tengo cuenta</small></a>
+					</div>
 				</div>
+			}
 			</div>
-		}
+		</div>
 	</div>
 }

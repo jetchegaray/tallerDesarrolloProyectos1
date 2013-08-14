@@ -1,5 +1,6 @@
 package model.domain.tasks;
 
+import model.domain.Costable;
 import model.domain.Task;
 import model.domain.Event;
 
@@ -13,7 +14,7 @@ import java.math.BigDecimal;
 /*
 	Fake task class to simplify integration with mockup tasks
 */
-public class FakeTask extends Task {
+public class FakeTask extends Task implements Costable {
 
 	public String mockupId;
 	BigDecimal lowerEstimate;
@@ -28,20 +29,21 @@ public class FakeTask extends Task {
 	}
 
 	public FakeTask(String name, String id, Date dueDate) {
+		this(name, id, dueDate, 0);
+	}
+
+	public FakeTask(String name, String id, Date dueDate, Integer base) {
 		super(name, dueDate);
 		this.mockupId = id;
 		Random random = new Random();
-		lowerEstimate = new BigDecimal(random.nextInt(150) * 100 + 500);
-		upperEstimate = new BigDecimal(random.nextInt(150) * 100 + lowerEstimate.intValue());
+		lowerEstimate = new BigDecimal(base);
+		upperEstimate = new BigDecimal((random.nextInt(4) + 2) * base);
 	}
 
 	public void updatePricingEstimate(Event event) {
-		if (slug.equals("contratar-sal-n")) {
-			lowerEstimate = lowerEstimate.add(new BigDecimal(1000));
-			upperEstimate = upperEstimate.add(new BigDecimal(1000));
-		}
 	}
 
+	@Override
 	public String getUrl() {
 		return "/mockup/tasks/" + mockupId;
 	}

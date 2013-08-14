@@ -1,0 +1,78 @@
+@(provider: model.domain.Provider)
+
+@account("Contrataciones") {
+
+<section>
+    <h2>@provider.getName()</h2>
+    <article id="profile" class="tab-pane active">
+        <h3>Profile</h3>
+        <figure class="media">
+            <a href="@routes.ProviderController.show(provider.id.toString())" alt="Contactar" class="pull-left thumbnail">
+                <img class="media-object" width="200" height="133"
+                     src="/assets/images/app/@provider.getPicture()" alt="someone"/>
+            </a>
+            <div class="media-body">
+                <small>@provider.getDescription()</small>
+            </div>
+        </figure>
+    </article>
+    <article id="portfolio" class="tab-pane">
+        <h3>Portfolio</h3>
+        <ul class="thumbnails">
+            <li class="span3"><a href="#" class="thumbnail"><img src="/assets/images/app/profile-1.jpg"></a></li>
+            <li class="span3"><a href="#" class="thumbnail"><img src="/assets/images/app/profile-2.jpg"></a></li>
+            <li class="span3"><a href="#" class="thumbnail"><img src="/assets/images/app/profile-3.jpg"></a></li>
+            <li class="span3"><a href="#" class="thumbnail"><img src="/assets/images/app/profile-4.jpg"></a></li>
+            <li class="span3"><a href="#" class="thumbnail"><img src="/assets/images/app/profile-5.jpg"></a></li>
+        </ul>
+    </article>
+    <article id="reviews" class="tab-pane">
+        <h3>Reviews</h3>
+        <ul>
+            <li class="media">
+                <a href="#" alt="Contactar" class="pull-left thumbnail">
+                    <img class="media-object" src="/assets/images/app/user-1.jpg" alt="someone else"/>
+                </a>
+                <div class="media-body">
+                    <h6>Adrián M. <span class="badge badge-success">+1</span></h6>
+                    <small>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat.
+                    </small>
+                </div>
+            </li>
+            <li class="media">
+                <a href="#" alt="Contactar" class="pull-left thumbnail">
+                    <img class="media-object" src="/assets/images/app/user-2.jpg" alt="someone else"/>
+                </a>
+                <div class="media-body">
+                    <h6>Carlos E. <span class="badge badge-success">+1</span></h6>
+                    <small>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat.
+                    </small>
+                </div>
+            </li>
+        </ul>
+    </article>
+    <form action="/mockup/Conversacion" method="get">
+        <fieldset>
+            <div class="control-group">
+                <label class="control-label" for="city">Nuevo Mensaje</label>
+                <div class="controls">
+                    <textarea id="city" type="text-area" placeholder="" class="input-block-level" rows="10"></textarea>
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <button type="submit" class="btn">Enviar</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</section>
+}

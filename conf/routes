@@ -3,7 +3,7 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index()
+GET     /                           controllers.UserController.user()
 GET     /mockup/*file               controllers.Mockup.at(file)
 
 # Map static resources from the /public folder to the /assets URL path
@@ -16,13 +16,15 @@ POST     /logout                    controllers.UserController.logout()
 GET      /user                      controllers.UserController.user()
 POST     /user                      controllers.UserController.addUser()
 
+GET      /dashboard                 controllers.DashboardController.show()
+
 GET      /civil                     controllers.EventsController.show(name = "CIVIL")
-PATCH    /civil                     controllers.EventsController.update(name = "CIVIL")
+POST     /civil                     controllers.EventsController.update(name = "CIVIL")
 POST     /civil/expenses            controllers.BudgetController.createExpense(name = "CIVIL")
 GET      /civil/expenses/new        controllers.BudgetController.newExpense(name = "CIVIL")
 
 GET      /ceremonia                 controllers.EventsController.show(name = "CEREMONY")
-PATCH    /ceremonia                 controllers.EventsController.update(name = "CEREMONY")
+POST     /ceremonia                 controllers.EventsController.update(name = "CEREMONY")
 POST     /ceremonia/expenses        controllers.BudgetController.createExpense(name = "CEREMONY")
 GET      /ceremonia/expenses/new    controllers.BudgetController.newExpense(name = "CEREMONY")
 
@@ -34,6 +36,13 @@ GET      /fiesta/expenses/new       controllers.BudgetController.newExpense(name
 GET      /budget/expenses/new       controllers.BudgetController.newExpense(name = null)
 POST     /budget/expenses           controllers.BudgetController.createExpense(name = null)
 GET      /budget                    controllers.BudgetController.show()
+
+GET      /tasks/civil/:id           controllers.TasksController.show(name = "CIVIL", id: String)
+POST     /tasks/civil/:id           controllers.TasksController.update(name = "CIVIL", id: String)
+GET      /tasks/ceremonia/:id       controllers.TasksController.show(name = "CEREMONY", id: String)
+POST     /tasks/ceremonia/:id       controllers.TasksController.update(name = "CEREMONY", id: String)
+GET      /tasks/fiesta/:id          controllers.TasksController.show(name = "PARTY", id: String)
+POST     /tasks/fiesta/:id          controllers.TasksController.update(name = "PARTY", id: String)
 
 GET      /invitados                 controllers.InvitadosController.index()
 POST     /invitados                 controllers.InvitadosController.addGuest()

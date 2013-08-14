@@ -7,13 +7,15 @@ import java.util.GregorianCalendar;
 import com.google.code.morphia.annotations.Embedded;
 import java.util.Date;
 
-public abstract class Task implements Costable {
+public abstract class Task {
 
 	public String name;
 	public String slug;
 	public Date dueDate;
+	public boolean done = false;
+	public String eventType;
 
-	protected Task() {}
+	public Task() { }
 
 	public Task(String name, Date dueDate) {
 		this.name = name;
@@ -21,14 +23,20 @@ public abstract class Task implements Costable {
 		this.dueDate = dueDate;
 	}
 
-	// Lower end for the current estimated cost
-	public BigDecimal getLowerEstimate() {
-		return new BigDecimal(0);
+	public void complete() {
+		this.done = true;
 	}
 
-	// Upper end for the current estimated cost
-	public BigDecimal getUpperEstimate() {
-		return new BigDecimal(0);
+	public boolean isPending() {
+		return !done;
+	}
+
+	public String getUrl() {
+		return "/tasks/" + eventType + "/" + slug;
+	}
+
+	public void completeTask(){
+		this.done = true;
 	}
 
 	public abstract void updatePricingEstimate(Event event);

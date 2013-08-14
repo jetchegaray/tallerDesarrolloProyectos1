@@ -1,0 +1,10 @@
+@(event: model.domain.Event, tasks: Seq[model.domain.Task])
+
+@for(task <- tasks) {
+	<tr>
+		<td><a href="@routes.EventsController.show(event.getTypeName())">@event.name</a></td>
+		<td class="date-cell">@task.dueDate.format("YYYY-MM-dd")</td>
+		<td>@task.name</td>
+		<th><a href="@task.getUrl()">ver</a></th>
+	</tr>
+}

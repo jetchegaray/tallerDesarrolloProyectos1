@@ -2,6 +2,10 @@ package model.domain;
 
 import model.domain.events.*;
 
+import java.util.Collection;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
@@ -16,6 +20,7 @@ import extensions.morphia.BigDecimalConverter;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Predicate;
+import org.apache.commons.collections.PredicateUtils;
 
 @Converters({BigDecimalConverter.class})
 @Entity("events")
@@ -42,13 +47,13 @@ public abstract class Event implements Budgetable {
 		this.budget = new BigDecimal(0);
 	}
 
-	public void addTask(Task t) {
-		tasks.add(t);
+	public List<Task> getAllTasks() {
+		return tasks;
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Task> getPendingTasks() {
-		// We should filter tasks that have been completed or canceled
-		return tasks;
+		return (List<Task>)CollectionUtils.select(tasks, PredicateUtils.invokerPredicate("isPending"));
 	}
 
 	public List<Expense> getActiveExpenses() {
@@ -75,10 +80,15 @@ public abstract class Event implements Budgetable {
 		return budget;
 	}
 
+	@SuppressWarnings("unchecked")
+	public Collection<Costable> getPendingCostableTasks() {
+		return (Collection<Costable>)CollectionUtils.select(tasks, PredicateUtils.instanceofPredicate(Costable.class));
+	}
+
 	// Lower end for the current estimated cost
 	public BigDecimal getLowerEstimate() {
 		BigDecimal acum = new BigDecimal(0);
-		for(Task task : getPendingTasks()) {
+		for(Costable task : getPendingCostableTasks()) {
 			acum = acum.add(task.getLowerEstimate());
 		}
 		return acum.add(getAmountSpent());
@@ -87,7 +97,7 @@ public abstract class Event implements Budgetable {
 	// Upper end for the current estimated cost
 	public BigDecimal getUpperEstimate() {
 		BigDecimal acum = new BigDecimal(0);
-		for(Task task : getPendingTasks()) {
+		for(Costable task : getPendingCostableTasks()) {
 			acum = acum.add(task.getUpperEstimate());
 		}
 		return acum.add(getAmountSpent());
@@ -124,7 +134,15 @@ public abstract class Event implements Budgetable {
 		return acum;
 	}
 
+	public void addTask(Task t) {
+		// FIXME: Using name for now, because its used on urls...
+		// t.eventType = getTypeName();
+		t.eventType = name.toLowerCase();
+		tasks.add(t);
+	}
+
 	public void addExpense(Expense expense) {
+		expense.eventOrigin = getTypeName();
 		expenses.add(expense);
 	}
 
@@ -140,6 +158,19 @@ public abstract class Event implements Budgetable {
 
 	protected enum EventType {
 		CIVIL, CEREMONY, PARTY
+	}
+
+
+	protected Date daysBefore(Integer count) {
+		GregorianCalendar calendar = new GregorianCalendar(2013, 11, 21);
+
+		if (date != null) {
+			calendar.setGregorianChange(date);
+		}
+
+		calendar.add(Calendar.DATE, -count);
+
+		return calendar.getTime();
 	}
 
 }
