@@ -1,6 +1,6 @@
 @(invitados: List[model.domain.guests.Guest])
 
-@account("Organizacion de mesas"){
+@account("Fiesta"){
 
 <h3>Organización de mesas</h3>
 <div id="task-304" class="row">
@@ -13,13 +13,13 @@
         </div>
 
     </section>
-    
+
     <aside class="span3 guests-affix" data-spy="affix" data-offset-top="1">
         <h4>Invitados sin sentar</h4>
 
-        
+
             <input id="filter" type="text" placeholder="Filtrar invitados">
-       
+
         <ul class="unstyled guests-tables guests-picker">
             @for(invitado <- invitados){
             <li class="sortable-item" style="display: list-item;" value="2">
@@ -34,7 +34,7 @@
                 </span>
             </li>
             }
-           
+
         </ul>
     </aside>
 </div>

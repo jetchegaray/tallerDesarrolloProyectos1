@@ -10,7 +10,7 @@
                         });
    </script>
 }
-@account("Conversation", extraScripts) {
+@account(helper.events.titleFromType(hiring.eventType), extraScripts) {
 
 <section class="tabbable">
     <h2>@hiring.getName()</h2>
@@ -22,32 +22,28 @@
     <div class="tab-content">
         <article id="profile" class="tab-pane active">
             <figure class="media">
-                <a href="/mockup/Conversacion" alt="Contactar" class="pull-left">
-                    <img class="media-object" src="@routes.Assets.at("images/app")/@hiring.getPicture()" alt="someone else"/>
+                <a href="#" alt="Contactar" class="pull-left">
+                    <img class="media-object" src="@routes.Assets.at("images/app")/@hiring.getPicture()" alt="@hiring.getName()"/>
                 </a>
                 <div class="media-body">
-                    <small>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis nostrud enisi ut aliquip ex ea commodo
-                    </small>
+                    <small>@hiring.provider.getDescription()</small>
                 </div>
             </figure>
         </article>
         <article id="portfolio" class="tab-pane">
             <ul class="thumbnails">
-                <li class="span3"><a href="#" class="thumbnail"><img src="http://lorempixel.com/300/200?1"></a></li>
-                <li class="span3"><a href="#" class="thumbnail"><img src="http://lorempixel.com/300/200?2"></a></li>
-                <li class="span3"><a href="#" class="thumbnail"><img src="http://lorempixel.com/300/200?3"></a></li>
-                <li class="span3"><a href="#" class="thumbnail"><img src="http://lorempixel.com/300/200?4"></a></li>
-                <li class="span3"><a href="#" class="thumbnail"><img src="http://lorempixel.com/300/200?5"></a></li>
+                <li class="span3"><a href="#" class="thumbnail"><img src="@routes.Assets.at("images/app/conversation-1.jpg")"></a></li>
+                <li class="span3"><a href="#" class="thumbnail"><img src="@routes.Assets.at("images/app/conversation-2.jpg")"></a></li>
+                <li class="span3"><a href="#" class="thumbnail"><img src="@routes.Assets.at("images/app/conversation-3.jpg")"></a></li>
+                <li class="span3"><a href="#" class="thumbnail"><img src="@routes.Assets.at("images/app/conversation-4.jpg")"></a></li>
+                <li class="span3"><a href="#" class="thumbnail"><img src="@routes.Assets.at("images/app/conversation-5.jpg")"></a></li>
             </ul>
         </article>
         <article id="reviews" class="tab-pane">
             <ul>
                 <li class="media">
-                    <a href="/mockup/Contact" alt="Contactar" class="pull-left">
-                        <img class="media-object" src="http://lorempixel.com/64/64/people?3" alt="someone else"/>
+                    <a href="#" alt="User" class="pull-left">
+                        <img class="media-object" src="@routes.Assets.at("images/app/user-1.jpg")" alt="someone else"/>
                     </a>
                     <div class="media-body">
                         <h6>Algún usuario <span class="badge badge-success">+1</span></h6>
@@ -60,8 +56,8 @@
                     </div>
                 </li>
                 <li class="media">
-                    <a href="/mockup/Contact" alt="Contactar" class="pull-left">
-                        <img class="media-object" src="http://lorempixel.com/64/64/people?4" alt="someone else"/>
+                    <a href="#" alt="User" class="pull-left">
+                        <img class="media-object" src="@routes.Assets.at("images/app/user-2.jpg")" alt="someone else"/>
                     </a>
                     <div class="media-body">
                         <h6>Algún usuario <span class="badge badge-success">+1</span></h6>
@@ -85,7 +81,7 @@
         @for(m1 <- hiring.getUserMessages()) {
         	<li class="media">
                 <div class="media-body">
-                    <h6 class="media-heading">XX <small><em>(Martes 26)</em></small>:</h6>
+                    <h6 class="media-heading">@hiring.wedding.bridesName :</h6>
                     <small>
                 		@m1
                     </small>
@@ -95,7 +91,7 @@
         	 	<li>@hiring.getName()</li>
              	<li class="media text-right">
                 	<div class="media-body">
-                    	<h6 class="media-heading">@hiring.getName() <small><em>(Lunes 26)</em></small>:</h6>
+                    	<h6 class="media-heading">@hiring.getName() :</h6>
                     	<small>
                            @hiring.getHiredMessages().get(hiring.getUserMessages().indexOf(m1))
         				</small>
@@ -103,14 +99,8 @@
             	</li>
             }
          }
-         <li class="media">
-                <div class="media-body">
-                    <h6 class="media-heading">XX :</h6>
-                    <small id="writeMessage"></small>
-                </div>
-            </li>
         </ul>
-        <form action="/mockup/Conversacion">
+        <form action="@routes.HiringController.newMessage(hiring.getId())">
             <fieldset>
                 <div class="control-group">
                     <label class="control-label" for="city">Nuevo Mensaje</label>
@@ -121,7 +111,7 @@
                 <div class="control-group">
                     <div class="controls">
                         <button id="agregarNuevoMensaje" type="button" class="btn">Enviar
-                        
+
                         </button>
                     </div>
                 </div>
@@ -131,11 +121,11 @@
     <aside class="span4">
         <h4>Adjuntos</h4>
         <ul class="thumbnails">
-            <li class="span2"><a href="#" class="thumbnail"><img src="http://lorempixel.com/300/200?1"></a></li>
-            <li class="span2"><a href="#" class="thumbnail"><img src="http://lorempixel.com/300/200?2"></a></li>
-            <li class="span2"><a href="#" class="thumbnail"><img src="http://lorempixel.com/300/200?3"></a></li>
-            <li class="span2"><a href="#" class="thumbnail"><img src="http://lorempixel.com/300/200?4"></a></li>
-            <li class="span2"><a href="#" class="thumbnail"><img src="http://lorempixel.com/300/200?5"></a></li>
+            <li class="span2"><a href="#" class="thumbnail"><img src="@routes.Assets.at("images/app/attachments-1.jpg")"></a></li>
+            <li class="span2"><a href="#" class="thumbnail"><img src="@routes.Assets.at("images/app/attachments-2.jpg")"></a></li>
+            <li class="span2"><a href="#" class="thumbnail"><img src="@routes.Assets.at("images/app/attachments-3.jpg")"></a></li>
+            <li class="span2"><a href="#" class="thumbnail"><img src="@routes.Assets.at("images/app/attachments-4.jpg")"></a></li>
+            <li class="span2"><a href="#" class="thumbnail"><img src="@routes.Assets.at("images/app/attachments-5.jpg")"></a></li>
         </ul>
     </aside>
 
