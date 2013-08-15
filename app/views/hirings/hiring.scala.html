@@ -41,10 +41,56 @@
 <article>
     <h3>Novedades</h3>
     <ul>
-        <li>
-                    No tiene novedades por el momento
-        </li>
+        <li> No tiene novedades por el momento </li>
     </ul>
+</article>
+
+<article>
+    <h3>Conversaciones en curso</h3>
+    @nonEmptyOrElse(hirings.toSeq) { hirings =>
+    <table class='table table-hover'>
+        <thead>
+            <tr>
+                <th>Origen</th>
+                <th>Detalle</th>
+                <th>Datos</th>
+                <th>Presupuesto</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        @for(hiring <- hirings) {
+            <tr>
+                <td><a href="@routes.EventsController.show(hiring.eventType)">@helper.events.titleFromType(hiring.eventType)</a></td>
+                <td>
+                    @helper.budget.toMoney(hiring.getPrice()) <span class="label label-success">Esperando</span>
+                    <br/>
+                </td>
+                <td class="media">
+                    <a href="@routes.HiringController.show(hiring.getId())" class="pull-left">
+                        <img class="media-object" width="200" height="133"
+                             src="/assets/images/app/@hiring.getPicture()" alt="@hiring.getName()"/>
+                    </a>
+                    <div class="media-body">
+                        <div class="media-body">
+                            <h6>@hiring.getName()</h6>
+                            <small>@hiring.getDescription()</small>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                  <em>Sin cotizar</em>
+                </td>
+                <td>
+                  <a href="@routes.HiringController.show(hiring.getId())">Ver Conversación</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    } {
+      <p>No tiene contrataciones en curso. Use el buscador o vaya al evento para el que quiera contratar y busque usando la tarea de contratación correspondiente.</li>
+    }
 </article>
 
 <div id="hiring-actions">
