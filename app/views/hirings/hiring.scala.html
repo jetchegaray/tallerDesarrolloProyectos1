@@ -63,7 +63,7 @@
             <tr>
                 <td><a href="@routes.EventsController.show(hiring.eventType)">@helper.events.titleFromType(hiring.eventType)</a></td>
                 <td>
-                    @helper.budget.toMoney(hiring.getPrice()) <span class="label label-success">Esperando</span>
+                    @hiring.getTask().name <span class="label label-success">Esperando</span>
                     <br/>
                 </td>
                 <td class="media">
