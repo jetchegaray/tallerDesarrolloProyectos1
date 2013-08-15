@@ -15,7 +15,8 @@
     case providerHire: Expense.ProviderHire => {
         @defining(providerHire.getProvider) { hire =>
             <div class="pull-left">
-                <img class="media-object" src="@routes.Assets.at("images/app")/@hire.getPicture()" alt="@hire.getName()"/>
+                <img class="media-object" width="100px" height="66px"
+                     src="@routes.Assets.at("images/app")/@hire.getPicture()" alt="@hire.getName()"/>
             </div>
             <div class="media-body">
                 <h6>@hire.getName() <em>@hire.getMail()</em></h6>
