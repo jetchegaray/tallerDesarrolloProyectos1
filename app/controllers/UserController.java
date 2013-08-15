@@ -24,9 +24,9 @@ public class UserController extends Controller {
 
 	public static Result login() {
 		DynamicForm params = new DynamicForm().bindFromRequest();
-		String userName = params.get("userName");
+		String email = params.get("email");
 		String password = params.get("password");
-		User user = UserDAO.getUserDAO().findOne("userName", userName);
+		User user = UserDAO.getUserDAO().findOne("email", email);
 
 		if ((user != null) && user.password.equals(password)) {
 			WeddingAuthenticator.signin(session(), user);

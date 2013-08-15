@@ -13,7 +13,6 @@ import play.data.validation.Constraints.Required;
 @Entity("guests")
 public class Guest {
 
-
     @Id
     private ObjectId id;
 
@@ -34,7 +33,7 @@ public class Guest {
     public Guest() {
         this.statusCivil   = InvitationStatus.NOINVITADO;
         this.statusFiesta  = InvitationStatus.NOINVITADO;
-        this.statusIglesia = InvitationStatus.INVITADO;
+        this.statusIglesia = InvitationStatus.NOINVITADO;
         this.roomLocation  = null;
     }
 
