@@ -31,12 +31,14 @@
                 @for(task <- event.getPendingTasks()) {
                     @task match {
                         case cost: Costable => {
+                            @if(cost.getLowerEstimate().intValue() != 0) {
                             <tr>
                                 <td><a href="@routes.EventsController.show(event.getTypeName())">@event.name</a></td>
                                 <td>@task.name</td>
                                 <td class="text-right">@helper.budget.range(cost)</td>
                                 <td class="text-center"><a href="@task.getUrl()">ver</a></td>
                             </tr>
+                            }
                         }
                         case _ => {@* Ignore task if it isn't a hire task *@ }
                     }

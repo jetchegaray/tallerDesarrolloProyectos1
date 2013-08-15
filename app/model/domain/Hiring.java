@@ -14,81 +14,40 @@ import com.google.common.collect.Lists;
 @Entity("hirings")
 public class Hiring {
 
-	@Id
-	public ObjectId id;
-	
-	private String name;
-	private String address;
-	private String mail;
-	private HiringType type;
-	
-	private String picture;
-	private BigDecimal price;
-	
-	public enum HiringType{
-		Fotos{
-			@Override
-			public String toString() {
-				return "Fotos";
-			}
-		},
-		Lugares{
-			@Override
-			public String toString() {
-				return "Lugares";
-			}
-		},
-		Videos{
-			@Override
-			public String toString() {
-				return "Videos";
-			}
-		},
-		Musica{
-			@Override
-			public String toString() {
-				return "Musica";
-			}
-		}
-	}
-	
+	@Id public ObjectId id;
+
+	@Reference public Provider provider;
+	@Reference public Wedding wedding;
+	public String eventType;
+	public String taskSlug;
+
 	private List<String> userMessages = Lists.newArrayList();
 	private List<String> hiredMessages = Lists.newArrayList();
-	
 
-	public String getName() {
-		return name;
+	public String getId() {
+		return id.toString();
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public Task getTask() {
+		return wedding.getEvent(eventType).findTaskBySlug(taskSlug);
+	}
+
+	public String getName() {
+		return provider.getName();
 	}
 
 	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
+		return provider.getAddress();
 	}
 
 	public String getMail() {
-		return mail;
+		return provider.getMail();
 	}
 
-	public void setMail(String mail) {
-		this.mail = mail;
+	public Provider.ProviderType getType() {
+		return provider.getType();
 	}
 
-	public HiringType getType() {
-		return type;
-	}
-
-	public void setType(HiringType type) {
-		this.type = type;
-	}
-
-	
 	public void addConversationMessageUser(String message) {
 		 userMessages.add(message);
 	}
@@ -96,22 +55,18 @@ public class Hiring {
 	public void addConversationMessageHireUser(String message) {
 		hiredMessages.add(message);
 	}
-	
 
-	public String getPicture() {
-		return picture;
+
+	public String getDescription() {
+		return provider.getDescription();
 	}
 
-	public void setPicture(String picture) {
-		this.picture = picture;
+	public String getPicture() {
+		return provider.getPicture();
 	}
 
 	public BigDecimal getPrice() {
-		return price;
-	}
-
-	public void setPrice(BigDecimal price) {
-		this.price = price;
+		return provider.getPrice();
 	}
 
 	public List<String> getUserMessages() {
@@ -129,5 +84,5 @@ public class Hiring {
 	public void setHiredMessages(List<String> hiredMessages) {
 		this.hiredMessages = hiredMessages;
 	}
-	
+
 }

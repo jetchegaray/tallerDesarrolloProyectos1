@@ -1,4 +1,4 @@
-@(provider: model.domain.Provider)
+@(provider: model.domain.Provider, eventType: String, taskSlug: String)
 
 @account("Contrataciones") {
 
@@ -59,20 +59,24 @@
             </li>
         </ul>
     </article>
-    <form action="/mockup/Conversacion" method="get">
-        <fieldset>
-            <div class="control-group">
-                <label class="control-label" for="city">Nuevo Mensaje</label>
-                <div class="controls">
-                    <textarea id="city" type="text-area" placeholder="" class="input-block-level" rows="10"></textarea>
+
+    @if(eventType != null) {
+        @defining(Form.form()) { contactForm =>
+            @helper.form(action = routes.ProviderController.hire(provider.id.toString())) {
+                <input type="hidden" name="eventType" value="@eventType">
+                <input type="hidden" name="taskSlug" value="@taskSlug">
+
+                @helper.textarea(contactForm("message"), 'class -> "input-block-level",
+                    '_label -> "Nuevo Mensaje", 'placeholder -> "Me gustaría saber...", 'rows -> "10")
+
+                <div class="control-group">
+                    <div class="controls">
+                        <button type="submit" class="btn">Enviar</button>
+                    </div>
                 </div>
-            </div>
-            <div class="control-group">
-                <div class="controls">
-                    <button type="submit" class="btn">Enviar</button>
-                </div>
-            </div>
-        </fieldset>
-    </form>
+            }
+
+        }
+    }
 </section>
 }

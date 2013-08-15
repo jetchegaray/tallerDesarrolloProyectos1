@@ -12,18 +12,17 @@
             <small>@hire.description</small>
         </div>
     }
+    case providerHire: Expense.ProviderHire => {
+        @defining(providerHire.getProvider) { hire =>
+            <div class="pull-left">
+                <img class="media-object" src="@routes.Assets.at("images/app")/@hire.getPicture()" alt="@hire.getName()"/>
+            </div>
+            <div class="media-body">
+                <h6>@hire.getName() <em>@hire.getMail()</em></h6>
+                <small>@hire.getDescription()</small>
+            </div>
+        }
+    }
     case _ => {
-        <a href="/mockup/Conversation" alt="Contactar" class="pull-left">
-            <img class="media-object" src="http://lorempixel.com/64/64/people" alt="someone"/>
-        </a>
-        <div class="media-body">
-            <h6>Some provider</h6>
-            <small>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat.
-            </small>
-        </div>
     }
 }

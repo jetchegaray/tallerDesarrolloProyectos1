@@ -47,10 +47,13 @@ POST     /tasks/fiesta/:id          controllers.TasksController.update(name = "P
 GET      /invitados                 controllers.InvitadosController.index()
 POST     /invitados                 controllers.InvitadosController.addGuest()
 
-GET		/hiring							controllers.HiringController.hiring()
-GET		/hiring/conversation/:name	controllers.HiringController.getConversation(name: String)
+GET      /tasks/tables              controllers.TablesController.index()
 
-GET		/providers/:id 				controllers.ProviderController.show(id: String)
-GET		/provider/providerByType/:type	controllers.ProviderController.getProviderByType(type: String)
+GET      /hiring                    controllers.HiringController.hiring()
+GET      /hiring/:id                controllers.HiringController.show(id: String)
+POST     /hiring/:id/messages       controllers.HiringController.newMessage(id: String)
 
-GET      /tasks/tables				controllers.TablesController.index()
+GET      /providers/:id            controllers.ProviderController.show(id: String, eventType: String ?= null, taskSlug: String ?= null)
+POST     /providers/:id            controllers.ProviderController.hire(id: String)
+GET      /provider/providerByType/:type  controllers.ProviderController.getProviderByType(type: String)
+
