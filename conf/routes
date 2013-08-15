@@ -51,6 +51,7 @@ GET      /tasks/tables              controllers.TablesController.index()
 
 GET      /hiring                    controllers.HiringController.hiring()
 GET      /hiring/:id                controllers.HiringController.show(id: String)
+POST     /hiring/:id/messages       controllers.HiringController.newMessage(id: String)
 
 GET      /providers/:id            controllers.ProviderController.show(id: String, eventType: String ?= null, taskSlug: String ?= null)
 POST     /providers/:id            controllers.ProviderController.hire(id: String)

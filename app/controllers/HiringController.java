@@ -29,5 +29,11 @@ public class HiringController extends WeddingController {
 		return ok( views.html.hirings.conversation.render(hiring) );
 	}
 
+	public static Result newMessage(String id){
+		Hiring hiring = HiringDAO.getHiringDAO().get(new ObjectId(id));
+
+		return ok( views.html.hirings.conversation.render(hiring) );
+	}
+
 
 }

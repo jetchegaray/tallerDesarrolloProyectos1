@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 
 import com.google.code.morphia.annotations.Transient;
 import com.google.code.morphia.annotations.Converters;
+import com.google.code.morphia.annotations.Reference;
 import extensions.morphia.BigDecimalConverter;
 
 import play.data.validation.Constraints.Required;
@@ -44,6 +45,24 @@ public class Expense {
 			super(task.name, total);
 			this.eventOrigin = task.eventType;
 			this.paid = total;
+		}
+	}
+
+	public static class ProviderHire extends Expense {
+		@Reference public Hiring hiring;
+
+		public ProviderHire() { super(); }
+
+		public ProviderHire(Hiring hiring, BigDecimal total) {
+			super(hiring.getTask().name, total);
+			Task task = hiring.getTask();
+			this.eventOrigin = task.eventType;
+			this.paid = total;
+			this.hiring = hiring;
+		}
+
+		public Provider getProvider() {
+			return hiring.provider;
 		}
 	}
 }

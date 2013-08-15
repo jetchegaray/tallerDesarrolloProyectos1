@@ -24,6 +24,10 @@ public class Hiring {
 	private List<String> userMessages = Lists.newArrayList();
 	private List<String> hiredMessages = Lists.newArrayList();
 
+	public String getId() {
+		return id.toString();
+	}
+
 	public Task getTask() {
 		return wedding.getEvent(eventType).findTaskBySlug(taskSlug);
 	}
